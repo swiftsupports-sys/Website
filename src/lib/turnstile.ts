@@ -13,11 +13,23 @@ export async function verifyTurnstile(
   remoteIp?: string,
 ): Promise<{ ok: boolean; reason?: string }> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
+  const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   if (!secret) {
+    if (siteKey) {
+      // Half-configured: the widget renders and produces a token we have no
+      // way to verify. Fail closed — this is a misconfiguration, not a choice.
+      return { ok: false, reason: "turnstile-secret-missing" };
+    }
+
+    // Turnstile is not set up at all, so no widget renders and there is no
+    // token to check. Treat it as switched off rather than rejecting every
+    // enquiry: the honeypot still runs, and nothing is stored server-side.
+    // Setting both keys switches it on with no code change.
     if (process.env.NODE_ENV === "production") {
-      // Fail closed in production rather than accepting unverified traffic.
-      return { ok: false, reason: "turnstile-not-configured" };
+      console.warn(
+        "[turnstile] not configured — form spam protection is limited to the honeypot",
+      );
     }
     return { ok: true };
   }

@@ -1,9 +1,7 @@
 # Launch checklist
 
-Everything below is deliberately unfinished — each item needs a business
-decision, a real credential, or legal review. The site builds, tests, and
-deploys as-is; these are what stand between the current build and going live at
-**swiftconsultancy.us**.
+The site is **live at https://swiftconsultancy.us**. Items marked DONE are
+finished; the rest need a business decision, a real credential, or legal review.
 
 Run `grep -rn "PLACEHOLDER" src/` at any time to re-derive this list.
 
@@ -77,8 +75,8 @@ the left.
 Copy `.env.example` to `.env.local` locally, and set the same keys in Vercel
 (Production + Preview).
 
-- `RESEND_API_KEY` — **set in `.env.local`.** Still needs adding to Vercel.
-- `CONSULTATION_INBOX` — **set** to `swiftsupports@gmail.com`.
+- `RESEND_API_KEY` — **set** in `.env.local` and in Vercel (Production + Preview).
+- `CONSULTATION_INBOX` — **set** to `swiftsupports@gmail.com`, locally and in Vercel.
 - `CONSULTATION_FROM` — **needs attention.** Resend only sends from a domain you
   have verified, and `gmail.com` cannot be verified, so the sender cannot be the
   Gmail address. It is currently `onboarding@resend.dev`, which works but
@@ -86,31 +84,36 @@ Copy `.env.example` to `.env.local` locally, and set the same keys in Vercel
   `swiftconsultancy.us` in Resend, then change this to
   `Swift Consultancy <hello@swiftconsultancy.us>`.
 - `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY` — **still missing.**
-  Free from the Cloudflare dashboard. Until both are set the server action
-  rejects every production submission.
+  Free from the Cloudflare dashboard. With neither key set, Turnstile is treated as switched off and the honeypot
+  is the only spam protection. Set both to switch it on — no code change needed.
 - `NEXT_PUBLIC_CAL_LINK` — optional. Set it to show a booking calendar beside
   the form; leave empty and the calendar is omitted entirely.
 
 Without Resend/Turnstile the form validates and acknowledges locally in
-development, and **fails closed in production** with a "please email us
+development, and **fails closed in production when half-configured** with a "please email us
 directly" message. It never silently drops an enquiry.
 
 `.env.local` is gitignored and must never be committed. The current Resend key
 was shared over chat, so rotate it in the Resend dashboard once delivery is
 confirmed working, and update both `.env.local` and Vercel.
 
-## 7. Deployment
+## 7. Deployment — DONE
 
-1. Push to GitHub (the project is not yet a git repository — `git init` first).
-2. Import into Vercel; the framework preset is detected automatically.
-3. Add the environment variables above.
-4. Add `swiftconsultancy.us` as a custom domain and let Vercel issue the
-   certificate.
-5. Verify after the first deploy:
-   - `https://swiftconsultancy.us/sitemap.xml` lists all 11 pages
-   - `https://swiftconsultancy.us/robots.txt` allows crawling
-   - the OG card renders — paste the URL into any link-preview debugger
-   - submit the form once and confirm it arrives in the inbox
+Live at **https://swiftconsultancy.us** and **https://www.swiftconsultancy.us**.
+
+- Vercel project: `swiftsupports-4842/swift-consultancy`
+- Repository: https://github.com/swiftsupports-sys/Website
+- DNS at Namecheap: `A @ 76.76.21.21` and `CNAME www cname.vercel-dns.com`
+- SSL issued for both hostnames, auto-renewing
+- Environment variables set for Production and Preview
+- GitHub connected to Vercel, so every push to `main` deploys automatically
+
+Verified on the live domain: all 11 pages return 200, the 404 works, sitemap and
+robots are served, and the security headers are applied.
+
+Note: from some networks the apex IP `76.76.21.21` can be slow or unreachable
+while `www` resolves fine. If that happens, replace the apex A record with an
+**ALIAS** record pointing at `cname.vercel-dns.com`.
 
 ## 8. Deliberately not done
 
