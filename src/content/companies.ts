@@ -30,8 +30,11 @@ export const targetEmployers: string[] = [
   "Cisco",
 ];
 
+/**
+ * The heading carries the whole claim now that the non-affiliation note has
+ * been removed at the owner's request. Keep it about *preparation* — wording
+ * that implies placement at, or a relationship with, these companies would
+ * contradict Terms section 3 and the About page.
+ */
 export const marqueeHeading =
   "Preparing candidates for roles at leading US technology employers";
-
-export const marqueeDisclaimer =
-  "Swift Consultancy is an independent career consultancy. We are not affiliated with, endorsed by, or a recruiting partner of the companies named above, and we do not guarantee placement at any of them.";

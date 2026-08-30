@@ -1,8 +1,4 @@
-import {
-  marqueeDisclaimer,
-  marqueeHeading,
-  targetEmployers,
-} from "@/content/companies";
+import { marqueeHeading, targetEmployers } from "@/content/companies";
 
 /**
  * Continuously scrolling strip of employer names.
@@ -41,18 +37,13 @@ export function CompanyMarquee() {
       </p>
 
       {/* Edge fade so names emerge and disappear rather than being clipped. */}
-      <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+      <div className="relative overflow-hidden mask-[linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         <div className="animate-marquee flex w-max">
           <Track />
           <Track duplicate />
         </div>
       </div>
 
-      {/* Kept narrower than the shell so the line length stays readable and the
-          text does not run under the floating WhatsApp button. */}
-      <p className="shell mx-auto mt-7 max-w-[68ch] text-center text-[0.78rem] leading-relaxed text-fg-faint">
-        {marqueeDisclaimer}
-      </p>
     </section>
   );
 }
