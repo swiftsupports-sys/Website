@@ -9,6 +9,7 @@ import {
   ServiceRows,
   StepList,
 } from "@/components/site/cards";
+import { CompanyMarquee } from "@/components/site/company-marquee";
 import { CtaBand } from "@/components/site/cta-band";
 import { FaqList } from "@/components/site/faq-list";
 import { HomeHero } from "@/components/site/home-hero";
@@ -68,6 +69,8 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
+
+      <CompanyMarquee />
 
       {/* ------------------------------------------------------------ about */}
       <Section tone="paper" id="about">

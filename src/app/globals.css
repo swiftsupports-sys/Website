@@ -158,6 +158,35 @@
   animation: hero-pan 18s var(--ease-brand) forwards;
 }
 
+/* Employer strip. The track is rendered twice, so translating by exactly
+   -50% lands the copy where the original started and the loop is seamless. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 45s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+    /* Static and wrapped, rather than a frozen row running off-screen. */
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
 /* Navigation drawer (Radix Dialog) enter/exit. */
 @keyframes fade-in {
   from {
