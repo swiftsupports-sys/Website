@@ -27,9 +27,11 @@ declare global {
  * Cloudflare Turnstile widget.
  *
  * Renders nothing when no site key is configured, so local development and
- * previews work without Cloudflare credentials. The server action fails closed
- * in production if the secret is missing, so a misconfigured deploy cannot
- * accept unverified submissions silently.
+ * previews work without Cloudflare credentials.
+ *
+ * Setting the site key without also setting TURNSTILE_SECRET_KEY is the one
+ * broken state: the widget renders and issues tokens the server has no way to
+ * verify, so the action rejects every submission. Set both, or neither.
  */
 export function Turnstile({
   onToken,
@@ -74,7 +76,9 @@ export function Turnstile({
     <>
       <Script
         src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
-        strategy="lazyOnload"
+        // Not lazyOnload: the visitor cannot submit until the widget has issued
+        // a token, so it should not queue behind everything else on the page.
+        strategy="afterInteractive"
         onReady={() => setReady(true)}
       />
       <div ref={containerRef} className="min-h-16.25" />
