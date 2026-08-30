@@ -8,8 +8,14 @@
 export const site = {
   name: "Swift Consultancy",
   shortName: "Swift",
+  /** Bare domain, for display in prose. */
   domain: "swiftconsultancy.us",
-  url: "https://swiftconsultancy.us",
+  /**
+   * Canonical origin — must match what the server actually serves, or every
+   * canonical tag, sitemap entry, and OG URL points at a redirect.
+   * Vercel serves www as primary and 308s the apex to it.
+   */
+  url: "https://www.swiftconsultancy.us",
   tagline: "Career consultancy for US technology roles",
   description:
     "Personalized candidate marketing, recruiter networking, role-specific training, interview preparation, and mentorship for professionals targeting technology roles at leading US companies.",
