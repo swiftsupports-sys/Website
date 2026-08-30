@@ -32,10 +32,10 @@ export const photos = {
   mentorship: {
     // Pre-cropped to 4:5 to match the frame it renders in, so the browser does
     // no further cropping and both people stay in shot.
-    src: "/images/mentorship-session.jpg",
-    alt: "A consultant and a candidate working through a career plan together at a laptop",
-    width: 1000,
-    height: 1250,
+    src: "/images/mentorship-consultation.jpg",
+    alt: "A career consultant talking a candidate through their plan in a one-to-one session",
+    width: 1600,
+    height: 2000,
   },
   roadmap: {
     src: "/images/roadmap.jpg",
