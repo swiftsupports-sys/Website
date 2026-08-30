@@ -27,6 +27,9 @@ const nextConfig: NextConfig = {
     // All photography is served from /public/images, so no remote hosts are
     // allowed through the optimizer.
     formats: ["image/avif", "image/webp"],
+    // 75 is the default; 82 is used for the hero, which is the LCP image and
+    // the first thing a visitor judges the brand on.
+    qualities: [75, 82],
   },
   poweredByHeader: false,
   async headers() {

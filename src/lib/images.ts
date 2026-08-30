@@ -24,10 +24,10 @@ export const photos = {
     // the left sit over quiet background rather than across a face. Replacing
     // it? Keep that weighting, and rename the file so the optimizer cache and
     // any CDN pick the new image up.
-    src: "/images/hero-session.jpg",
+    src: "/images/hero-session-hd.jpg",
     alt: "A career consultant leading a session at a whiteboard",
-    width: 1800,
-    height: 1201,
+    width: 3840,
+    height: 2561,
   },
   mentorship: {
     // Pre-cropped to 4:5 to match the frame it renders in, so the browser does

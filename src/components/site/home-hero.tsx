@@ -23,6 +23,7 @@ export function HomeHero() {
           alt={photos.hero.alt}
           fill
           priority
+          quality={82}
           sizes="100vw"
           // Narrow viewports crop horizontally, so anchor toward the right to
           // keep the subject in frame; wide viewports crop vertically and can
