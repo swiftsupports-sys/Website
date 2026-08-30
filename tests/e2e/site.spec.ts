@@ -55,7 +55,7 @@ test("the FAQ accordion opens an answer", async ({ page }) => {
   const question = page.getByRole("button", { name: /do you guarantee job placement/i });
   await expect(question).toBeVisible();
   await question.click();
-  await expect(page.getByText(/We do not guarantee jobs, offers/i).first()).toBeVisible();
+  await expect(page.getByText(/We guarantee our work/i).first()).toBeVisible();
 });
 
 test("the consultation form reports validation errors", async ({ page }) => {

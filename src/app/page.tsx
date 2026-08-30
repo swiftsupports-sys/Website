@@ -96,7 +96,7 @@ export default function HomePage() {
               items={[
                 "A strategy shaped by your experience level and target role",
                 "Preparation aligned to how US technology teams actually hire",
-                "Honest guidance — no guarantees, no inflated promises",
+                "Committed interview opportunities and recruiter networking, worked continuously",
               ]}
             />
             <div className="mt-8.5">

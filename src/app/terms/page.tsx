@@ -47,11 +47,18 @@ export default function TermsPage() {
 
           <h2>3. No Guarantee of Outcomes</h2>
           <p>
-            We provide preparation, positioning, visibility, and guidance. We do not
-            guarantee employment, interviews, offers, salary levels, visa or work
-            authorization outcomes, or placement at any specific company. Hiring
-            decisions rest entirely with employers. Nothing on this website constitutes
-            a promise of any particular result.
+            We commit to the work: preparation, positioning, visibility, dedicated
+            interview opportunities, and recruiter networking, carried out
+            continuously for the duration of your engagement rather than stopping
+            after a fixed number of applications. Timelines described on this
+            website are typical expectations, not commitments, and depend on your
+            profile, your participation, and the opportunities available.
+          </p>
+          <p>
+            We do not guarantee a specific job offer, a particular employer, a salary
+            level, a joining date, or visa or work authorization outcomes. The final
+            hiring decision rests entirely with the employer. Nothing on this website
+            constitutes a promise of any particular result.
           </p>
 
           <h2>4. Not Professional Advice</h2>

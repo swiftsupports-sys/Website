@@ -112,7 +112,7 @@ export const servicePages: ServicePage[] = [
       {
         question: "Do you guarantee I will pass my interviews?",
         answer:
-          "No. We do not guarantee interviews, offers, salaries, or placement at any company. Employers make hiring decisions. What we provide is realistic practice, specific feedback, and honest assessment of where you stand.",
+          "Your engagement includes dedicated interview opportunities and recruiter networking, and we prepare you for them thoroughly. What no one can guarantee is the outcome of a specific interview or a particular offer — that decision belongs to the employer.",
       },
       {
         question: "Do you attend or assist during real interviews?",
@@ -295,7 +295,7 @@ export const servicePages: ServicePage[] = [
       {
         question: "Do you have partnerships with specific companies?",
         answer:
-          "No. We do not claim partnerships with, or guaranteed placement at, any named company. Our work is visibility and positioning; hiring decisions rest entirely with employers.",
+          "We commit to dedicated interview opportunities and active recruiter networking, worked continuously rather than stopped after a set number of applications. We do not claim partnerships with, or guaranteed placement at, any named company — hiring decisions rest with employers.",
       },
     ],
     related: ["resume-and-linkedin", "interview-preparation"],

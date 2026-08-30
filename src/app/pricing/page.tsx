@@ -36,9 +36,9 @@ const shared = [
   },
   {
     icon: ShieldCheck,
-    title: "No Outcome Promises",
+    title: "Honest About the Limits",
     description:
-      "Neither package guarantees interviews, offers, salaries, or placement at any company. Both are paid for the work and the guidance.",
+      "Both packages include dedicated interview opportunities, candidate marketing, and recruiter networking. Neither can guarantee a specific offer, employer, salary, or joining date — that decision belongs to the employer.",
   },
 ];
 

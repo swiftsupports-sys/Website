@@ -21,7 +21,7 @@ export const faqs: FaqItem[] = [
   {
     question: "Do you guarantee job placement?",
     answer:
-      "No. We do not guarantee jobs, offers, interviews, salaries, or placement at any specific company. Hiring decisions are made by employers. What we provide is preparation, positioning, visibility, and guidance — and honest feedback about where you stand.",
+      "We guarantee our work, not an employer's decision. Your engagement includes dedicated interview opportunities, candidate marketing, and recruiter networking — worked continuously rather than stopping after a fixed number of applications. Candidates who follow the process, complete the work, and stay responsive can expect to start reaching interview opportunities within weeks, depending on their profile and the opportunities available. Our goal is to move you from interviews to an offer within three to six months, and sooner where a candidate is highly consistent. What we cannot honestly guarantee is a specific offer, employer, salary, or joining date, because the final hiring decision belongs to the employer. Any consultancy promising you a job is either charging for something outside its control or not telling you the whole truth.",
     tags: ["general", "pricing"],
   },
   {

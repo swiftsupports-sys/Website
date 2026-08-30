@@ -20,7 +20,8 @@ export function Footer() {
             <p className="mt-5 max-w-[40ch] text-[0.93rem] text-on-dark-muted">
               A career consultancy for technology professionals targeting roles at
               leading US companies. We provide preparation, positioning, and
-              mentorship — not job guarantees.
+              mentorship, with dedicated interview opportunities and recruiter
+              networking.
             </p>
             <div className="mt-6 flex gap-2.5">
               <SocialLink href={site.social.linkedin} label="LinkedIn">

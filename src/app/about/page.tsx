@@ -32,7 +32,7 @@ export const metadata: Metadata = pageMetadata({
   absoluteTitle: true,
   socialTitle: "About Us",
   description:
-    "Swift Consultancy is a career consultancy for technology professionals targeting roles at companies in the United States. Personalized preparation, positioning, and mentorship — no job guarantees.",
+    "Swift Consultancy is a career consultancy for technology professionals targeting roles at companies in the United States, providing preparation, positioning, dedicated interview opportunities, and recruiter networking.",
   path: "/about",
 });
 
@@ -85,7 +85,7 @@ const audiences = [
 ];
 
 const limits = [
-  "We do not guarantee jobs, offers, interviews, or salaries.",
+  "We do not guarantee a specific offer, employer, salary, or joining date — the hiring decision belongs to the employer.",
   "We do not claim partnerships with or placement at named companies.",
   "We do not misrepresent your experience to any employer or recruiter.",
   "We do not provide immigration, visa, or legal advice.",
@@ -97,7 +97,7 @@ export default function AboutPage() {
     <>
       <PageSchema
         name={"About Swift Consultancy"}
-        description={"Swift Consultancy is a career consultancy for technology professionals targeting roles at companies in the United States. Personalized preparation, positioning, and mentorship — no job guarantees."}
+        description={"Swift Consultancy is a career consultancy for technology professionals targeting roles at companies in the United States, providing preparation, positioning, dedicated interview opportunities, and recruiter networking."}
         path={"/about"}
         breadcrumb={"About Us"}
       />

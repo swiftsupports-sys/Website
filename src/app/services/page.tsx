@@ -114,9 +114,10 @@ export default function ServicesPage() {
             {groupIndex === serviceGroups.length - 1 ? (
               <>
                 <Disclaimer>
-                  All services are advisory and preparatory. We do not guarantee
-                  interviews, offers, salaries, or placement at any specific company,
-                  and we do not provide immigration or legal advice.
+                  Your engagement includes dedicated interview opportunities, candidate
+                  marketing, and recruiter networking. We cannot guarantee a specific
+                  offer, employer, salary, or joining date — the hiring decision belongs
+                  to the employer — and we do not provide immigration or legal advice.
                 </Disclaimer>
                 <div className="mt-10">
                   <Button asChild variant="dark">

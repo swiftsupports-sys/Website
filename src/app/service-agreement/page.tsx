@@ -45,6 +45,12 @@ export default function ServiceAgreementPage() {
           </p>
 
           <h2>2. Services Provided</h2>
+          <p>
+            The Consultancy commits to working the Candidate&apos;s search actively for
+            the duration of the engagement — including dedicated interview
+            opportunities, candidate marketing, and recruiter networking — rather than
+            ceasing after a fixed number of applications.
+          </p>
           <p>Services are drawn from the following, as agreed in the engagement schedule:</p>
           <ul>
             <li>Career assessment and role guidance</li>
@@ -66,8 +72,10 @@ export default function ServiceAgreementPage() {
           <h2>3. What Is Not Included</h2>
           <ul>
             <li>
-              Any guarantee of employment, interviews, offers, salary levels, or
-              placement at a specific company.
+              Any guarantee of a specific job offer, a particular employer, a salary
+              level, or a joining date. The Consultancy commits to dedicated interview
+              opportunities, candidate marketing, and recruiter networking; the hiring
+              decision itself rests with the employer.
             </li>
             <li>Immigration, visa, work authorization, legal, tax, or financial advice.</li>
             <li>

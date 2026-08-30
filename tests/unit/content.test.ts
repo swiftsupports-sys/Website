@@ -36,16 +36,21 @@ describe("site content", () => {
     expect(packages.filter((p) => p.recommended)).toHaveLength(1);
   });
 
-  it("answers the placement-guarantee question honestly", () => {
-    const guarantee = faqs.find((f) => f.question.includes("guarantee job placement"));
-    expect(guarantee?.answer).toMatch(/^No\./);
+  it("states plainly what is and is not guaranteed", () => {
+    const answer = faqs.find((f) => f.question.includes("guarantee job placement"))?.answer ?? "";
+    // The commitment is to the work the consultancy controls...
+    expect(answer).toMatch(/interview opportunities/i);
+    expect(answer).toMatch(/recruiter networking/i);
+    // ...and it must still disclaim the part the employer controls.
+    expect(answer).toMatch(/cannot honestly guarantee/i);
+    expect(answer).toMatch(/offer, employer, salary, or joining date/i);
   });
 
-  it("never promises a guaranteed job anywhere in the FAQ", () => {
-    const promises = faqs.filter((f) =>
-      /we guarantee|guaranteed (job|offer|placement)/i.test(f.answer),
-    );
-    expect(promises).toEqual([]);
+  it("never promises a specific job, offer, or employer", () => {
+    // "We guarantee our work" is fine. Guaranteeing an outcome is not.
+    const banned = /guarantee[sd]?s+(yous+)?(as+)?(job|offer|placement|employment|salary)/i;
+    const offenders = faqs.filter((f) => banned.test(f.answer));
+    expect(offenders.map((f) => f.question)).toEqual([]);
   });
 
   it("splits FAQ entries between the home and pricing pages", () => {
@@ -91,13 +96,14 @@ describe("service pages", () => {
   });
 
   it("promise no outcomes anywhere in their copy", () => {
-    const banned = /\b(guarantee[ds]?|assured placement|100% placement)\b/i;
+    const banned = /guarantee[sd]?s+(yous+)?(as+)?(job|offer|placement|employment|salary)|assured placement|100% placement/i;
     for (const page of servicePages) {
       const prose = [
         ...page.intro,
         ...page.includes.flatMap((i) => [i.title, i.body]),
         ...page.process.flatMap((s) => [s.title, s.body]),
         ...page.audience.flatMap((a) => [a.title, a.body]),
+        ...page.faqs.flatMap((f) => [f.question, f.answer]),
       ].join(" ");
       expect(prose, page.slug).not.toMatch(banned);
     }
