@@ -8,7 +8,7 @@ import { Toaster } from "sonner";
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
 import { WhatsAppFab } from "@/components/site/whatsapp-fab";
-import { organizationJsonLd } from "@/lib/structured-data";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
 import { site } from "@/lib/site";
 
 import "./globals.css";
@@ -30,7 +30,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Career Consultancy for US Technology Roles`,
+    default: `Career Consulting for US Technology Roles | ${site.name}`,
     template: `%s — ${site.name}`,
   },
   description: site.description,
@@ -49,12 +49,12 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "en_US",
     url: site.url,
-    title: `${site.name} — Career Consultancy for US Technology Roles`,
+    title: `Career Consulting for US Technology Roles | ${site.name}`,
     description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} — Career Consultancy for US Technology Roles`,
+    title: `Career Consulting for US Technology Roles | ${site.name}`,
     description: site.description,
   },
   robots: {
@@ -101,10 +101,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
 
+        {/*
+          One graph for the whole site: the Organization is the entity, the
+          WebSite points at it as publisher, and every Service and WebPage node
+          references the same @id. That gives search engines a single subject to
+          attach signals to rather than several loosely related ones.
+        */}
         <script
           type="application/ld+json"
-          // Organization + ProfessionalService markup for search engines.
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([organizationJsonLd, websiteJsonLd]),
+          }}
         />
 
         {/* No-ops outside Vercel; they only report once deployed. */}

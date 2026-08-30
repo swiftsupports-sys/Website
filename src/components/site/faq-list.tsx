@@ -6,13 +6,18 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import type { FaqItem } from "@/content/faq";
 
 /**
  * Single-open accordion. `collapsible` lets the visitor close the open item
  * rather than forcing one to always be expanded.
  */
-export function FaqList({ items }: { items: FaqItem[] }) {
+/** Accepts anything question-and-answer shaped, so service pages can pass
+ * their own FAQs without carrying the tags used to filter the shared list. */
+export function FaqList({
+  items,
+}: {
+  items: { question: string; answer: string }[];
+}) {
   return (
     <Accordion type="single" collapsible className="grid gap-3">
       {items.map((item, i) => (

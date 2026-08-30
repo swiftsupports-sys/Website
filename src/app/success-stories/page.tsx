@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
+
+import { pageMetadata } from "@/lib/seo";
 import { CircleX, FileCheck, Info } from "lucide-react";
 
 import { FeatureCard, QuoteCard } from "@/components/site/cards";
 import { CtaBand } from "@/components/site/cta-band";
 import { HeroActions, PageHero } from "@/components/site/page-hero";
+import { PageSchema } from "@/components/site/page-schema";
 import { Disclaimer, Section, SectionHead } from "@/components/site/primitives";
 import { testimonials } from "@/content/testimonials";
 
-export const metadata: Metadata = {
-  title: "Success Stories",
+export const metadata: Metadata = pageMetadata({
+  title: "Candidate Experiences",
+  socialTitle: "Success Stories",
   description:
-    "Candidate experiences working with our career consultants. Published only with written consent — no employer names, salary figures, or invented outcomes.",
-  alternates: { canonical: "/success-stories" },
-};
+    "Feedback from candidates who worked with our consultants, published anonymously by technology domain. Individual experiences vary and outcomes are never guaranteed.",
+  path: "/success-stories",
+});
 
 const standards = [
   {
@@ -38,6 +42,13 @@ const standards = [
 export default function SuccessStoriesPage() {
   return (
     <>
+      <PageSchema
+        name={"Candidate Experiences"}
+        description={"Feedback from candidates who worked with our consultants, published anonymously by technology domain. Individual experiences vary and outcomes are never guaranteed."}
+        path={"/success-stories"}
+        breadcrumb={"Success Stories"}
+      />
+
       <PageHero
         breadcrumb="Success Stories"
         eyebrow="Success Stories"

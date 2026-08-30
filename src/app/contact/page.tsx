@@ -1,21 +1,25 @@
 import type { Metadata } from "next";
+
+import { pageMetadata } from "@/lib/seo";
 import { CalendarDays, Clock, Mail, MessageSquare, Phone, Search } from "lucide-react";
 
 import { WhatsAppIcon } from "@/components/site/brand";
 import { StepList } from "@/components/site/cards";
 import { ConsultationForm } from "@/components/site/consultation-form";
 import { PageHero } from "@/components/site/page-hero";
+import { PageSchema } from "@/components/site/page-schema";
 import { Scheduler } from "@/components/site/scheduler";
 import { Eyebrow, Section, SectionHead } from "@/components/site/primitives";
 import { Reveal } from "@/components/site/reveal";
 import { site, whatsappLink } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "Contact",
+export const metadata: Metadata = pageMetadata({
+  title: "Book a Free Career Consultation",
+  socialTitle: "Contact",
   description:
-    "Book a free consultation. Tell us about your experience, target role, technology domain, and career expectations — no resume needed to begin.",
-  alternates: { canonical: "/contact" },
-};
+    "Tell us about your experience, target role, and technology domain. No resume needed to begin — book a free consultation and we will explain the right next step.",
+  path: "/contact",
+});
 
 const nextSteps = [
   {
@@ -51,6 +55,13 @@ export default function ContactPage() {
 
   return (
     <>
+      <PageSchema
+        name={"Book a Free Career Consultation"}
+        description={"Tell us about your experience, target role, and technology domain. No resume needed to begin — book a free consultation and we will explain the right next step."}
+        path={"/contact"}
+        breadcrumb={"Contact"}
+      />
+
       <PageHero
         breadcrumb="Contact"
         eyebrow="Free Consultation"

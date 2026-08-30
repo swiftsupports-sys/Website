@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { BarChart, CircleCheckBig, Timer } from "lucide-react";
 
 import { FeatureCard, StepList } from "@/components/site/cards";
 import { CtaBand } from "@/components/site/cta-band";
 import { HeroActions, PageHero } from "@/components/site/page-hero";
+import { PageSchema } from "@/components/site/page-schema";
 import {
   CheckList,
   Disclaimer,
@@ -16,12 +19,13 @@ import { Reveal } from "@/components/site/reveal";
 import { photos } from "@/lib/images";
 import { processSteps } from "@/content/process";
 
-export const metadata: Metadata = {
-  title: "How It Works",
+export const metadata: Metadata = pageMetadata({
+  title: "How Our Career Consulting Process Works",
+  socialTitle: "How It Works",
   description:
-    "A five-stage process: career assessment, personalized roadmap, role-specific training, candidate marketing and networking, then interview and placement guidance.",
-  alternates: { canonical: "/how-it-works" },
-};
+    "A five-stage process: career assessment, a personalized roadmap, role-specific training, candidate marketing and recruiter networking, then interview and placement guidance.",
+  path: "/how-it-works",
+});
 
 const phases = [
   {
@@ -47,6 +51,13 @@ const phases = [
 export default function HowItWorksPage() {
   return (
     <>
+      <PageSchema
+        name={"How Our Career Consulting Process Works"}
+        description={"A five-stage process: career assessment, a personalized roadmap, role-specific training, candidate marketing and recruiter networking, then interview and placement guidance."}
+        path={"/how-it-works"}
+        breadcrumb={"How It Works"}
+      />
+
       <PageHero
         breadcrumb="How It Works"
         eyebrow="How It Works"

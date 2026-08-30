@@ -1,21 +1,25 @@
 import type { Metadata } from "next";
+
+import { pageMetadata } from "@/lib/seo";
 import { FileText, ShieldCheck, Users } from "lucide-react";
 
 import { FeatureCard, PriceCard } from "@/components/site/cards";
 import { CtaBand } from "@/components/site/cta-band";
 import { FaqList } from "@/components/site/faq-list";
 import { HeroActions, PageHero } from "@/components/site/page-hero";
+import { PageSchema } from "@/components/site/page-schema";
 import { Disclaimer, Section, SectionHead } from "@/components/site/primitives";
 import { Reveal } from "@/components/site/reveal";
 import { faqsFor } from "@/content/faq";
 import { packages, pricingDisclaimer } from "@/content/packages";
 
-export const metadata: Metadata = {
-  title: "Pricing",
+export const metadata: Metadata = pageMetadata({
+  title: "Pricing and Support Packages",
+  socialTitle: "Pricing",
   description:
-    "Two transparent support models for candidates pursuing technology roles at leading US companies. Scope and terms are confirmed in writing before you commit.",
-  alternates: { canonical: "/pricing" },
-};
+    "Two transparent engagement models for candidates pursuing technology roles in the US. Scope, fees, and any later charges are explained before you commit and confirmed in writing.",
+  path: "/pricing",
+});
 
 const shared = [
   {
@@ -41,6 +45,13 @@ const shared = [
 export default function PricingPage() {
   return (
     <>
+      <PageSchema
+        name={"Pricing and Support Packages"}
+        description={"Two transparent engagement models for candidates pursuing technology roles in the US. Scope, fees, and any later charges are explained before you commit and confirmed in writing."}
+        path={"/pricing"}
+        breadcrumb={"Pricing"}
+      />
+
       <PageHero
         breadcrumb="Pricing"
         eyebrow="Pricing"

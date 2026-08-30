@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { domains } from "@/content/domains";
 import { faqs, faqsFor } from "@/content/faq";
+import { servicePages } from "@/content/service-pages";
 import { packages } from "@/content/packages";
 import { processSteps } from "@/content/process";
 import { services, serviceGroups, servicesByGroup } from "@/content/services";
@@ -56,5 +57,49 @@ describe("site content", () => {
     const hrefs = [...primaryNav, ...legalNav].map((item) => item.href);
     expect(new Set(hrefs).size).toBe(hrefs.length);
     hrefs.forEach((href) => expect(href.startsWith("/")).toBe(true));
+  });
+});
+
+describe("service pages", () => {
+  it("have unique slugs", () => {
+    const slugs = servicePages.map((p) => p.slug);
+    expect(new Set(slugs).size).toBe(slugs.length);
+  });
+
+  it("only link to service pages that exist", () => {
+    const slugs = new Set(servicePages.map((p) => p.slug));
+    for (const page of servicePages) {
+      for (const related of page.related) {
+        expect(slugs.has(related), `${page.slug} -> ${related}`).toBe(true);
+      }
+    }
+  });
+
+  it("never link to themselves as related", () => {
+    for (const page of servicePages) {
+      expect(page.related).not.toContain(page.slug);
+    }
+  });
+
+  it("keep meta titles and descriptions within sensible SERP limits", () => {
+    for (const page of servicePages) {
+      // Titles get " — Swift Consultancy" appended by the layout template.
+      expect(page.metaTitle.length, page.slug).toBeLessThanOrEqual(45);
+      expect(page.metaDescription.length, page.slug).toBeGreaterThan(70);
+      expect(page.metaDescription.length, page.slug).toBeLessThanOrEqual(200);
+    }
+  });
+
+  it("promise no outcomes anywhere in their copy", () => {
+    const banned = /\b(guarantee[ds]?|assured placement|100% placement)\b/i;
+    for (const page of servicePages) {
+      const prose = [
+        ...page.intro,
+        ...page.includes.flatMap((i) => [i.title, i.body]),
+        ...page.process.flatMap((s) => [s.title, s.body]),
+        ...page.audience.flatMap((a) => [a.title, a.body]),
+      ].join(" ");
+      expect(prose, page.slug).not.toMatch(banned);
+    }
   });
 });

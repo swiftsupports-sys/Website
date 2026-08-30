@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 
 import { DomainCard } from "@/components/site/cards";
 import { CtaBand } from "@/components/site/cta-band";
 import { HeroActions, PageHero } from "@/components/site/page-hero";
+import { PageSchema } from "@/components/site/page-schema";
 import {
   CheckList,
   Eyebrow,
@@ -17,16 +20,24 @@ import { photos } from "@/lib/images";
 import { Button } from "@/components/ui/button";
 import { domains } from "@/content/domains";
 
-export const metadata: Metadata = {
-  title: "Technology Domains",
+export const metadata: Metadata = pageMetadata({
+  title: "Technology Domains We Support",
+  socialTitle: "Domains",
   description:
-    "Support across software development, QA and automation, data analytics and engineering, cloud and DevOps, cybersecurity, business analysis, and UI/UX and product roles.",
-  alternates: { canonical: "/domains" },
-};
+    "Career support across software development, QA and automation, data analytics and engineering, cloud and DevOps, cybersecurity, business analysis, and UI/UX and product roles.",
+  path: "/domains",
+});
 
 export default function DomainsPage() {
   return (
     <>
+      <PageSchema
+        name={"Technology Domains We Support"}
+        description={"Career support across software development, QA and automation, data analytics and engineering, cloud and DevOps, cybersecurity, business analysis, and UI/UX and product roles."}
+        path={"/domains"}
+        breadcrumb={"Domains"}
+      />
+
       <PageHero
         breadcrumb="Domains"
         eyebrow="Technology Domains"

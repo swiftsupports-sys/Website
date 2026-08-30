@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import {
   Briefcase,
@@ -14,6 +16,7 @@ import {
 import { FeatureCard } from "@/components/site/cards";
 import { CtaBand } from "@/components/site/cta-band";
 import { HeroActions, PageHero } from "@/components/site/page-hero";
+import { PageSchema } from "@/components/site/page-schema";
 import {
   CheckList,
   Eyebrow,
@@ -24,12 +27,13 @@ import {
 import { Reveal } from "@/components/site/reveal";
 import { photos } from "@/lib/images";
 
-export const metadata: Metadata = {
-  title: "About Us",
+export const metadata: Metadata = pageMetadata({
+  title: "About Swift Consultancy",
+  socialTitle: "About Us",
   description:
-    "A career strategy built around your experience, strengths, and target technology role in the US market — with honest positioning and transparent terms.",
-  alternates: { canonical: "/about" },
-};
+    "Swift Consultancy is a career consultancy for technology professionals targeting roles at companies in the United States. Personalized preparation, positioning, and mentorship — no job guarantees.",
+  path: "/about",
+});
 
 const principles = [
   {
@@ -90,6 +94,13 @@ const limits = [
 export default function AboutPage() {
   return (
     <>
+      <PageSchema
+        name={"About Swift Consultancy"}
+        description={"Swift Consultancy is a career consultancy for technology professionals targeting roles at companies in the United States. Personalized preparation, positioning, and mentorship — no job guarantees."}
+        path={"/about"}
+        breadcrumb={"About Us"}
+      />
+
       <PageHero
         breadcrumb="About Us"
         eyebrow="About Us"
