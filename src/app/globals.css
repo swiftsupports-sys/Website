@@ -1,0 +1,233 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Swift Consultancy — design tokens
+   Charcoal + electric lime + warm white. Single theme by design: the site
+   commits to one look rather than following the visitor's colour scheme.
+   ========================================================================== */
+
+@theme {
+  /* Surfaces */
+  --color-ink: #101210;
+  --color-ink-soft: #181a18;
+  --color-ink-line: #2a2d2a;
+  --color-paper: #f7f7f2;
+  --color-paper-alt: #efefe9;
+
+  /* Brand */
+  --color-accent: #35e852;
+  --color-accent-deep: #17a534; /* passes contrast as text on paper */
+  --color-accent-bright: #45f861;
+
+  /* Foreground */
+  --color-fg: #101210;
+  --color-fg-muted: #55584f;
+  --color-fg-faint: #6e7269;
+  --color-on-dark: #f4f4f1;
+  --color-on-dark-muted: #a7aca7;
+
+  /* Lines */
+  --color-hair: rgb(16 18 16 / 0.1);
+  --color-hair-strong: rgb(16 18 16 / 0.16);
+  --color-hair-dark: rgb(255 255 255 / 0.12);
+
+  /* Type */
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Rhythm */
+  --spacing-gutter: clamp(1.25rem, 5vw, 3.5rem);
+  --radius-card: 1.5rem;
+  --radius-xl2: 2rem;
+
+  /* Motion */
+  --ease-brand: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  /* Shadows */
+  --shadow-soft: 0 1px 2px rgb(16 18 16 / 0.04), 0 6px 16px rgb(16 18 16 / 0.05);
+  --shadow-card: 0 2px 6px rgb(16 18 16 / 0.05), 0 18px 40px rgb(16 18 16 / 0.08);
+  --shadow-float: 0 30px 70px rgb(16 18 16 / 0.14);
+}
+
+/* ------------------------------------------------------------- base ---- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: 16.5px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.028em;
+    line-height: 1.04;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #0b0b0b;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+/* ------------------------------------------------------- primitives ---- */
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: 78rem;
+    margin-inline: auto;
+    padding-inline: var(--spacing-gutter);
+  }
+
+  .section {
+    padding-block: clamp(4.5rem, 9vw, 8.25rem);
+  }
+
+  .section-tight {
+    padding-block: clamp(3.5rem, 6vw, 5.5rem);
+  }
+
+  /* Editorial display scale */
+  .h-display {
+    font-size: clamp(2.6rem, 6.4vw, 4.9rem);
+    line-height: 1;
+  }
+
+  .h-xl {
+    font-size: clamp(2.1rem, 4.3vw, 3.4rem);
+  }
+
+  .h-lg {
+    font-size: clamp(1.7rem, 2.9vw, 2.4rem);
+  }
+
+  .h-md {
+    font-size: clamp(1.22rem, 1.7vw, 1.42rem);
+    letter-spacing: -0.018em;
+  }
+
+  .lead {
+    font-size: clamp(1.02rem, 1.3vw, 1.14rem);
+    line-height: 1.72;
+  }
+}
+
+/* Hero photograph slow settle — decorative, disabled under reduced motion. */
+@keyframes hero-pan {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.animate-hero-pan {
+  animation: hero-pan 18s var(--ease-brand) forwards;
+}
+
+/* Navigation drawer (Radix Dialog) enter/exit. */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+/* Radix accordion open/close, driven by the measured content height. */
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes wa-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.14);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-wa-pulse {
+  animation: wa-pulse 2.8s ease-out infinite;
+}

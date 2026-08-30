@@ -1,0 +1,56 @@
+/**
+ * Single source of truth for business details, navigation, and canonical URLs.
+ *
+ * These values feed the header, footer, contact page, structured data, and the
+ * floating WhatsApp button — change them here and every surface follows.
+ */
+
+export const site = {
+  name: "Swift Consultancy",
+  shortName: "Swift",
+  domain: "swiftconsultancy.us",
+  url: "https://swiftconsultancy.us",
+  tagline: "Career consultancy for US technology roles",
+  description:
+    "Personalized candidate marketing, recruiter networking, role-specific training, interview preparation, and mentorship for professionals targeting technology roles at leading US companies.",
+
+  email: "swiftsupports@gmail.com",
+  phoneDisplay: "+91 89561 10805",
+  phoneHref: "+918956110805",
+  /** International format, no "+" or spaces — wa.me 404s otherwise. */
+  whatsappNumber: "918956110805",
+  hours: "Mon–Fri, 9:00 AM – 7:00 PM ET",
+
+  /* PLACEHOLDER social profiles */
+  social: {
+    linkedin: "#",
+  },
+} as const;
+
+export const whatsappLink = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(
+  "Hi, I'd like to book a free career consultation.",
+)}`;
+
+export type NavItem = { href: string; label: string };
+
+export const primaryNav: NavItem[] = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About Us" },
+  { href: "/services", label: "Services" },
+  { href: "/how-it-works", label: "How It Works" },
+  { href: "/domains", label: "Domains" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/success-stories", label: "Success Stories" },
+  { href: "/contact", label: "Contact" },
+];
+
+export const legalNav: NavItem[] = [
+  { href: "/privacy-policy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms of Service" },
+  { href: "/service-agreement", label: "Service Agreement" },
+];
+
+export const footerNav = {
+  explore: primaryNav.slice(0, 5),
+  more: primaryNav.slice(5),
+};
