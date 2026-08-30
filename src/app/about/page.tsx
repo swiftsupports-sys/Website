@@ -28,7 +28,8 @@ import { Reveal } from "@/components/site/reveal";
 import { photos } from "@/lib/images";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Swift Consultancy",
+  title: "About Swift Consultancy | US Tech Career Consulting",
+  absoluteTitle: true,
   socialTitle: "About Us",
   description:
     "Swift Consultancy is a career consultancy for technology professionals targeting roles at companies in the United States. Personalized preparation, positioning, and mentorship — no job guarantees.",

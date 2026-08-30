@@ -24,6 +24,11 @@ type PageMetaInput = {
   index?: boolean;
   /** Overrides the title used in the social card, when the SERP title is terse. */
   socialTitle?: string;
+  /**
+   * Bypass the layout's `%s — Swift Consultancy` template. Use when the title
+   * already contains the brand, so it does not appear twice.
+   */
+  absoluteTitle?: boolean;
 };
 
 export function pageMetadata({
@@ -32,12 +37,13 @@ export function pageMetadata({
   path,
   index = true,
   socialTitle,
+  absoluteTitle = false,
 }: PageMetaInput): Metadata {
   const url = canonical(path);
   const ogTitle = `${socialTitle ?? title} — ${site.name}`;
 
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical: url },
     openGraph: {
