@@ -13,14 +13,23 @@ export const site = {
   /**
    * Canonical origin — must match what the server actually serves, or every
    * canonical tag, sitemap entry, and OG URL points at a redirect.
-   * Vercel serves www as primary and 308s the apex to it.
+   *
+   * Vercel currently serves the apex as primary and redirects www to it. If
+   * that is ever flipped in the Vercel dashboard, change this to match, or
+   * every canonical URL on the site will point at a redirect.
    */
-  url: "https://www.swiftconsultancy.us",
+  url: "https://swiftconsultancy.us",
   tagline: "Career consultancy for US technology roles",
   description:
     "Personalized candidate marketing, recruiter networking, role-specific training, interview preparation, and mentorship for professionals targeting technology roles at leading US companies.",
 
-  email: "swiftsupports@gmail.com",
+  /**
+   * Public-facing address, shown in the header, footer, contact page, and
+   * structured data. Where consultation-form submissions are delivered is a
+   * separate setting (CONSULTATION_INBOX) — keep that pointed at a mailbox
+   * that definitely receives, so enquiries cannot go missing.
+   */
+  email: "contact@swiftconsultancy.us",
   phoneDisplay: "+91 89561 10805",
   phoneHref: "+918956110805",
   /** International format, no "+" or spaces — wa.me 404s otherwise. */
