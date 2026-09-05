@@ -30,10 +30,20 @@ export const site = {
    * that definitely receives, so enquiries cannot go missing.
    */
   email: "contact@swiftconsultancy.us",
-  phoneDisplay: "+91 89561 10805",
-  phoneHref: "+918956110805",
-  /** International format, no "+" or spaces — wa.me 404s otherwise. */
-  whatsappNumber: "918956110805",
+
+  /**
+   * Phone and WhatsApp are intentionally blank while a business number is
+   * being arranged. Every surface checks `hasPhone` / `hasWhatsApp` and shows
+   * an inert placeholder instead of a dead link, so nothing looks broken.
+   *
+   * To switch them back on, fill all three in — no other file needs editing:
+   *   phoneDisplay: "+1 (555) 123-4567"   as written for humans
+   *   phoneHref:    "+15551234567"         digits and a leading +, for tel:
+   *   whatsappNumber: "15551234567"        digits only — wa.me 404s otherwise
+   */
+  phoneDisplay: "",
+  phoneHref: "",
+  whatsappNumber: "",
   hours: "Mon–Fri, 9:00 AM – 7:00 PM ET",
 
   /**
@@ -47,9 +57,22 @@ export const site = {
   },
 } as const;
 
-export const whatsappLink = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(
-  "Hi, I'd like to book a free career consultation.",
-)}`;
+/**
+ * Whether a contact number is configured. Surfaces render an inert
+ * placeholder when these are false rather than a link that goes nowhere.
+ */
+export const hasPhone: boolean = String(site.phoneHref).length > 0;
+export const hasWhatsApp: boolean = String(site.whatsappNumber).length > 0;
+
+/** Empty string when no number is set — always guard with `hasWhatsApp`. */
+export const whatsappLink = hasWhatsApp
+  ? `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(
+      "Hi, I'd like to book a free career consultation.",
+    )}`
+  : "";
+
+/** Shown in place of a number while none is configured. */
+export const phonePlaceholder = "Available soon";
 
 export type NavItem = { href: string; label: string };
 

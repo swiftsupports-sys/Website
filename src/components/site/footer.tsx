@@ -2,7 +2,15 @@ import Link from "next/link";
 import { Mail } from "lucide-react";
 
 import { LinkedInIcon, LogoMark, WhatsAppIcon } from "@/components/site/brand";
-import { footerNav, legalNav, site, whatsappLink } from "@/lib/site";
+import {
+  footerNav,
+  hasPhone,
+  hasWhatsApp,
+  legalNav,
+  phonePlaceholder,
+  site,
+  whatsappLink,
+} from "@/lib/site";
 
 export function Footer() {
   return (
@@ -30,9 +38,12 @@ export function Footer() {
               <SocialLink href={`mailto:${site.email}`} label="Email">
                 <Mail className="size-4.5" strokeWidth={1.8} />
               </SocialLink>
-              <SocialLink href={whatsappLink} label="WhatsApp" external>
-                <WhatsAppIcon className="size-4.5" />
-              </SocialLink>
+              {/* Omitted rather than left as an icon that links nowhere. */}
+              {hasWhatsApp ? (
+                <SocialLink href={whatsappLink} label="WhatsApp" external>
+                  <WhatsAppIcon className="size-4.5" />
+                </SocialLink>
+              ) : null}
             </div>
           </div>
 
@@ -62,23 +73,36 @@ export function Footer() {
                 {site.email}
               </a>
             </li>
+            {/* Rendered as plain text, not a link, until a number exists. */}
             <li>
-              <a
-                href={`tel:${site.phoneHref}`}
-                className="text-[0.93rem] text-on-dark-muted transition-colors hover:text-accent"
-              >
-                {site.phoneDisplay}
-              </a>
+              {hasPhone ? (
+                <a
+                  href={`tel:${site.phoneHref}`}
+                  className="text-[0.93rem] text-on-dark-muted transition-colors hover:text-accent"
+                >
+                  {site.phoneDisplay}
+                </a>
+              ) : (
+                <span className="text-[0.93rem] text-on-dark-muted">
+                  Phone: {phonePlaceholder}
+                </span>
+              )}
             </li>
             <li>
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noopener"
-                className="text-[0.93rem] text-on-dark-muted transition-colors hover:text-accent"
-              >
-                WhatsApp: {site.phoneDisplay}
-              </a>
+              {hasWhatsApp ? (
+                <a
+                  href={whatsappLink}
+                  target="_blank"
+                  rel="noopener"
+                  className="text-[0.93rem] text-on-dark-muted transition-colors hover:text-accent"
+                >
+                  WhatsApp: {site.phoneDisplay}
+                </a>
+              ) : (
+                <span className="text-[0.93rem] text-on-dark-muted">
+                  WhatsApp: {phonePlaceholder}
+                </span>
+              )}
             </li>
             <li className="text-[0.93rem] text-on-dark-muted">{site.hours}</li>
           </FooterColumn>

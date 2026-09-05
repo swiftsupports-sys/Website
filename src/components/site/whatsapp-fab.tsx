@@ -1,11 +1,18 @@
 import { WhatsAppIcon } from "@/components/site/brand";
-import { whatsappLink } from "@/lib/site";
+import { hasWhatsApp, whatsappLink } from "@/lib/site";
 
 /**
  * Floating WhatsApp action. Rendered on every page; the label collapses to the
  * icon alone on small screens so it never crowds the content.
+ *
+ * Renders nothing while no WhatsApp number is configured. Unlike the inline
+ * contact entries, which degrade to plain text, this is a large tappable
+ * button — leaving it visible but inert would invite a tap that does nothing.
+ * It returns automatically once `whatsappNumber` is set in site.ts.
  */
 export function WhatsAppFab() {
+  if (!hasWhatsApp) return null;
+
   return (
     <a
       href={whatsappLink}

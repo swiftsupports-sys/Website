@@ -1,6 +1,6 @@
 import { faqsFor } from "@/content/faq";
 import { canonical } from "@/lib/seo";
-import { site } from "@/lib/site";
+import { hasPhone, site } from "@/lib/site";
 
 /**
  * Organization + WebSite markup, rendered once in the root layout.
@@ -34,7 +34,8 @@ export const organizationJsonLd = {
   disambiguatingDescription:
     "A career consultancy for technology professionals pursuing roles at companies in the United States, providing candidate marketing, recruiter networking, interview preparation, domain training, and one-to-one mentorship. Not affiliated with other businesses operating under similar names in HR outsourcing, recruitment, or financial services.",
   email: site.email,
-  telephone: site.phoneDisplay,
+  // Omitted rather than emitted empty while no number is configured.
+  ...(hasPhone ? { telephone: site.phoneDisplay } : {}),
   areaServed: { "@type": "Country", name: "United States" },
   slogan: site.tagline,
   knowsLanguage: "en",
@@ -61,7 +62,7 @@ export const organizationJsonLd = {
     "@type": "ContactPoint",
     contactType: "customer support",
     email: site.email,
-    telephone: site.phoneDisplay,
+    ...(hasPhone ? { telephone: site.phoneDisplay } : {}),
     areaServed: "US",
     availableLanguage: "English",
   },

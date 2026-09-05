@@ -131,7 +131,7 @@ export default function TermsPage() {
 
           <h2>12. Contact</h2>
           <p>
-            Questions about these terms: {site.email} &middot; {site.phoneDisplay}.
+            Questions about these terms: {site.email}.
           </p>
         </LegalBody>
       </Section>

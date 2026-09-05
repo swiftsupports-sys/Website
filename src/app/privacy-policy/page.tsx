@@ -45,7 +45,7 @@ export default function PrivacyPolicyPage() {
             Swift Consultancy (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;)
             operates {site.domain} and provides career consultancy, training,
             preparation, and mentorship services to candidates pursuing technology
-            roles. You can reach us at {site.email} or {site.phoneDisplay}.
+            roles. You can reach us at {site.email}.
           </p>
 
           <h2>2. Information We Collect</h2>
@@ -168,7 +168,7 @@ export default function PrivacyPolicyPage() {
           <h2>11. Contact</h2>
           <p>
             Questions about this policy or your information: {site.email} &middot;{" "}
-            {site.phoneDisplay}.
+            {site.email}.
           </p>
         </LegalBody>
       </Section>

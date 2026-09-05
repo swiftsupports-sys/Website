@@ -15,7 +15,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { primaryNav, site } from "@/lib/site";
+import { hasPhone, phonePlaceholder, primaryNav, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -129,7 +129,11 @@ export function Header() {
 
               <div className="mt-7 grid gap-1.5 text-[0.9rem] text-on-dark-muted">
                 <a href={`mailto:${site.email}`}>{site.email}</a>
-                <a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
+                {hasPhone ? (
+                  <a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
+                ) : (
+                  <span>Phone: {phonePlaceholder}</span>
+                )}
                 <span>{site.hours}</span>
               </div>
             </div>

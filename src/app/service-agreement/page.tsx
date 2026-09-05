@@ -182,7 +182,7 @@ export default function ServiceAgreementPage() {
 
           <h2>11. Contact</h2>
           <p>
-            Questions about an engagement: {site.email} &middot; {site.phoneDisplay}.
+            Questions about an engagement: {site.email}.
           </p>
         </LegalBody>
       </Section>

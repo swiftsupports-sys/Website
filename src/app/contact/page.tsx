@@ -11,7 +11,13 @@ import { PageSchema } from "@/components/site/page-schema";
 import { Scheduler } from "@/components/site/scheduler";
 import { Eyebrow, Section, SectionHead } from "@/components/site/primitives";
 import { Reveal } from "@/components/site/reveal";
-import { site, whatsappLink } from "@/lib/site";
+import {
+  hasPhone,
+  hasWhatsApp,
+  phonePlaceholder,
+  site,
+  whatsappLink,
+} from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Book a Free Career Consultation",
@@ -105,20 +111,30 @@ export default function ContactPage() {
                 value={site.email}
                 note="For consultation requests and general questions"
               />
+              {/* No href while unconfigured: the card stays in place but is
+                  inert, rather than offering a link that goes nowhere. */}
               <ContactCard
-                href={`tel:${site.phoneHref}`}
+                href={hasPhone ? `tel:${site.phoneHref}` : undefined}
                 icon={<Phone className="size-5" strokeWidth={1.8} />}
                 label="Phone"
-                value={site.phoneDisplay}
-                note="Mon–Fri during business hours"
+                value={hasPhone ? site.phoneDisplay : phonePlaceholder}
+                note={
+                  hasPhone
+                    ? "Mon–Fri during business hours"
+                    : "In the meantime, email us or use the form"
+                }
               />
               <ContactCard
-                href={whatsappLink}
-                external
+                href={hasWhatsApp ? whatsappLink : undefined}
+                external={hasWhatsApp}
                 icon={<WhatsAppIcon className="size-5" />}
                 label="WhatsApp"
-                value={site.phoneDisplay}
-                note="Quickest way to reach a consultant"
+                value={hasWhatsApp ? site.phoneDisplay : phonePlaceholder}
+                note={
+                  hasWhatsApp
+                    ? "Quickest way to reach a consultant"
+                    : "In the meantime, email us or use the form"
+                }
               />
               <ContactCard
                 icon={<Clock className="size-5" strokeWidth={1.8} />}
