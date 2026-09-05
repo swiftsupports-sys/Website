@@ -24,7 +24,7 @@ export function Footer() {
               networking.
             </p>
             <div className="mt-6 flex gap-2.5">
-              <SocialLink href={site.social.linkedin} label="LinkedIn">
+              <SocialLink href={site.social.linkedin} label="LinkedIn" external>
                 <LinkedInIcon className="size-4.5" />
               </SocialLink>
               <SocialLink href={`mailto:${site.email}`} label="Email">

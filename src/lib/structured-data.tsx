@@ -71,9 +71,12 @@ export const organizationJsonLd = {
     opens: "09:00",
     closes: "19:00",
   },
-  // `sameAs` is intentionally absent until real, verified profiles exist.
-  // Adding placeholder or unowned URLs would weaken the entity signal rather
-  // than strengthen it. See LAUNCH-CHECKLIST.md.
+  /**
+   * Verified profiles only — this is the link that tells search engines which
+   * "Swift Consultancy" this is. Add a profile here only once it exists, is
+   * controlled by the business, and names the same company and website.
+   */
+  sameAs: [site.social.linkedin],
 };
 
 /** WebSite node, linked to the Organization so both resolve to one entity. */

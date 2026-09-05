@@ -36,9 +36,14 @@ export const site = {
   whatsappNumber: "918956110805",
   hours: "Mon–Fri, 9:00 AM – 7:00 PM ET",
 
-  /* PLACEHOLDER social profiles */
+  /**
+   * Verified profiles only. These are emitted as schema.org `sameAs`, which is
+   * how search engines tie this site to the right "Swift Consultancy" — the
+   * name is shared with unrelated businesses, so an unverified or wrong URL
+   * here actively confuses the entity rather than clarifying it.
+   */
   social: {
-    linkedin: "#",
+    linkedin: "https://www.linkedin.com/company/swift-consultancy-usa",
   },
 } as const;
 
