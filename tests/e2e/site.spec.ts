@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { hasWhatsApp } from "@/lib/site";
+
 const pages = [
   { path: "/", heading: /Build Your Career at/i },
   { path: "/about", heading: /More Than Job Search Support/i },
@@ -26,9 +28,15 @@ test.describe("every page renders", () => {
         page_.heading,
       );
       await expect(page.getByRole("contentinfo")).toBeVisible();
-      await expect(
-        page.getByRole("link", { name: /chat with us on whatsapp/i }),
-      ).toBeVisible();
+
+      // The floating button is hidden while no WhatsApp number is configured,
+      // so assert whichever state the config actually calls for.
+      const fab = page.getByRole("link", { name: /chat with us on whatsapp/i });
+      if (hasWhatsApp) {
+        await expect(fab).toBeVisible();
+      } else {
+        await expect(fab).toHaveCount(0);
+      }
     });
   }
 });
@@ -106,4 +114,45 @@ test("sitemap and robots are served", async ({ request }) => {
   const robots = await request.get("/robots.txt");
   expect(robots.ok()).toBeTruthy();
   expect(await robots.text()).toContain("Sitemap:");
+});
+
+test("the mobile drawer closes when a link is tapped", async ({ page, isMobile }) => {
+  // The hamburger only exists below xl; on the desktop project there is
+  // nothing to test.
+  test.skip(!isMobile, "mobile layout only");
+
+  await page.goto("/");
+  await page.getByRole("button", { name: /open menu/i }).click();
+
+  const drawer = page.getByRole("dialog");
+  await expect(drawer).toBeVisible();
+
+  await drawer.getByRole("link", { name: /^Services$/ }).first().click();
+
+  // App Router navigations do not unmount the sheet, so without an explicit
+  // close the page changes behind an open drawer with the body still
+  // scroll-locked — which looks to a visitor like the menu doing nothing.
+  await expect(page).toHaveURL(/\/services$/);
+  await expect(drawer).toBeHidden();
+  await expect
+    .poll(() => page.evaluate(() => getComputedStyle(document.body).overflow))
+    .not.toBe("hidden");
+});
+
+test("the drawer closes when tapping the page you are already on", async ({
+  page,
+  isMobile,
+}) => {
+  test.skip(!isMobile, "mobile layout only");
+
+  await page.goto("/pricing");
+  await page.getByRole("button", { name: /open menu/i }).click();
+
+  const drawer = page.getByRole("dialog");
+  await expect(drawer).toBeVisible();
+
+  // The route does not change here, so the pathname effect cannot fire —
+  // the link's own handler has to close it.
+  await drawer.getByRole("link", { name: /^Pricing$/ }).first().click();
+  await expect(drawer).toBeHidden();
 });

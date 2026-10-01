@@ -30,6 +30,24 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  /**
+   * Close the drawer whenever the route changes.
+   *
+   * App Router navigations are client-side, so the sheet is never unmounted —
+   * without this the page changes behind a drawer that stays open with the
+   * body still scroll-locked, which reads as "the menu does nothing". This
+   * also covers back/forward, where no link handler runs.
+   *
+   * Adjusted during render rather than in an effect: React re-runs this
+   * component before touching the DOM, so the drawer never paints in the
+   * stale open state.
+   */
+  const [lastPath, setLastPath] = React.useState(pathname);
+  if (lastPath !== pathname) {
+    setLastPath(pathname);
+    setOpen(false);
+  }
+
   // Every page opens on a dark hero, so the bar starts transparent and only
   // switches to the frosted light treatment once the visitor scrolls.
   const isActive = (href: string) =>
@@ -104,6 +122,7 @@ export function Header() {
                   <Link
                     key={item.href}
                     href={item.href}
+                    onClick={() => setOpen(false)}
                     aria-current={isActive(item.href) ? "page" : undefined}
                     className={cn(
                       "flex items-center justify-between gap-4 border-b border-hair-dark py-3 font-display text-[clamp(1.4rem,5.4vw,1.9rem)] font-bold tracking-[-0.03em]",
@@ -111,7 +130,12 @@ export function Header() {
                     )}
                   >
                     {item.label}
-                    <span className="font-sans text-[0.72rem] font-medium text-fg-faint">
+                    {/* Decorative index — hidden so the link is announced as
+                        "Services", not "Services 03". */}
+                    <span
+                      aria-hidden="true"
+                      className="font-sans text-[0.72rem] font-medium text-fg-faint"
+                    >
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </Link>
@@ -120,10 +144,14 @@ export function Header() {
 
               <div className="mt-8 grid gap-3.5">
                 <Button asChild block>
-                  <Link href="/contact">Book a Free Consultation</Link>
+                  <Link href="/contact" onClick={() => setOpen(false)}>
+                    Book a Free Consultation
+                  </Link>
                 </Button>
                 <Button asChild block variant="outlineDark">
-                  <Link href="/services">Explore Our Services</Link>
+                  <Link href="/services" onClick={() => setOpen(false)}>
+                    Explore Our Services
+                  </Link>
                 </Button>
               </div>
 
