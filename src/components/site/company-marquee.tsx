@@ -17,7 +17,7 @@ function Track({ duplicate = false }: { duplicate?: boolean }) {
       {targetEmployers.map((name) => (
         <li
           key={name}
-          className="font-display text-lg font-bold tracking-[-0.02em] whitespace-nowrap text-fg-faint transition-colors duration-300 hover:text-fg md:text-xl"
+          className="text-lg font-bold tracking-[-0.02em] whitespace-nowrap text-fg-faint transition-colors duration-300 hover:text-fg md:text-xl"
         >
           {name}
         </li>
@@ -32,7 +32,7 @@ export function CompanyMarquee() {
       aria-label="Employers candidates commonly target"
       className="border-y border-hair bg-paper-alt py-9 md:py-11"
     >
-      <p className="shell mb-7 text-center font-display text-[0.72rem] font-bold tracking-[0.16em] text-fg-muted uppercase">
+      <p className="shell mb-7 text-center text-[0.72rem] font-bold tracking-[0.16em] text-fg-muted uppercase">
         {marqueeHeading}
       </p>
 

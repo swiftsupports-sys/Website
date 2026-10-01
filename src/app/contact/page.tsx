@@ -94,7 +94,7 @@ export default function ContactPage() {
             {calLink ? <Scheduler calLink={calLink} /> : null}
           </Reveal>
 
-          <Reveal delay={1}>
+          <Reveal>
             <Eyebrow>Direct Contact</Eyebrow>
             <h2 className="h-lg">Prefer to Reach Out Yourself?</h2>
             <p className="mt-3.5 mb-6.5 text-fg-muted">
@@ -188,10 +188,10 @@ function ContactCard({
         {icon}
       </span>
       <span>
-        <span className="block font-display text-[0.78rem] font-bold tracking-[0.1em] text-fg-faint uppercase">
+        <span className="block text-[0.78rem] font-bold tracking-[0.1em] text-fg-faint uppercase">
           {label}
         </span>
-        <span className="mt-1.25 block font-display text-[1.02rem] font-bold tracking-[-0.02em]">
+        <span className="mt-1.25 block text-[1.02rem] font-bold tracking-[-0.02em]">
           {value}
         </span>
         <span className="mt-0.75 block text-[0.84rem] text-fg-muted">{note}</span>

@@ -31,22 +31,32 @@
   --color-hair-strong: rgb(16 18 16 / 0.16);
   --color-hair-dark: rgb(255 255 255 / 0.12);
 
-  /* Type */
-  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  /* Type — an optical serif against a technical grotesk. */
+  --font-display: var(--font-display), ui-serif, Georgia, serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 
   /* Rhythm */
   --spacing-gutter: clamp(1.25rem, 5vw, 3.5rem);
-  --radius-card: 1.5rem;
-  --radius-xl2: 2rem;
+
+  /**
+   * Radii are deliberately unequal. Structural surfaces sit near-square so
+   * the page reads as built rather than inflated; only controls are round.
+   */
+  --radius-card: 0.375rem;
+  --radius-panel: 0.125rem;
+  --radius-xl2: 0.5rem;
 
   /* Motion */
   --ease-brand: cubic-bezier(0.22, 0.61, 0.36, 1);
 
-  /* Shadows */
-  --shadow-soft: 0 1px 2px rgb(16 18 16 / 0.04), 0 6px 16px rgb(16 18 16 / 0.05);
-  --shadow-card: 0 2px 6px rgb(16 18 16 / 0.05), 0 18px 40px rgb(16 18 16 / 0.08);
-  --shadow-float: 0 30px 70px rgb(16 18 16 / 0.14);
+  /**
+   * Shadows are reserved for things that genuinely float above the page.
+   * Cards and panels separate with a hairline border instead — a shadow on
+   * every surface flattens the hierarchy it is meant to create.
+   */
+  --shadow-soft: 0 1px 1px rgb(16 18 16 / 0.03);
+  --shadow-card: 0 1px 2px rgb(16 18 16 / 0.04);
+  --shadow-float: 0 24px 60px rgb(16 18 16 / 0.16);
 }
 
 /* ------------------------------------------------------------- base ---- */
@@ -68,12 +78,19 @@
 
   h1,
   h2,
-  h3,
-  h4 {
+  h3 {
     font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: -0.028em;
-    line-height: 1.04;
+    font-weight: 600;
+    letter-spacing: -0.018em;
+    line-height: 1.08;
+  }
+
+  /* h4 is a card/list heading, not a display heading — it stays in the body
+     face so small headings read as structure rather than ornament. */
+  h4 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.006em;
   }
 
   ::selection {
@@ -111,36 +128,69 @@
     padding-inline: var(--spacing-gutter);
   }
 
+  /**
+   * Three densities, not one. A page that breathes evenly from top to bottom
+   * reads as generated; varying the rhythm is what makes it feel composed.
+   */
   .section {
     padding-block: clamp(4.5rem, 9vw, 8.25rem);
   }
 
   .section-tight {
-    padding-block: clamp(3.5rem, 6vw, 5.5rem);
+    padding-block: clamp(3rem, 5vw, 4.5rem);
   }
 
-  /* Editorial display scale */
+  .section-airy {
+    padding-block: clamp(6.5rem, 13vw, 12rem);
+  }
+
+  /**
+   * Type scale on a 1.333 ratio. Fraunces is a serif, so it carries less
+   * negative tracking than the old grotesk and needs a touch more leading.
+   */
   .h-display {
-    font-size: clamp(2.6rem, 6.4vw, 4.9rem);
-    line-height: 1;
+    font-size: clamp(2.9rem, 7vw, 5.6rem);
+    line-height: 0.98;
+    letter-spacing: -0.021em;
+    font-weight: 600;
+    text-wrap: balance;
   }
 
   .h-xl {
-    font-size: clamp(2.1rem, 4.3vw, 3.4rem);
+    font-size: clamp(2.05rem, 4.2vw, 3.35rem);
+    line-height: 1.06;
+    letter-spacing: -0.018em;
+    font-weight: 600;
+    text-wrap: balance;
   }
 
   .h-lg {
-    font-size: clamp(1.7rem, 2.9vw, 2.4rem);
+    font-size: clamp(1.6rem, 2.7vw, 2.25rem);
+    line-height: 1.12;
+    letter-spacing: -0.014em;
+    font-weight: 600;
+    text-wrap: balance;
   }
 
+  /* Card and list headings sit in the body face: a serif at this size next to
+     body copy reads as decoration rather than hierarchy. */
   .h-md {
-    font-size: clamp(1.22rem, 1.7vw, 1.42rem);
-    letter-spacing: -0.018em;
+    font-family: var(--font-sans);
+    font-size: 1.06rem;
+    line-height: 1.35;
+    letter-spacing: -0.006em;
+    font-weight: 600;
   }
 
   .lead {
-    font-size: clamp(1.02rem, 1.3vw, 1.14rem);
-    line-height: 1.72;
+    font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+    line-height: 1.62;
+    max-width: 68ch;
+  }
+
+  /* Measure guard for long-form body copy. */
+  .prose-measure {
+    max-width: 70ch;
   }
 }
 

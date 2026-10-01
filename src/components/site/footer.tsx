@@ -138,7 +138,7 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h4 className="mb-5 font-display text-[0.76rem] font-bold tracking-[0.14em] text-white/50 uppercase">
+      <h4 className="mb-5 text-[0.76rem] font-bold tracking-[0.14em] text-white/50 uppercase">
         {title}
       </h4>
       <ul className="grid gap-3">{children}</ul>

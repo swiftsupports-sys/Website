@@ -154,7 +154,7 @@ export default function AboutPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={1} className="order-1 lg:order-2">
+          <Reveal className="order-1 lg:order-2">
             <Eyebrow>Our Approach</Eyebrow>
             <h2 className="h-xl">
               We Start With Your Situation, <Muted>Not a Template.</Muted>
@@ -190,8 +190,8 @@ export default function AboutPage() {
           intro="A career decision deserves straight answers. These are the commitments we make to every candidate we work with."
         />
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {principles.map((principle, i) => (
-            <FeatureCard key={principle.title} {...principle} delay={i} />
+          {principles.map((principle) => (
+            <FeatureCard key={principle.title} {...principle} />
           ))}
         </div>
       </Section>
@@ -207,8 +207,8 @@ export default function AboutPage() {
           }
         />
         <div className="grid gap-5 md:grid-cols-3">
-          {audiences.map((audience, i) => (
-            <FeatureCard key={audience.title} {...audience} delay={i} tone="flat" />
+          {audiences.map((audience) => (
+            <FeatureCard key={audience.title} {...audience} tone="flat" />
           ))}
         </div>
       </Section>
@@ -226,7 +226,7 @@ export default function AboutPage() {
             </p>
           </Reveal>
 
-          <Reveal delay={1}>
+          <Reveal>
             <ul className="grid gap-3.5">
               {limits.map((limit) => (
                 <li

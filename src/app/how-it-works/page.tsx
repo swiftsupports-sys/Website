@@ -96,7 +96,7 @@ export default function HowItWorksPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={1}>
+          <Reveal>
             <Eyebrow tone="dark">Working Together</Eyebrow>
             <h2 className="h-xl">What the Engagement Asks of You.</h2>
             <p className="lead mt-6 text-on-dark-muted">
@@ -126,8 +126,8 @@ export default function HowItWorksPage() {
           intro="Every journey differs. The pattern below is indicative only — your consultant will set a realistic rhythm during the assessment, based on your availability and target role."
         />
         <div className="grid gap-5 md:grid-cols-3">
-          {phases.map((phase, i) => (
-            <FeatureCard key={phase.title} {...phase} delay={i} tone="flat" />
+          {phases.map((phase) => (
+            <FeatureCard key={phase.title} {...phase} tone="flat" />
           ))}
         </div>
         <Disclaimer>

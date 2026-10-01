@@ -60,8 +60,8 @@ export default function DomainsPage() {
           intro="Each domain has its own vocabulary, interview format, and evidence of competence. We prepare you for the one you are actually targeting."
         />
         <div className="grid gap-5 md:grid-cols-2">
-          {domains.map((domain, i) => (
-            <DomainCard key={domain.title} domain={domain} delay={i % 4} detailed />
+          {domains.map((domain) => (
+            <DomainCard key={domain.title} domain={domain} detailed />
           ))}
         </div>
       </Section>
@@ -94,7 +94,7 @@ export default function DomainsPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={1}>
+          <Reveal>
             <div className="overflow-hidden rounded-(--radius-card)">
               {/* PLACEHOLDER IMAGE */}
               <Image

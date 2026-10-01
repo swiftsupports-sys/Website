@@ -2,7 +2,6 @@ import * as React from "react";
 import Link from "next/link";
 import { ArrowRight, CircleCheck, type LucideIcon } from "lucide-react";
 
-import { Reveal } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
 import type { Domain } from "@/content/domains";
 import type { Package } from "@/content/packages";
@@ -17,17 +16,15 @@ export function FeatureCard({
   icon: Icon,
   title,
   description,
-  delay = 0,
   tone = "light",
 }: {
   icon: LucideIcon;
   title: string;
   description: string;
-  delay?: number;
   tone?: "light" | "dark" | "flat";
 }) {
   return (
-    <Reveal delay={delay} className="h-full">
+    <div className="h-full">
       <article
         className={cn(
           "group relative h-full overflow-hidden rounded-(--radius-card) border p-6 transition-[transform,box-shadow,border-color] duration-400 ease-brand hover:-translate-y-1.5 hover:shadow-card md:p-8",
@@ -58,7 +55,7 @@ export function FeatureCard({
           {description}
         </p>
       </article>
-    </Reveal>
+    </div>
   );
 }
 
@@ -66,11 +63,9 @@ export function FeatureCard({
 
 export function DomainCard({
   domain,
-  delay = 0,
   detailed,
 }: {
   domain: Domain;
-  delay?: number;
   detailed?: boolean;
 }) {
   if (detailed) {
@@ -79,13 +74,12 @@ export function DomainCard({
         icon={domain.icon}
         title={domain.title}
         description={domain.long}
-        delay={delay}
       />
     );
   }
 
   return (
-    <Reveal delay={delay} className="h-full">
+    <div className="h-full">
       <article className="group flex h-full min-h-46 flex-col gap-3.5 rounded-2xl border border-hair bg-white p-6 transition-[transform,box-shadow] duration-400 ease-brand hover:-translate-y-1.5 hover:shadow-card">
         <span className="grid size-11 place-items-center rounded-xl border border-hair text-ink transition-colors duration-400 group-hover:border-accent group-hover:bg-accent">
           <domain.icon className="size-5.25" strokeWidth={1.7} aria-hidden="true" />
@@ -95,7 +89,7 @@ export function DomainCard({
         </h3>
         <p className="mt-auto text-[0.88rem] text-fg-muted">{domain.short}</p>
       </article>
-    </Reveal>
+    </div>
   );
 }
 
@@ -115,8 +109,8 @@ export function StepList({
       {/* The <li> is the animated wrapper and the inner element is a plain div:
           nesting an <li> inside an <li> is invalid HTML and breaks hydration,
           and the split keeps the hover transform off motion's inline style. */}
-      {steps.map((step, i) => (
-        <Reveal as="li" key={step.n} delay={i}>
+      {steps.map((step) => (
+        <li key={step.n}>
           <div
             className={cn(
               "group grid grid-cols-[auto_1fr] items-start gap-5 rounded-(--radius-card) border p-6 transition-[background-color,border-color,transform] duration-400 ease-brand md:grid-cols-[auto_1fr_auto] md:gap-10 md:p-9",
@@ -194,7 +188,7 @@ export function StepList({
               <step.icon className="size-5.5" strokeWidth={1.7} aria-hidden="true" />
             </span>
           </div>
-        </Reveal>
+        </li>
       ))}
     </ol>
   );
@@ -204,7 +198,7 @@ export function StepList({
 
 export function ServiceRows({ services }: { services: Service[] }) {
   return (
-    <Reveal className="grid md:grid-cols-2 md:gap-x-12 lg:gap-x-18">
+    <div className="grid md:grid-cols-2 md:gap-x-12 lg:gap-x-18">
       {services.map((service) => (
         <Link
           key={service.n}
@@ -212,11 +206,11 @@ export function ServiceRows({ services }: { services: Service[] }) {
           className="group relative flex items-start gap-4.5 border-b border-hair py-5.5 transition-[padding] duration-300 ease-brand hover:pl-4.5"
         >
           <span className="absolute -inset-x-3.5 inset-y-0 rounded-2xl bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-          <span className="relative min-w-6.5 pt-1 font-display text-[0.78rem] font-bold tracking-[0.06em] text-fg-faint">
+          <span className="relative min-w-6.5 pt-1 text-[0.78rem] font-bold tracking-[0.06em] text-fg-faint">
             {service.n}
           </span>
           <span className="relative">
-            <span className="block font-display text-[1.03rem] font-bold tracking-[-0.018em]">
+            <span className="block text-[1.03rem] font-bold tracking-[-0.018em]">
               {service.title}
             </span>
             <span className="mt-1 block text-[0.9rem] text-fg-muted">
@@ -231,17 +225,17 @@ export function ServiceRows({ services }: { services: Service[] }) {
           </span>
         </Link>
       ))}
-    </Reveal>
+    </div>
   );
 }
 
 /* ------------------------------------------------------------ price card */
 
-export function PriceCard({ plan, delay = 0 }: { plan: Package; delay?: number }) {
+export function PriceCard({ plan }: { plan: Package }) {
   const featured = plan.recommended;
 
   return (
-    <Reveal delay={delay} className="h-full">
+    <div className="h-full">
       <article
         className={cn(
           "relative flex h-full flex-col rounded-(--radius-xl2) border p-7 transition-[transform,box-shadow] duration-400 ease-brand hover:-translate-y-1.5 md:p-11",
@@ -251,14 +245,14 @@ export function PriceCard({ plan, delay = 0 }: { plan: Package; delay?: number }
         )}
       >
         {featured ? (
-          <span className="absolute top-5.5 right-5.5 rounded-full bg-accent px-3.5 py-1.75 font-display text-[0.68rem] font-extrabold tracking-[0.12em] text-ink uppercase">
+          <span className="absolute top-5.5 right-5.5 rounded-full bg-accent px-3.5 py-1.75 text-[0.68rem] font-extrabold tracking-[0.12em] text-ink uppercase">
             Recommended
           </span>
         ) : null}
 
         <p
           className={cn(
-            "font-display text-[0.78rem] font-bold tracking-[0.15em] uppercase",
+            "text-[0.78rem] font-bold tracking-[0.15em] uppercase",
             featured ? "text-accent" : "text-fg-faint",
           )}
         >
@@ -309,7 +303,7 @@ export function PriceCard({ plan, delay = 0 }: { plan: Package; delay?: number }
           </p>
         </div>
       </article>
-    </Reveal>
+    </div>
   );
 }
 
@@ -317,13 +311,11 @@ export function PriceCard({ plan, delay = 0 }: { plan: Package; delay?: number }
 
 export function QuoteCard({
   testimonial,
-  delay = 0,
 }: {
   testimonial: Testimonial;
-  delay?: number;
 }) {
   return (
-    <Reveal delay={delay} className="h-full">
+    <div className="h-full">
       <article className="flex h-full flex-col gap-4.5 rounded-(--radius-card) border border-hair bg-white p-7 transition-[transform,box-shadow] duration-400 ease-brand hover:-translate-y-1.5 hover:shadow-card md:p-9">
         <span
           aria-hidden="true"
@@ -333,7 +325,7 @@ export function QuoteCard({
         </span>
 
         {testimonial.isPlaceholder ? (
-          <span className="self-start rounded-full bg-paper-alt px-2.75 py-1.25 font-display text-[0.66rem] font-bold tracking-widest text-fg-faint uppercase">
+          <span className="self-start rounded-full bg-paper-alt px-2.75 py-1.25 text-[0.66rem] font-bold tracking-widest text-fg-faint uppercase">
             Example placeholder
           </span>
         ) : null}
@@ -345,12 +337,12 @@ export function QuoteCard({
         <div className="flex items-center gap-3.5 border-t border-hair pt-5">
           <span
             aria-hidden="true"
-            className="grid size-11 shrink-0 place-items-center rounded-full bg-paper-alt font-display text-[0.95rem] font-extrabold text-fg-faint"
+            className="grid size-11 shrink-0 place-items-center rounded-full bg-paper-alt text-[0.95rem] font-extrabold text-fg-faint"
           >
             {testimonial.initials}
           </span>
           <span>
-            <strong className="block font-display text-[0.95rem] tracking-[-0.01em]">
+            <strong className="block text-[0.95rem] tracking-[-0.01em]">
               {testimonial.domain}
             </strong>
             <span className="block text-[0.82rem] text-fg-faint">
@@ -359,6 +351,6 @@ export function QuoteCard({
           </span>
         </div>
       </article>
-    </Reveal>
+    </div>
   );
 }

@@ -69,8 +69,8 @@ export default function PricingPage() {
 
       <Section tone="paper">
         <div className="grid items-stretch gap-5 lg:grid-cols-2 lg:gap-7.5">
-          {packages.map((plan, i) => (
-            <PriceCard key={plan.id} plan={plan} delay={i} />
+          {packages.map((plan) => (
+            <PriceCard key={plan.id} plan={plan} />
           ))}
         </div>
         <Disclaimer>{pricingDisclaimer}</Disclaimer>
@@ -83,8 +83,8 @@ export default function PricingPage() {
           intro="Whichever model you choose, the standard of support and the honesty of the guidance do not change."
         />
         <div className="grid gap-5 md:grid-cols-3">
-          {shared.map((item, i) => (
-            <FeatureCard key={item.title} {...item} delay={i} />
+          {shared.map((item) => (
+            <FeatureCard key={item.title} {...item} />
           ))}
         </div>
       </Section>

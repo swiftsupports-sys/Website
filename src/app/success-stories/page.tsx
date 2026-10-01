@@ -72,7 +72,7 @@ export default function SuccessStoriesPage() {
         />
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {testimonials.map((testimonial, i) => (
-            <QuoteCard key={i} testimonial={testimonial} delay={i % 3} />
+            <QuoteCard key={i} testimonial={testimonial} />
           ))}
         </div>
         <Disclaimer>
@@ -91,8 +91,8 @@ export default function SuccessStoriesPage() {
           intro="Reviews are only useful if they are real. These are the rules we hold ourselves to on this page."
         />
         <div className="grid gap-5 md:grid-cols-3">
-          {standards.map((standard, i) => (
-            <FeatureCard key={standard.title} {...standard} delay={i} tone="dark" />
+          {standards.map((standard) => (
+            <FeatureCard key={standard.title} {...standard} tone="dark" />
           ))}
         </div>
       </Section>

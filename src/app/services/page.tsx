@@ -57,8 +57,8 @@ export default function ServicesPage() {
           intro="Every service below belongs to one of these. Each page covers what it includes, how it runs, who it suits, and the questions candidates ask most."
         />
         <div className="grid gap-5 md:grid-cols-2">
-          {servicePages.map((page, i) => (
-            <Reveal key={page.slug} delay={i} className="h-full">
+          {servicePages.map((page) => (
+            <Reveal key={page.slug} className="h-full">
               <Link
                 href={`/services/${page.slug}`}
                 className="group block h-full rounded-(--radius-card) border border-hair bg-white p-7 transition-[transform,box-shadow] duration-400 ease-brand hover:-translate-y-1.5 hover:shadow-card md:p-9"
@@ -67,7 +67,7 @@ export default function ServicesPage() {
                 <p className="mt-3 text-[0.95rem] text-fg-muted">
                   {page.metaDescription}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-2 font-display text-[0.93rem] font-bold">
+                <span className="mt-5 inline-flex items-center gap-2 text-[0.93rem] font-bold">
                   {page.navLabel} in detail
                   <span
                     aria-hidden="true"
@@ -100,13 +100,13 @@ export default function ServicesPage() {
                   : "grid gap-5 md:grid-cols-2"
               }
             >
-              {items.map((service, i) => (
+              {items.map((service) => (
                 <FeatureCard
                   key={service.n}
                   icon={service.icon}
                   title={service.title}
                   description={service.long}
-                  delay={i % 4}
+                 
                 />
               ))}
             </div>

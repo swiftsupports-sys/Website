@@ -76,7 +76,7 @@ export default function HomePage() {
       <Section tone="paper" id="about">
         <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-18">
           <Reveal>
-            <p className="mb-5.5 inline-flex items-center gap-2.5 font-display text-[0.72rem] font-bold tracking-[0.16em] text-fg-muted uppercase">
+            <p className="mb-5.5 inline-flex items-center gap-2.5 text-[0.72rem] font-bold tracking-[0.16em] text-fg-muted uppercase">
               <span
                 aria-hidden="true"
                 className="size-2.25 rounded-[3px] bg-accent ring-4 ring-accent/20"
@@ -109,7 +109,7 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          <Reveal delay={2} className="relative">
+          <Reveal className="relative">
             <div className="overflow-hidden rounded-(--radius-card) bg-paper-alt">
               {/* PLACEHOLDER IMAGE */}
               <Image
@@ -142,8 +142,8 @@ export default function HomePage() {
           intro="Four pillars that work together — so your profile, your preparation, and your visibility all point in the same direction."
         />
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {pillars.map((pillar, i) => (
-            <FeatureCard key={pillar.title} {...pillar} delay={i} />
+          {pillars.map((pillar) => (
+            <FeatureCard key={pillar.title} {...pillar} />
           ))}
         </div>
       </Section>
@@ -172,8 +172,8 @@ export default function HomePage() {
           intro="Your career strategy, preparation, and guidance are tailored to the expectations of your target domain."
         />
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-          {domains.map((domain, i) => (
-            <DomainCard key={domain.title} domain={domain} delay={i % 4} />
+          {domains.map((domain) => (
+            <DomainCard key={domain.title} domain={domain} />
           ))}
         </div>
         <Reveal className="mt-9.5">
@@ -204,8 +204,8 @@ export default function HomePage() {
           intro="Two straightforward engagement models. Scope, timelines, and terms are discussed openly before you commit."
         />
         <div className="grid items-stretch gap-5 lg:grid-cols-2 lg:gap-7.5">
-          {packages.map((plan, i) => (
-            <PriceCard key={plan.id} plan={plan} delay={i} />
+          {packages.map((plan) => (
+            <PriceCard key={plan.id} plan={plan} />
           ))}
         </div>
         <Disclaimer>{pricingDisclaimer}</Disclaimer>
@@ -220,7 +220,7 @@ export default function HomePage() {
         />
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {testimonials.slice(0, 3).map((testimonial, i) => (
-            <QuoteCard key={i} testimonial={testimonial} delay={i} />
+            <QuoteCard key={i} testimonial={testimonial} />
           ))}
         </div>
         <Reveal className="mt-10">

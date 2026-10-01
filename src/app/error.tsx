@@ -19,7 +19,7 @@ export default function Error({
   return (
     <section className="bg-ink py-32 text-white md:py-44">
       <div className="shell text-center">
-        <p className="font-display text-[0.76rem] font-bold tracking-[0.16em] text-accent uppercase">
+        <p className="text-[0.76rem] font-bold tracking-[0.16em] text-accent uppercase">
           Something went wrong
         </p>
         <h1 className="h-xl mx-auto mt-5 max-w-[18ch]">

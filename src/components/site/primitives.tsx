@@ -44,16 +44,25 @@ export function Eyebrow({
   className?: string;
 }) {
   return (
+    /**
+     * A rule and small caps, not a badge. The lime dot appeared above all 54
+     * headings on the site, which turned the accent into wallpaper and made
+     * every section announce itself the same way. The accent now earns its
+     * place by being rare.
+     */
     <p
       className={cn(
-        "mb-5.5 inline-flex items-center gap-2.5 font-display text-[0.72rem] font-bold tracking-[0.16em] uppercase",
-        tone === "dark" ? "text-on-dark-muted" : "text-fg-muted",
+        "mb-5 flex items-center gap-3.5 font-sans text-[0.7rem] font-semibold tracking-[0.18em] uppercase",
+        tone === "dark" ? "text-on-dark-muted" : "text-fg-faint",
         className,
       )}
     >
       <span
         aria-hidden="true"
-        className="size-2.25 rounded-[3px] bg-accent ring-4 ring-accent/20"
+        className={cn(
+          "h-px w-7 shrink-0",
+          tone === "dark" ? "bg-white/25" : "bg-hair-strong",
+        )}
       />
       {children}
     </p>
@@ -76,7 +85,7 @@ export function SectionHead({
   className?: string;
 }) {
   return (
-    <Reveal
+    <div
       className={cn(
         "mb-10 md:mb-16",
         intro && "grid items-end gap-6 md:grid-cols-[1.15fr_0.85fr] md:gap-12",
@@ -97,7 +106,7 @@ export function SectionHead({
           {intro}
         </p>
       ) : null}
-    </Reveal>
+    </div>
   );
 }
 
@@ -178,7 +187,7 @@ export function ArrowLink({
     <Link
       href={href}
       className={cn(
-        "group inline-flex items-center gap-2.5 border-b-[1.5px] border-transparent pb-0.5 font-display text-[0.93rem] font-bold transition-colors duration-300 hover:border-current",
+        "group inline-flex items-center gap-2.5 border-b-[1.5px] border-transparent pb-0.5 text-[0.93rem] font-bold transition-colors duration-300 hover:border-current",
         className,
       )}
     >

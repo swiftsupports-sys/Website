@@ -46,7 +46,7 @@ export function HomeHero() {
           </h1>
         </Reveal>
 
-        <Reveal delay={1}>
+        <Reveal>
           <p className="lead mt-6.5 max-w-[58ch] text-white/80">
             Get personalized candidate marketing, recruiter networking,
             role-specific training, interview preparation, and mentorship designed to
@@ -54,7 +54,7 @@ export function HomeHero() {
           </p>
         </Reveal>
 
-        <Reveal delay={2}>
+        <Reveal>
           <div className="mt-9 flex flex-wrap gap-3.5">
             <Button asChild>
               <Link href="/contact">Book a Free Consultation</Link>
@@ -74,15 +74,15 @@ export function HomeHero() {
           </p>
         </Reveal>
 
-        <Reveal delay={3} className="mt-12 md:mt-20">
-          <p className="font-display text-[0.76rem] font-bold tracking-[0.14em] text-white/55 uppercase">
+        <Reveal className="mt-12 md:mt-20">
+          <p className="text-[0.76rem] font-bold tracking-[0.14em] text-white/55 uppercase">
             What working with us looks like
           </p>
           <ul className="mt-5 grid gap-3.5 sm:grid-cols-[repeat(2,max-content)] sm:gap-y-4 sm:gap-x-14">
             {trustPoints.map((point) => (
               <li
                 key={point.label}
-                className="flex items-center gap-2.5 font-display text-[1rem] font-bold tracking-[-0.02em] text-white/90"
+                className="flex items-center gap-2.5 text-[1rem] font-bold tracking-[-0.02em] text-white/90"
               >
                 <point.icon
                   className="size-4.75 shrink-0 text-accent"

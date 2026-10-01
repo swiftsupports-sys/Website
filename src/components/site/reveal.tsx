@@ -6,13 +6,13 @@ import { motion, useInView, useReducedMotion } from "motion/react";
 type RevealProps = {
   children: React.ReactNode;
   className?: string;
-  /** Stagger index — each step delays the entrance by 90ms. */
+  /** Stagger index — each step delays the entrance by 50ms. */
   delay?: number;
   /** Element to render. Defaults to a div. */
   as?: "div" | "section" | "li" | "article" | "header";
 };
 
-const hidden = { opacity: 0, y: 26 };
+const hidden = { opacity: 0, y: 10 };
 const shown = { opacity: 1, y: 0 };
 
 /**
@@ -60,9 +60,9 @@ export function Reveal({ children, className, delay = 0, as = "div" }: RevealPro
       initial={hidden}
       animate={visible ? shown : hidden}
       transition={{
-        duration: 0.8,
-        delay: visible ? delay * 0.09 : 0,
-        ease: [0.22, 0.61, 0.36, 1],
+        duration: 0.24,
+        delay: visible ? delay * 0.05 : 0,
+        ease: [0.16, 1, 0.3, 1],
       }}
     >
       {children}
