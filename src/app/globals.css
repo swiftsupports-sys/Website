@@ -278,3 +278,34 @@
     height: 0;
   }
 }
+
+/**
+ * Employer strip. The row is rendered twice, so translating by exactly -50%
+ * lands the copy where the original started and the loop is seamless.
+ */
+@keyframes employer-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-employer-scroll {
+  animation: employer-scroll 48s linear infinite;
+}
+
+.animate-employer-scroll:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-employer-scroll {
+    animation: none;
+    /* Held still and wrapped, rather than frozen mid-slide off-screen. */
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

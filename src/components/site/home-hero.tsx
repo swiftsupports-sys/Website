@@ -57,7 +57,9 @@ export function HomeHero() {
             priority
             quality={82}
             sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover object-[70%_35%]"
+            // Centred: the photo is a square composed around its subject, and
+            // the panel crops to ~1:1 on desktop and 16:10 on mobile.
+            className="object-cover object-center"
           />
         </div>
       </section>

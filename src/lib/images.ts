@@ -20,14 +20,20 @@ export type Photo = {
 
 export const photos = {
   hero: {
-    // Composed with the subject in the right half so the headline and CTAs on
-    // the left sit over quiet background rather than across a face. Replacing
-    // it? Keep that weighting, and rename the file so the optimizer cache and
-    // any CDN pick the new image up.
-    src: "/images/hero-session-hd.jpg",
-    alt: "A career consultant leading a session at a whiteboard",
-    width: 3840,
-    height: 2561,
+    /**
+     * The hero photo now sits in its own panel rather than behind the text, so
+     * it needs a centred subject — the previous image was composed with the
+     * subject hard right for a full-bleed layout, which left dead space inside
+     * the panel.
+     *
+     * Square on purpose: the panel is roughly 1:1 on desktop and 16:10 on
+     * mobile, and a centred square survives both crops. Replacing it? Rename
+     * the file, or the optimizer and CDN keep serving the old one.
+     */
+    src: "/images/hero-consultation.jpg",
+    alt: "A professional in conversation at a meeting table, city skyline behind",
+    width: 1800,
+    height: 1800,
   },
   mentorship: {
     // Pre-cropped to 4:5 to match the frame it renders in, so the browser does
