@@ -21,19 +21,18 @@ export type Photo = {
 export const photos = {
   hero: {
     /**
-     * The hero photo now sits in its own panel rather than behind the text, so
-     * it needs a centred subject — the previous image was composed with the
-     * subject hard right for a full-bleed layout, which left dead space inside
-     * the panel.
+     * Full-bleed behind the headline, so the composition matters: the subject
+     * sits in the right half and the left is quiet, which is what lets the
+     * scrim darken for the copy without covering a face.
      *
-     * Square on purpose: the panel is roughly 1:1 on desktop and 16:10 on
-     * mobile, and a centred square survives both crops. Replacing it? Rename
-     * the file, or the optimizer and CDN keep serving the old one.
+     * Keep that weighting if you replace it, and rename the file — the image
+     * optimizer and any CDN cache per path, so reusing this name will keep
+     * serving the old photograph.
      */
-    src: "/images/hero-consultation.jpg",
-    alt: "A professional in conversation at a meeting table, city skyline behind",
-    width: 1800,
-    height: 1800,
+    src: "/images/hero-session-hd.jpg",
+    alt: "A career consultant leading a session at a whiteboard",
+    width: 3840,
+    height: 2561,
   },
   mentorship: {
     // Pre-cropped to 4:5 to match the frame it renders in, so the browser does
