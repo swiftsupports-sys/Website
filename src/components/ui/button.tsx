@@ -6,63 +6,45 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "group relative inline-flex items-center justify-center gap-3.5 rounded-full border font-semibold tracking-[-0.005em] whitespace-nowrap transition-[transform,background-color,color,border-color,box-shadow] duration-300 ease-brand hover:-translate-y-0.5 active:translate-y-0 disabled:pointer-events-none disabled:opacity-60",
+  "inline-flex items-center justify-center gap-2 rounded-md border font-medium whitespace-nowrap transition-colors duration-200 ease-brand disabled:pointer-events-none disabled:opacity-60 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        accent:
-          "border-accent bg-accent text-ink hover:bg-accent-bright hover:shadow-[0_14px_34px_rgb(53_232_82/0.32)]",
-        dark: "border-ink bg-ink text-white hover:shadow-card",
-        light: "border-white bg-white text-ink hover:shadow-card",
+        /** Main call to action. */
+        primary:
+          "border-brand-blue bg-brand-blue text-white hover:border-brand-blue-hover hover:bg-brand-blue-hover",
         /** Outlined button for light backgrounds. */
-        outline:
-          "border-hair-strong bg-transparent text-ink hover:border-ink hover:shadow-soft",
-        /** Outlined button for dark backgrounds and photography. */
-        outlineDark:
-          "border-white/35 bg-transparent text-white hover:border-white hover:bg-white/10",
+        secondary:
+          "border-border-strong bg-surface text-brand-navy hover:border-brand-blue-border hover:bg-brand-blue-light",
+        /** Outlined button for navy backgrounds. */
+        secondaryDark:
+          "border-white/40 bg-transparent text-white hover:border-white hover:bg-white/10",
       },
       size: {
-        default: "py-[15px] pr-5 pl-6 text-[0.95rem]",
-        sm: "py-[11px] pr-[15px] pl-5 text-[0.87rem]",
+        default: "h-11 px-5 text-[0.9375rem]",
+        sm: "h-10 px-4 text-[0.875rem]",
+        lg: "h-12 px-6 text-base",
       },
       block: {
         true: "w-full",
       },
     },
-    defaultVariants: { variant: "accent", size: "default" },
-  },
-);
-
-const bubbleVariants = cva(
-  "grid shrink-0 place-items-center rounded-full transition-transform duration-300 ease-brand group-hover:translate-x-[3px]",
-  {
-    variants: {
-      tone: {
-        onLight: "bg-ink/10",
-        onDark: "bg-white/15",
-      },
-      size: {
-        default: "size-[30px] [&_svg]:size-[13px]",
-        sm: "size-[25px] [&_svg]:size-[12px]",
-      },
-    },
-    defaultVariants: { tone: "onDark", size: "default" },
+    defaultVariants: { variant: "primary", size: "default" },
   },
 );
 
 export type ButtonProps = React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
-    /** Render the trailing circular arrow. On by default. */
+    /** Render a small trailing arrow. Off by default. */
     withArrow?: boolean;
   };
 
 /**
- * The site's single button component. The trailing arrow bubble is part of the
- * brand language, so it is included unless explicitly turned off.
- *
- * With `asChild`, the arrow is rendered *inside* the child element (usually a
- * `next/link`), which is why the label is wrapped in Radix's `Slottable`.
+ * The site's single button component: rectangular, 6px radius, colour-only
+ * hover. With `asChild` the styles (and optional arrow) are applied to the
+ * child element — usually a `next/link` — which is why the label is wrapped
+ * in Radix's `Slottable`.
  */
 export function Button({
   className,
@@ -70,20 +52,17 @@ export function Button({
   size,
   block,
   asChild = false,
-  withArrow = true,
+  withArrow = false,
   children,
   ...props
 }: ButtonProps) {
   const Comp = asChild ? Slot : "button";
-  const tone = variant === "accent" || variant === "light" ? "onLight" : "onDark";
 
   return (
     <Comp className={cn(buttonVariants({ variant, size, block }), className)} {...props}>
       <Slottable>{children}</Slottable>
       {withArrow ? (
-        <span className={cn(bubbleVariants({ tone, size }))} aria-hidden="true">
-          <ArrowRight strokeWidth={2.4} />
-        </span>
+        <ArrowRight className="size-4" strokeWidth={2} aria-hidden="true" />
       ) : null}
     </Comp>
   );

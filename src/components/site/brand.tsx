@@ -3,44 +3,74 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { site } from "@/lib/site";
 
-/** The ascending-chevron mark. Lime tile on dark, inverted on light. */
-export function LogoMark({ className }: { className?: string }) {
+/**
+ * The ascending-chevron mark on a near-square tile. Navy on light surfaces;
+ * corporate blue on navy, where a navy tile would disappear.
+ */
+export function LogoMark({
+  className,
+  tone = "light",
+}: {
+  className?: string;
+  tone?: "light" | "dark";
+}) {
   return (
-    <svg viewBox="0 0 64 64" aria-hidden="true" className={cn("size-8.5", className)}>
-      <rect width="64" height="64" rx="16" fill="var(--color-accent)" />
-      <path
-        d="M18 40 L32 22 L46 40"
-        fill="none"
-        stroke="#0b0b0b"
-        strokeWidth="7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+    <svg viewBox="0 0 64 64" aria-hidden="true" className={cn("size-9", className)}>
+      <rect
+        width="64"
+        height="64"
+        rx="8"
+        fill={tone === "dark" ? "var(--color-brand-blue)" : "var(--color-brand-navy)"}
       />
       <path
-        d="M18 50 L32 32 L46 50"
+        d="M18 38 L32 22 L46 38"
         fill="none"
-        stroke="#0b0b0b"
-        strokeOpacity="0.4"
-        strokeWidth="7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke="#ffffff"
+        strokeWidth="6"
+        strokeLinecap="square"
+        strokeLinejoin="miter"
+      />
+      <path
+        d="M18 50 L32 34 L46 50"
+        fill="none"
+        stroke={tone === "dark" ? "#bfdbfe" : "var(--color-brand-blue-soft)"}
+        strokeWidth="6"
+        strokeLinecap="square"
+        strokeLinejoin="miter"
       />
     </svg>
   );
 }
 
-export function BrandLink({ className }: { className?: string }) {
+/** "Swift" set heavier than "Consultancy" — a conventional two-weight wordmark. */
+const wordmark = [
+  site.name.split(" ")[0],
+  site.name.split(" ").slice(1).join(" "),
+] as const;
+
+/** Logo plus wordmark, linking home. */
+export function BrandLink({
+  className,
+  tone = "light",
+}: {
+  className?: string;
+  tone?: "light" | "dark";
+}) {
   return (
     <Link
       href="/"
       className={cn(
-        "flex shrink-0 items-center gap-2.5 font-display text-[1.22rem] font-extrabold tracking-[-0.03em] transition-colors duration-300",
+        "flex shrink-0 items-center gap-2.5 text-[1.1875rem] leading-none tracking-[-0.01em]",
+        tone === "dark" ? "text-white" : "text-brand-navy",
         className,
       )}
       aria-label={`${site.name} — home`}
     >
-      <LogoMark />
-      {site.name}
+      <LogoMark tone={tone} />
+      <span>
+        <span className="font-semibold">{wordmark[0]}</span>{" "}
+        <span className="font-normal">{wordmark[1]}</span>
+      </span>
     </Link>
   );
 }

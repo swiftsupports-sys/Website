@@ -17,26 +17,24 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <section className="bg-ink py-32 text-white md:py-44">
+    <section className="section bg-surface">
       <div className="shell text-center">
-        <p className="text-[0.76rem] font-bold tracking-[0.16em] text-accent uppercase">
-          Something went wrong
-        </p>
-        <h1 className="h-xl mx-auto mt-5 max-w-[18ch]">
+        <p className="text-[0.9375rem] font-semibold text-brand-blue">Something went wrong</p>
+        <h1 className="h-page mx-auto mt-3 max-w-[22ch]">
           This page didn&apos;t load properly.
         </h1>
-        <p className="lead mx-auto mt-5 max-w-[52ch] text-white/70">
+        <p className="lead mx-auto mt-5 max-w-[52ch] text-text-body">
           The problem is on our side, not yours. Try again — and if it keeps
           happening, email us and we will pick the conversation up there.
         </p>
         {error.digest ? (
-          <p className="mt-4 text-[0.78rem] text-white/40">
+          <p className="mt-4 text-[0.8125rem] text-text-secondary">
             Reference: {error.digest}
           </p>
         ) : null}
-        <div className="mt-9 flex flex-wrap justify-center gap-3.5">
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Button onClick={reset}>Try again</Button>
-          <Button asChild variant="outlineDark">
+          <Button asChild variant="secondary">
             <Link href="/contact">Contact us</Link>
           </Button>
         </div>

@@ -1,6 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
-import { ArrowRight, CircleCheck, Info } from "lucide-react";
+import { ArrowRight, Check, Info } from "lucide-react";
 
 import { Reveal } from "@/components/site/reveal";
 import { cn } from "@/lib/utils";
@@ -9,10 +9,16 @@ import { cn } from "@/lib/utils";
 
 type Tone = "paper" | "alt" | "dark";
 
+/**
+ * paper — white surface
+ * alt   — the off-white page background, ruled top and bottom so adjacent
+ *         sections separate cleanly
+ * dark  — navy
+ */
 const toneClass: Record<Tone, string> = {
-  paper: "bg-paper text-fg",
-  alt: "bg-paper-alt text-fg",
-  dark: "bg-ink text-on-dark",
+  paper: "bg-surface text-text-primary",
+  alt: "border-y border-border bg-background text-text-primary",
+  dark: "tone-dark bg-brand-navy text-on-dark",
 };
 
 export function Section({
@@ -34,6 +40,7 @@ export function Section({
 
 /* --------------------------------------------------------------- eyebrow */
 
+/** Short section label: sentence case, brand blue, no ornament. */
 export function Eyebrow({
   children,
   tone = "light",
@@ -44,26 +51,13 @@ export function Eyebrow({
   className?: string;
 }) {
   return (
-    /**
-     * A rule and small caps, not a badge. The lime dot appeared above all 54
-     * headings on the site, which turned the accent into wallpaper and made
-     * every section announce itself the same way. The accent now earns its
-     * place by being rare.
-     */
     <p
       className={cn(
-        "mb-5 flex items-center gap-3.5 font-sans text-[0.7rem] font-semibold tracking-[0.18em] uppercase",
-        tone === "dark" ? "text-on-dark-muted" : "text-fg-faint",
+        "mb-3 text-[0.9375rem] font-semibold",
+        tone === "dark" ? "text-brand-blue-border" : "text-brand-blue",
         className,
       )}
     >
-      <span
-        aria-hidden="true"
-        className={cn(
-          "h-px w-7 shrink-0",
-          tone === "dark" ? "bg-white/25" : "bg-hair-strong",
-        )}
-      />
       {children}
     </p>
   );
@@ -78,29 +72,21 @@ export function SectionHead({
   tone = "light",
   className,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   heading: React.ReactNode;
   intro?: React.ReactNode;
   tone?: "light" | "dark";
   className?: string;
 }) {
   return (
-    <div
-      className={cn(
-        "mb-10 md:mb-16",
-        intro && "grid items-end gap-6 md:grid-cols-[1.15fr_0.85fr] md:gap-12",
-        className,
-      )}
-    >
-      <div>
-        <Eyebrow tone={tone}>{eyebrow}</Eyebrow>
-        <h2 className="h-xl">{heading}</h2>
-      </div>
+    <div className={cn("mb-10 max-w-3xl md:mb-12", className)}>
+      {eyebrow ? <Eyebrow tone={tone}>{eyebrow}</Eyebrow> : null}
+      <h2 className="h-xl">{heading}</h2>
       {intro ? (
         <p
           className={cn(
-            "lead",
-            tone === "dark" ? "text-on-dark-muted" : "text-fg-muted",
+            "lead mt-4",
+            tone === "dark" ? "text-on-dark-muted" : "text-text-body",
           )}
         >
           {intro}
@@ -108,11 +94,6 @@ export function SectionHead({
       ) : null}
     </div>
   );
-}
-
-/** Second half of a two-tone heading, e.g. "Bold part <Muted>quiet part</Muted>". */
-export function Muted({ children }: { children: React.ReactNode }) {
-  return <span className="font-extrabold text-fg-faint">{children}</span>;
 }
 
 /* ------------------------------------------------------------- checklist */
@@ -127,18 +108,21 @@ export function CheckList({
   className?: string;
 }) {
   return (
-    <ul className={cn("grid gap-3.5", className)}>
+    <ul className={cn("grid gap-3", className)}>
       {items.map((item, i) => (
         <li
           key={i}
           className={cn(
-            "flex items-start gap-3.5 text-[0.97rem]",
-            tone === "dark" ? "text-on-dark-muted" : "text-fg-muted",
+            "flex items-start gap-3",
+            tone === "dark" ? "text-on-dark-muted" : "text-text-body",
           )}
         >
-          <CircleCheck
-            className="mt-0.5 size-5.25 shrink-0 text-accent"
-            strokeWidth={1.9}
+          <Check
+            className={cn(
+              "mt-1 size-4.5 shrink-0",
+              tone === "dark" ? "text-brand-blue-border" : "text-brand-blue",
+            )}
+            strokeWidth={2.4}
             aria-hidden="true"
           />
           <span>{item}</span>
@@ -160,13 +144,20 @@ export function Disclaimer({
   return (
     <Reveal
       className={cn(
-        "mt-8 flex items-start gap-3.5 rounded-2xl border border-dashed p-5 text-[0.9rem] md:mt-10",
+        "mt-8 flex items-start gap-3 rounded-md border p-4 text-[0.875rem] md:mt-10 md:px-5",
         tone === "dark"
-          ? "border-hair-dark bg-ink-soft text-on-dark-muted"
-          : "border-hair-strong bg-paper-alt text-fg-muted",
+          ? "border-border-dark text-on-dark-muted"
+          : "border-border bg-surface text-text-body",
       )}
     >
-      <Info className="mt-0.5 size-5 shrink-0 text-fg-faint" strokeWidth={1.8} aria-hidden="true" />
+      <Info
+        className={cn(
+          "mt-0.5 size-4.5 shrink-0",
+          tone === "dark" ? "text-on-dark-subtle" : "text-text-secondary",
+        )}
+        strokeWidth={2}
+        aria-hidden="true"
+      />
       <span>{children}</span>
     </Reveal>
   );
@@ -174,6 +165,7 @@ export function Disclaimer({
 
 /* ------------------------------------------------------------ arrow link */
 
+/** Plain text link with a small trailing arrow. */
 export function ArrowLink({
   href,
   children,
@@ -187,16 +179,12 @@ export function ArrowLink({
     <Link
       href={href}
       className={cn(
-        "group inline-flex items-center gap-2.5 border-b-[1.5px] border-transparent pb-0.5 text-[0.93rem] font-bold transition-colors duration-300 hover:border-current",
+        "inline-flex items-center gap-1.5 font-medium text-brand-blue underline-offset-4 transition-colors duration-200 hover:text-brand-blue-hover hover:underline",
         className,
       )}
     >
       {children}
-      <ArrowRight
-        className="size-3.5 transition-transform duration-300 ease-brand group-hover:translate-x-1"
-        strokeWidth={2.2}
-        aria-hidden="true"
-      />
+      <ArrowRight className="size-4" strokeWidth={2} aria-hidden="true" />
     </Link>
   );
 }

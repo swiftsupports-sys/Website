@@ -3,40 +3,36 @@ import Link from "next/link";
 import { Eyebrow } from "@/components/site/primitives";
 import { Reveal } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
-/** Closing conversion band, repeated at the foot of every page. */
+/**
+ * Closing conversion band, repeated at the foot of every page. One treatment
+ * site-wide: a straight navy section, copy left, actions right.
+ */
 export function CtaBand({
   eyebrow = "Free Consultation",
   heading = "Let's Build Your Career Strategy.",
   body = "Tell us about your experience, desired role, technology domain, and career expectations. We will help you understand the right next step.",
   secondary = { href: "/pricing", label: "Review Packages" },
-  tone = "alt",
 }: {
   eyebrow?: string;
   heading?: string;
   body?: string;
   secondary?: { href: string; label: string };
-  tone?: "paper" | "alt";
 }) {
   return (
-    <section className={cn("section-tight", tone === "alt" ? "bg-paper-alt" : "bg-paper")}>
+    <section className="tone-dark border-b border-border-dark bg-brand-navy py-14 text-white md:py-18 lg:py-20">
       <div className="shell">
-        <Reveal className="relative isolate overflow-hidden rounded-(--radius-xl2) bg-ink px-6 py-10 text-center text-white md:px-14 md:py-19">
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_118%,rgb(53_232_82/0.3),transparent_62%)]"
-          />
-          <Eyebrow tone="dark" className="justify-center">
-            {eyebrow}
-          </Eyebrow>
-          <h2 className="h-xl mx-auto max-w-[19ch]">{heading}</h2>
-          <p className="mx-auto mt-5 max-w-[56ch] text-on-dark-muted">{body}</p>
-          <div className="mt-8.5 flex flex-wrap justify-center gap-3.5">
-            <Button asChild>
+        <Reveal className="grid items-center gap-8 lg:grid-cols-[1fr_auto] lg:gap-16">
+          <div>
+            <Eyebrow tone="dark">{eyebrow}</Eyebrow>
+            <h2 className="h-xl max-w-[26ch]">{heading}</h2>
+            <p className="mt-4 max-w-[62ch] text-[1.0625rem] text-on-dark-muted">{body}</p>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Button asChild size="lg">
               <Link href="/contact">Book a Free Consultation</Link>
             </Button>
-            <Button asChild variant="outlineDark">
+            <Button asChild size="lg" variant="secondaryDark">
               <Link href={secondary.href}>{secondary.label}</Link>
             </Button>
           </div>

@@ -5,12 +5,12 @@ import Image from "next/image";
 import {
   Briefcase,
   CalendarCheck,
-  CircleX,
   GraduationCap,
   Repeat,
   ShieldCheck,
   Target,
   Users,
+  X,
 } from "lucide-react";
 
 import { FeatureCard } from "@/components/site/cards";
@@ -20,7 +20,6 @@ import { PageSchema } from "@/components/site/page-schema";
 import {
   CheckList,
   Eyebrow,
-  Muted,
   Section,
   SectionHead,
 } from "@/components/site/primitives";
@@ -104,68 +103,24 @@ export default function AboutPage() {
 
       <PageHero
         breadcrumb="About Us"
-        eyebrow="About Us"
-        title={
-          <>
-            More Than Job Search Support —{" "}
-            <span className="text-accent">A Career Strategy Built Around You.</span>
-          </>
-        }
+        title="More Than Job Search Support — A Career Strategy Built Around You."
         intro="We work closely with candidates to understand their experience, strengths, career goals, and target roles. From professional branding and role-specific preparation to recruiter networking and interview support, our process is designed to help candidates present themselves with confidence in the US technology job market."
         actions={<HeroActions />}
       />
 
       {/* ------------------------------------------------------- our approach */}
       <Section tone="paper">
-        <div className="grid items-center gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-18">
-          <Reveal className="order-2 lg:order-1">
-            <div className="grid grid-cols-2 gap-3.5">
-              {/* PLACEHOLDER IMAGES */}
-              <div className="col-span-2 overflow-hidden rounded-(--radius-card)">
-                <Image
-                  src={photos.roadmap.src}
-                  alt={photos.roadmap.alt}
-                  width={1000}
-                  height={563}
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  className="aspect-video w-full object-cover"
-                />
-              </div>
-              <div className="overflow-hidden rounded-(--radius-card)">
-                <Image
-                  src={photos.workspace.src}
-                  alt={photos.workspace.alt}
-                  width={700}
-                  height={700}
-                  sizes="(max-width: 1024px) 50vw, 22vw"
-                  className="aspect-square w-full object-cover"
-                />
-              </div>
-              <div className="overflow-hidden rounded-(--radius-card)">
-                <Image
-                  src={photos.team.src}
-                  alt={photos.team.alt}
-                  width={700}
-                  height={700}
-                  sizes="(max-width: 1024px) 50vw, 22vw"
-                  className="aspect-square w-full object-cover"
-                />
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal className="order-1 lg:order-2">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <Reveal>
             <Eyebrow>Our Approach</Eyebrow>
-            <h2 className="h-xl">
-              We Start With Your Situation, <Muted>Not a Template.</Muted>
-            </h2>
-            <p className="lead mt-6 text-fg-muted">
+            <h2 className="h-xl">We Start With Your Situation, Not a Template.</h2>
+            <p className="lead mt-5 text-text-body">
               Two candidates with the same job title rarely need the same plan. One may
               need to rebuild how their experience is presented; another may need depth
               in a specific technology, or simply the confidence to handle a panel
               interview well.
             </p>
-            <p className="mt-4 text-fg-muted">
+            <p className="mt-4 text-text-body">
               So we begin with an honest assessment — what you have done, what you are
               aiming for, and the distance between the two. Everything after that is
               built on what we find, and revised as you progress.
@@ -179,6 +134,18 @@ export default function AboutPage() {
               ]}
             />
           </Reveal>
+
+          <Reveal>
+            {/* PLACEHOLDER IMAGE */}
+            <Image
+              src={photos.roadmap.src}
+              alt={photos.roadmap.alt}
+              width={1200}
+              height={800}
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              className="aspect-3/2 w-full rounded-lg object-cover lg:aspect-4/3"
+            />
+          </Reveal>
         </div>
       </Section>
 
@@ -189,9 +156,9 @@ export default function AboutPage() {
           heading="Principles We Hold To."
           intro="A career decision deserves straight answers. These are the commitments we make to every candidate we work with."
         />
-        <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {principles.map((principle) => (
-            <FeatureCard key={principle.title} {...principle} />
+            <FeatureCard key={principle.title} {...principle} variant="plain" />
           ))}
         </div>
       </Section>
@@ -200,26 +167,22 @@ export default function AboutPage() {
       <Section tone="paper">
         <SectionHead
           eyebrow="Who We Work With"
-          heading={
-            <span className="max-w-[24ch]">
-              Professionals at Different Points on the Same Path.
-            </span>
-          }
+          heading="Professionals at Different Points on the Same Path."
         />
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           {audiences.map((audience) => (
-            <FeatureCard key={audience.title} {...audience} tone="flat" />
+            <FeatureCard key={audience.title} {...audience} />
           ))}
         </div>
       </Section>
 
       {/* ------------------------------------------------------- what we don't */}
-      <Section tone="dark">
-        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-18">
+      <Section tone="alt">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.2fr)] lg:gap-16">
           <Reveal>
-            <Eyebrow tone="dark">Clarity First</Eyebrow>
+            <Eyebrow>Clarity First</Eyebrow>
             <h2 className="h-xl">What We Do Not Do.</h2>
-            <p className="lead mt-6 text-on-dark-muted">
+            <p className="lead mt-5 text-text-body">
               Being clear about our limits is part of being useful. If any of the
               following is what you are looking for, we are not the right fit — and we
               will say so early.
@@ -227,18 +190,15 @@ export default function AboutPage() {
           </Reveal>
 
           <Reveal>
-            <ul className="grid gap-3.5">
+            <ul className="divide-y divide-border rounded-lg border border-border bg-surface">
               {limits.map((limit) => (
-                <li
-                  key={limit}
-                  className="flex items-start gap-3.5 text-[0.97rem] text-on-dark-muted"
-                >
-                  <CircleX
-                    className="mt-0.5 size-5.25 shrink-0 text-accent"
-                    strokeWidth={1.9}
+                <li key={limit} className="flex items-start gap-4 px-5 py-4 md:px-6">
+                  <X
+                    className="mt-1 size-4.5 shrink-0 text-text-secondary"
+                    strokeWidth={2.2}
                     aria-hidden="true"
                   />
-                  {limit}
+                  <span className="text-text-body">{limit}</span>
                 </li>
               ))}
             </ul>

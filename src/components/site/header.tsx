@@ -3,9 +3,9 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { ChevronRight, Clock, Mail, Menu, X } from "lucide-react";
 
-import { BrandLink } from "@/components/site/brand";
+import { BrandLink, LinkedInIcon } from "@/components/site/brand";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -18,17 +18,12 @@ import {
 import { hasPhone, phonePlaceholder, primaryNav, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
+/** The logo already links home, so the desktop bar leaves "Home" out. */
+const desktopNav = primaryNav.filter((item) => item.href !== "/");
+
 export function Header() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-
-  React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   /**
    * Close the drawer whenever the route changes.
@@ -48,126 +43,150 @@ export function Header() {
     setOpen(false);
   }
 
-  // Every page opens on a dark hero, so the bar starts transparent and only
-  // switches to the frosted light treatment once the visitor scrolls.
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-80 flex h-[78px] items-center border-b border-transparent transition-[background-color,height,box-shadow,border-color] duration-400 ease-brand",
-        scrolled &&
-          "h-[70px] border-hair bg-paper/85 shadow-[0_8px_34px_rgb(16_18_16/0.06)] backdrop-blur-md",
-      )}
-    >
-      <div className="shell flex items-center gap-4 lg:gap-8">
-        <BrandLink className={scrolled ? "text-ink" : "text-white"} />
-
-        <nav
-          aria-label="Primary"
-          className="ml-auto hidden items-center gap-0.5 xl:flex"
-        >
-          {primaryNav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              aria-current={isActive(item.href) ? "page" : undefined}
-              className={cn(
-                "relative rounded-full px-3 py-2 text-[0.89rem] font-medium whitespace-nowrap transition-colors duration-300",
-                "after:absolute after:inset-x-3 after:bottom-1 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-sm after:bg-accent after:transition-transform after:duration-300 after:ease-brand hover:after:scale-x-100 aria-[current=page]:after:scale-x-100",
-                scrolled
-                  ? "text-fg-muted hover:text-ink aria-[current=page]:font-semibold aria-[current=page]:text-ink"
-                  : "text-white/80 hover:text-white aria-[current=page]:font-semibold aria-[current=page]:text-white",
-              )}
+    <>
+      {/* Utility bar — scrolls away; only the main bar below is sticky. */}
+      <div className="tone-dark hidden bg-brand-navy text-[0.8125rem] text-on-dark-muted lg:block">
+        <div className="shell flex h-9 items-center justify-between gap-6">
+          <span>{site.tagline}</span>
+          <div className="flex items-center gap-6">
+            <a
+              href={`mailto:${site.email}`}
+              className="inline-flex items-center gap-2 transition-colors hover:text-white"
             >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-
-        <Button asChild size="sm" className="ml-1.5 hidden xl:inline-flex">
-          <Link href="/contact">Book a Free Consultation</Link>
-        </Button>
-
-        {/* Mobile / tablet */}
-        <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger
-            aria-label="Open menu"
-            className="ml-auto grid size-11.5 cursor-pointer place-items-center rounded-[13px] bg-accent text-ink transition-transform duration-300 hover:scale-105 xl:hidden"
-          >
-            <Menu className="size-5" strokeWidth={2.2} />
-          </SheetTrigger>
-
-          <SheetContent aria-describedby="drawer-desc">
-            <div className="flex h-[78px] items-center justify-between border-b border-hair-dark px-(--spacing-gutter)">
-              <SheetTitle asChild>
-                <BrandLink className="text-white" />
-              </SheetTitle>
-              <SheetClose
-                aria-label="Close menu"
-                className="grid size-11.5 cursor-pointer place-items-center rounded-[13px] border border-hair-dark text-white transition-colors hover:bg-white/10"
-              >
-                <X className="size-5" strokeWidth={2.2} />
-              </SheetClose>
-            </div>
-
-            <div className="overflow-y-auto px-(--spacing-gutter) py-8">
-              <SheetDescription id="drawer-desc" className="sr-only">
-                Site navigation and contact details
-              </SheetDescription>
-
-              <nav aria-label="Mobile" className="grid">
-                {primaryNav.map((item, i) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setOpen(false)}
-                    aria-current={isActive(item.href) ? "page" : undefined}
-                    className={cn(
-                      "flex items-center justify-between gap-4 border-b border-hair-dark py-3 font-display text-[clamp(1.4rem,5.4vw,1.9rem)] font-bold tracking-[-0.03em]",
-                      "aria-[current=page]:text-accent",
-                    )}
-                  >
-                    {item.label}
-                    {/* Decorative index — hidden so the link is announced as
-                        "Services", not "Services 03". */}
-                    <span
-                      aria-hidden="true"
-                      className="font-sans text-[0.72rem] font-medium text-fg-faint"
-                    >
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </Link>
-                ))}
-              </nav>
-
-              <div className="mt-8 grid gap-3.5">
-                <Button asChild block>
-                  <Link href="/contact" onClick={() => setOpen(false)}>
-                    Book a Free Consultation
-                  </Link>
-                </Button>
-                <Button asChild block variant="outlineDark">
-                  <Link href="/services" onClick={() => setOpen(false)}>
-                    Explore Our Services
-                  </Link>
-                </Button>
-              </div>
-
-              <div className="mt-7 grid gap-1.5 text-[0.9rem] text-on-dark-muted">
-                <a href={`mailto:${site.email}`}>{site.email}</a>
-                {hasPhone ? (
-                  <a href={`tel:${site.phoneHref}`}>{site.phoneDisplay}</a>
-                ) : (
-                  <span>Phone: {phonePlaceholder}</span>
-                )}
-                <span>{site.hours}</span>
-              </div>
-            </div>
-          </SheetContent>
-        </Sheet>
+              <Mail className="size-3.5" strokeWidth={2} aria-hidden="true" />
+              {site.email}
+            </a>
+            <span className="inline-flex items-center gap-2">
+              <Clock className="size-3.5" strokeWidth={2} aria-hidden="true" />
+              {site.hours}
+            </span>
+            <a
+              href={site.social.linkedin}
+              target="_blank"
+              rel="noopener"
+              aria-label="LinkedIn"
+              className="transition-colors hover:text-white"
+            >
+              <LinkedInIcon className="size-3.5" />
+            </a>
+          </div>
+        </div>
       </div>
-    </header>
+
+      <header className="sticky top-0 z-80 border-b border-border bg-surface">
+        <div className="shell flex h-[76px] items-center gap-6 lg:gap-8">
+          <BrandLink />
+
+          <nav aria-label="Primary" className="ml-auto hidden h-full items-stretch xl:flex">
+            {desktopNav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={isActive(item.href) ? "page" : undefined}
+                className={cn(
+                  "relative flex items-center px-3 text-[0.9375rem] font-medium whitespace-nowrap text-text-primary transition-colors duration-200 hover:text-brand-blue",
+                  "aria-[current=page]:text-brand-blue aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3 aria-[current=page]:after:bottom-0 aria-[current=page]:after:h-0.5 aria-[current=page]:after:bg-brand-blue",
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          <Button asChild size="sm" className="hidden xl:inline-flex">
+            <Link href="/contact">Book a Free Consultation</Link>
+          </Button>
+
+          {/* Mobile / tablet */}
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger
+              aria-label="Open menu"
+              className="ml-auto grid size-11 cursor-pointer place-items-center rounded-md border border-border text-brand-navy transition-colors duration-200 hover:bg-muted xl:hidden"
+            >
+              <Menu className="size-5" strokeWidth={2} />
+            </SheetTrigger>
+
+            <SheetContent aria-describedby="drawer-desc">
+              <div className="flex h-[76px] items-center justify-between border-b border-border px-5">
+                <SheetTitle asChild>
+                  <BrandLink />
+                </SheetTitle>
+                <SheetClose
+                  aria-label="Close menu"
+                  className="grid size-10 cursor-pointer place-items-center rounded-md text-brand-navy transition-colors duration-200 hover:bg-muted"
+                >
+                  <X className="size-5" strokeWidth={2} />
+                </SheetClose>
+              </div>
+
+              <div className="overflow-y-auto px-5 py-4">
+                <SheetDescription id="drawer-desc" className="sr-only">
+                  Site navigation and contact details
+                </SheetDescription>
+
+                <nav aria-label="Mobile">
+                  <ul>
+                    {primaryNav.map((item) => (
+                      <li key={item.href} className="border-b border-border">
+                        <Link
+                          href={item.href}
+                          onClick={() => setOpen(false)}
+                          aria-current={isActive(item.href) ? "page" : undefined}
+                          className="flex items-center justify-between gap-4 py-3.5 text-base font-medium text-text-primary transition-colors hover:text-brand-blue aria-[current=page]:font-semibold aria-[current=page]:text-brand-blue"
+                        >
+                          {item.label}
+                          <ChevronRight
+                            className="size-4 text-text-secondary"
+                            strokeWidth={2}
+                            aria-hidden="true"
+                          />
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+
+                <div className="mt-6 grid gap-3">
+                  <Button asChild block>
+                    <Link href="/contact" onClick={() => setOpen(false)}>
+                      Book a Free Consultation
+                    </Link>
+                  </Button>
+                  <Button asChild block variant="secondary">
+                    <Link href="/services" onClick={() => setOpen(false)}>
+                      Explore Our Services
+                    </Link>
+                  </Button>
+                </div>
+
+                <div className="mt-6 grid gap-1.5 border-t border-border pt-5 text-[0.875rem] text-text-body">
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="transition-colors hover:text-brand-blue"
+                  >
+                    {site.email}
+                  </a>
+                  {hasPhone ? (
+                    <a
+                      href={`tel:${site.phoneHref}`}
+                      className="transition-colors hover:text-brand-blue"
+                    >
+                      {site.phoneDisplay}
+                    </a>
+                  ) : (
+                    <span>Phone: {phonePlaceholder}</span>
+                  )}
+                  <span>{site.hours}</span>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </header>
+    </>
   );
 }

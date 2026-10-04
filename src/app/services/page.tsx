@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 
-import { FeatureCard } from "@/components/site/cards";
+import { FeatureCard, LinkCard } from "@/components/site/cards";
 import { CtaBand } from "@/components/site/cta-band";
 import { HeroActions, PageHero } from "@/components/site/page-hero";
 import { PageSchema } from "@/components/site/page-schema";
@@ -33,13 +33,7 @@ export default function ServicesPage() {
 
       <PageHero
         breadcrumb="Services"
-        eyebrow="Our Services"
-        title={
-          <>
-            Career Services Designed{" "}
-            <span className="text-accent">Around Your Goals.</span>
-          </>
-        }
+        title="Career Services Designed Around Your Goals."
         intro="Fifteen services across positioning, preparation, and mentorship. Engage the full journey, or concentrate on the areas where you need the most support — every service is delivered one-to-one."
         actions={<HeroActions secondaryHref="/pricing" secondaryLabel="View Packages" />}
       />
@@ -56,27 +50,15 @@ export default function ServicesPage() {
           heading="Four areas, explained in full."
           intro="Every service below belongs to one of these. Each page covers what it includes, how it runs, who it suits, and the questions candidates ask most."
         />
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2">
           {servicePages.map((page) => (
             <Reveal key={page.slug} className="h-full">
-              <Link
+              <LinkCard
                 href={`/services/${page.slug}`}
-                className="group block h-full rounded-(--radius-card) border border-hair bg-white p-7 transition-[transform,box-shadow] duration-400 ease-brand hover:-translate-y-1.5 hover:shadow-card md:p-9"
-              >
-                <h3 className="h-md">{page.metaTitle}</h3>
-                <p className="mt-3 text-[0.95rem] text-fg-muted">
-                  {page.metaDescription}
-                </p>
-                <span className="mt-5 inline-flex items-center gap-2 text-[0.93rem] font-bold">
-                  {page.navLabel} in detail
-                  <span
-                    aria-hidden="true"
-                    className="transition-transform group-hover:translate-x-1"
-                  >
-                    →
-                  </span>
-                </span>
-              </Link>
+                title={page.metaTitle}
+                description={page.metaDescription}
+                linkLabel={`${page.navLabel} in detail`}
+              />
             </Reveal>
           ))}
         </div>
@@ -84,7 +66,7 @@ export default function ServicesPage() {
 
       {serviceGroups.map((group, groupIndex) => {
         const items = servicesByGroup(group.id);
-        const tone = groupIndex === 1 ? "alt" : "paper";
+        const tone = groupIndex % 2 === 0 ? "alt" : "paper";
 
         return (
           <Section key={group.id} tone={tone}>
@@ -96,8 +78,8 @@ export default function ServicesPage() {
             <div
               className={
                 items.length === 3
-                  ? "grid gap-5 md:grid-cols-3"
-                  : "grid gap-5 md:grid-cols-2"
+                  ? "grid gap-6 md:grid-cols-3"
+                  : "grid gap-6 md:grid-cols-2 lg:grid-cols-3"
               }
             >
               {items.map((service) => (
@@ -106,7 +88,6 @@ export default function ServicesPage() {
                   icon={service.icon}
                   title={service.title}
                   description={service.long}
-                 
                 />
               ))}
             </div>
@@ -120,7 +101,7 @@ export default function ServicesPage() {
                   to the employer — and we do not provide immigration or legal advice.
                 </Disclaimer>
                 <div className="mt-10">
-                  <Button asChild variant="dark">
+                  <Button asChild variant="secondary">
                     <Link href="/pricing">Review Packages</Link>
                   </Button>
                 </div>

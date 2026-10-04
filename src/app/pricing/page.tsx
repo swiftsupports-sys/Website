@@ -54,13 +54,7 @@ export default function PricingPage() {
 
       <PageHero
         breadcrumb="Pricing"
-        eyebrow="Pricing"
-        title={
-          <>
-            Choose the Support Model{" "}
-            <span className="text-accent">That Works for You.</span>
-          </>
-        }
+        title="Choose the Support Model That Works for You."
         intro="Two engagement models, stated plainly. Scope, timelines, inclusions, and any charges that apply later are explained before you commit and confirmed in writing."
         actions={
           <HeroActions secondaryHref="/services" secondaryLabel="See What's Included" />
@@ -68,12 +62,14 @@ export default function PricingPage() {
       />
 
       <Section tone="paper">
-        <div className="grid items-stretch gap-5 lg:grid-cols-2 lg:gap-7.5">
+        <div className="mx-auto grid max-w-5xl items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
           {packages.map((plan) => (
             <PriceCard key={plan.id} plan={plan} />
           ))}
         </div>
-        <Disclaimer>{pricingDisclaimer}</Disclaimer>
+        <div className="mx-auto max-w-5xl">
+          <Disclaimer>{pricingDisclaimer}</Disclaimer>
+        </div>
       </Section>
 
       <Section tone="alt">
@@ -82,26 +78,28 @@ export default function PricingPage() {
           heading="What Both Packages Have in Common."
           intro="Whichever model you choose, the standard of support and the honesty of the guidance do not change."
         />
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-x-8 gap-y-10 md:grid-cols-3">
           {shared.map((item) => (
-            <FeatureCard key={item.title} {...item} />
+            <FeatureCard key={item.title} {...item} variant="plain" />
           ))}
         </div>
       </Section>
 
       <Section tone="paper">
-        <SectionHead
-          eyebrow="Pricing Questions"
-          heading="The Details People Ask About."
-          intro="Anything not covered here will be answered directly during your consultation, before any commitment."
-        />
-        <Reveal>
-          <FaqList items={faqsFor("pricing")} />
-        </Reveal>
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16">
+          <SectionHead
+            className="mb-0"
+            eyebrow="Pricing Questions"
+            heading="The Details People Ask About."
+            intro="Anything not covered here will be answered directly during your consultation, before any commitment."
+          />
+          <Reveal>
+            <FaqList items={faqsFor("pricing")} />
+          </Reveal>
+        </div>
       </Section>
 
       <CtaBand
-        tone="alt"
         heading="Talk It Through Before You Commit."
         body="The consultation is free, and it is the right place to ask about scope, terms, and whether either package makes sense for your situation."
         secondary={{ href: "/service-agreement", label: "Read the Service Agreement" }}

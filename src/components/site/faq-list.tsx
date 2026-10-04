@@ -19,7 +19,7 @@ export function FaqList({
   items: { question: string; answer: string }[];
 }) {
   return (
-    <Accordion type="single" collapsible className="grid gap-3">
+    <Accordion type="single" collapsible className="border-t border-border">
       {items.map((item, i) => (
         <AccordionItem key={item.question} value={`faq-${i}`}>
           <AccordionTrigger>{item.question}</AccordionTrigger>

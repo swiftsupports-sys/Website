@@ -2,106 +2,100 @@
 
 /* ==========================================================================
    Swift Consultancy — design tokens
-   Charcoal + electric lime + warm white. Single theme by design: the site
-   commits to one look rather than following the visitor's colour scheme.
+   Navy, corporate blue, and neutral slate on white. Light surfaces carry the
+   page; navy anchors the header bar, page banners, CTA, and footer; blue is
+   the single interactive colour. Cyan and emerald are supporting accents and
+   appear rarely — emerald only for success / completed states.
    ========================================================================== */
 
 @theme {
-  /* Surfaces */
-  --color-ink: #101210;
-  --color-ink-soft: #181a18;
-  --color-ink-line: #2a2d2a;
-  --color-paper: #f7f7f2;
-  --color-paper-alt: #efefe9;
-
   /* Brand */
-  --color-accent: #35e852;
-  --color-accent-deep: #17a534; /* passes contrast as text on paper */
-  --color-accent-bright: #45f861;
+  --color-brand-navy: #0b1f3a;
+  --color-brand-navy-soft: #12294a; /* raised surfaces on navy */
+  --color-brand-blue: #2563eb;
+  --color-brand-blue-hover: #1d4ed8;
+  --color-brand-blue-light: #eff6ff;
+  --color-brand-blue-border: #93c5fd;
+  --color-brand-blue-soft: #60a5fa; /* link hover on dark surfaces */
+  --color-brand-cyan: #06b6d4;
+  --color-brand-success: #10b981;
+  --color-brand-success-strong: #047857; /* success as text — passes AA */
 
-  /* Foreground */
-  --color-fg: #101210;
-  --color-fg-muted: #55584f;
-  --color-fg-faint: #6e7269;
-  --color-on-dark: #f4f4f1;
-  --color-on-dark-muted: #a7aca7;
+  /* Surfaces */
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-muted: #f1f5f9;
+  --color-footer: #071426;
 
   /* Lines */
-  --color-hair: rgb(16 18 16 / 0.1);
-  --color-hair-strong: rgb(16 18 16 / 0.16);
-  --color-hair-dark: rgb(255 255 255 / 0.12);
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+  --color-border-dark: rgb(255 255 255 / 0.14);
 
-  /* Type — an optical serif against a technical grotesk. */
-  --font-display: var(--font-display), ui-serif, Georgia, serif;
-  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Text */
+  --color-text-primary: #1e293b;
+  --color-text-body: #475569; /* paragraph copy — AA on every light surface */
+  --color-text-secondary: #64748b; /* meta text, on white / background only */
+  --color-on-dark: #ffffff;
+  --color-on-dark-muted: #cbd5e1;
+  --color-on-dark-subtle: #94a3b8;
 
-  /* Rhythm */
-  --spacing-gutter: clamp(1.25rem, 5vw, 3.5rem);
+  /* Type — one family, used at disciplined weights. */
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
 
-  /**
-   * Radii are deliberately unequal. Structural surfaces sit near-square so
-   * the page reads as built rather than inflated; only controls are round.
-   */
-  --radius-card: 0.375rem;
-  --radius-panel: 0.125rem;
-  --radius-xl2: 0.5rem;
+  /* Shadows — borders separate surfaces; shadows are near-invisible. */
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.05);
+  --shadow-hover: 0 4px 14px rgb(15 23 42 / 0.07);
+  --shadow-overlay: 0 12px 32px rgb(15 23 42 / 0.14);
 
   /* Motion */
-  --ease-brand: cubic-bezier(0.22, 0.61, 0.36, 1);
-
-  /**
-   * Shadows are reserved for things that genuinely float above the page.
-   * Cards and panels separate with a hairline border instead — a shadow on
-   * every surface flattens the hierarchy it is meant to create.
-   */
-  --shadow-soft: 0 1px 1px rgb(16 18 16 / 0.03);
-  --shadow-card: 0 1px 2px rgb(16 18 16 / 0.04);
-  --shadow-float: 0 24px 60px rgb(16 18 16 / 0.16);
+  --ease-brand: cubic-bezier(0.2, 0.6, 0.35, 1);
 }
 
 /* ------------------------------------------------------------- base ---- */
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 6rem;
+    /* Sticky header is 76px tall. */
+    scroll-padding-top: 5.5rem;
   }
 
   body {
-    background-color: var(--color-paper);
-    color: var(--color-fg);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
     font-family: var(--font-sans);
-    font-size: 16.5px;
+    font-size: 1rem;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
+  /* Headings are navy on light surfaces; `.tone-dark` flips them to white. */
   h1,
   h2,
-  h3 {
-    font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: -0.018em;
-    line-height: 1.08;
-  }
-
-  /* h4 is a card/list heading, not a display heading — it stays in the body
-     face so small headings read as structure rather than ornament. */
+  h3,
   h4 {
-    font-family: var(--font-sans);
+    color: var(--heading-color, var(--color-brand-navy));
     font-weight: 600;
-    letter-spacing: -0.006em;
+    letter-spacing: -0.012em;
+    line-height: 1.2;
   }
 
   ::selection {
-    background-color: var(--color-accent);
-    color: #0b0b0b;
+    background-color: #bfdbfe;
+    color: var(--color-brand-navy);
   }
 
   :focus-visible {
-    outline: 3px solid var(--color-accent);
-    outline-offset: 3px;
-    border-radius: 4px;
+    outline: 2px solid var(--focus-color, var(--color-brand-blue));
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Navy and footer surfaces: white headings, a lighter focus ring. */
+  .tone-dark {
+    --heading-color: #ffffff;
+    --focus-color: var(--color-brand-blue-border);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -121,119 +115,111 @@
 
 /* ------------------------------------------------------- primitives ---- */
 @layer components {
+  /* One container for every section: 1280px including gutters. */
   .shell {
     width: 100%;
-    max-width: 78rem;
+    max-width: 80rem;
     margin-inline: auto;
-    padding-inline: var(--spacing-gutter);
+    padding-inline: 1rem;
   }
 
-  /**
-   * Three densities, not one. A page that breathes evenly from top to bottom
-   * reads as generated; varying the rhythm is what makes it feel composed.
-   */
+  @media (width >= 48rem) {
+    .shell {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  @media (width >= 64rem) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Section rhythm: 56 / 72 / 96px. */
   .section {
-    padding-block: clamp(4.5rem, 9vw, 8.25rem);
+    padding-block: 3.5rem;
   }
 
   .section-tight {
-    padding-block: clamp(3rem, 5vw, 4.5rem);
+    padding-block: 3rem;
   }
 
-  .section-airy {
-    padding-block: clamp(6.5rem, 13vw, 12rem);
+  @media (width >= 48rem) {
+    .section {
+      padding-block: 4.5rem;
+    }
+
+    .section-tight {
+      padding-block: 3.5rem;
+    }
+  }
+
+  @media (width >= 64rem) {
+    .section {
+      padding-block: 6rem;
+    }
+
+    .section-tight {
+      padding-block: 4rem;
+    }
   }
 
   /**
-   * Type scale on a 1.333 ratio. Fraunces is a serif, so it carries less
-   * negative tracking than the old grotesk and needs a touch more leading.
+   * Type scale.
+   *   h-display  home H1        34 → 44 → 56px
+   *   h-page     inner H1       32 → 40 → 48px
+   *   h-xl       section H2     28 → 34 → 42px
+   *   h-lg       sub-section    22 → 28px
+   *   h-md       card / list    18 → 20px
    */
   .h-display {
-    font-size: clamp(2.9rem, 7vw, 5.6rem);
-    line-height: 0.98;
-    letter-spacing: -0.021em;
+    font-size: clamp(2.125rem, 1.5rem + 2.6vw, 3.5rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
     font-weight: 600;
     text-wrap: balance;
   }
 
-  .h-xl {
-    font-size: clamp(2.05rem, 4.2vw, 3.35rem);
-    line-height: 1.06;
+  .h-page {
+    font-size: clamp(2rem, 1.4rem + 2.2vw, 3rem);
+    line-height: 1.15;
     letter-spacing: -0.018em;
     font-weight: 600;
     text-wrap: balance;
   }
 
-  .h-lg {
-    font-size: clamp(1.6rem, 2.7vw, 2.25rem);
-    line-height: 1.12;
-    letter-spacing: -0.014em;
+  .h-xl {
+    font-size: clamp(1.75rem, 1.2rem + 1.9vw, 2.625rem);
+    line-height: 1.18;
+    letter-spacing: -0.016em;
     font-weight: 600;
     text-wrap: balance;
   }
 
-  /* Card and list headings sit in the body face: a serif at this size next to
-     body copy reads as decoration rather than hierarchy. */
+  .h-lg {
+    font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.75rem);
+    line-height: 1.25;
+    letter-spacing: -0.012em;
+    font-weight: 600;
+    text-wrap: balance;
+  }
+
   .h-md {
-    font-family: var(--font-sans);
-    font-size: 1.06rem;
+    font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.25rem);
     line-height: 1.35;
-    letter-spacing: -0.006em;
+    letter-spacing: -0.008em;
     font-weight: 600;
   }
 
   .lead {
-    font-size: clamp(1.05rem, 1.3vw, 1.2rem);
-    line-height: 1.62;
+    font-size: clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);
+    line-height: 1.65;
     max-width: 68ch;
   }
 
   /* Measure guard for long-form body copy. */
   .prose-measure {
     max-width: 70ch;
-  }
-}
-
-/* Hero photograph slow settle — decorative, disabled under reduced motion. */
-@keyframes hero-pan {
-  from {
-    transform: scale(1.06);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-.animate-hero-pan {
-  animation: hero-pan 18s var(--ease-brand) forwards;
-}
-
-/* Employer strip. The track is rendered twice, so translating by exactly
-   -50% lands the copy where the original started and the loop is seamless. */
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-marquee {
-  animation: marquee 45s linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
-    animation: none;
-    /* Static and wrapped, rather than a frozen row running off-screen. */
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
   }
 }
 
@@ -256,21 +242,21 @@
   }
 }
 
-@keyframes slide-down {
+@keyframes drawer-in {
   from {
-    transform: translateY(-100%);
+    transform: translateX(100%);
   }
   to {
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
-@keyframes slide-up {
+@keyframes drawer-out {
   from {
-    transform: translateY(0);
+    transform: translateX(0);
   }
   to {
-    transform: translateY(-100%);
+    transform: translateX(100%);
   }
 }
 
@@ -291,22 +277,4 @@
   to {
     height: 0;
   }
-}
-
-@keyframes wa-pulse {
-  0% {
-    transform: scale(1);
-    opacity: 0.7;
-  }
-  70% {
-    transform: scale(1.14);
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-.animate-wa-pulse {
-  animation: wa-pulse 2.8s ease-out infinite;
 }

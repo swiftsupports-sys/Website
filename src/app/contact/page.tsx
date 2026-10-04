@@ -71,21 +71,17 @@ export default function ContactPage() {
       <PageHero
         breadcrumb="Contact"
         eyebrow="Free Consultation"
-        title={
-          <>
-            Let&apos;s Build <span className="text-accent">Your Career Strategy.</span>
-          </>
-        }
+        title="Let's Build Your Career Strategy."
         intro="Tell us about your experience, desired role, technology domain, and career expectations. We will help you understand the right next step."
         note="No resume needed to begin — a short conversation is enough."
       />
 
-      <Section tone="paper">
-        <div className="grid items-start gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+      <Section tone="alt" className="border-t-0">
+        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:gap-12">
           <Reveal>
-            <div className="rounded-(--radius-xl2) border border-hair bg-white p-6 shadow-soft md:p-11">
+            <div className="rounded-lg border border-border bg-surface p-6 md:p-10">
               <h2 className="h-lg">Request a Consultation</h2>
-              <p className="mt-3 mb-7 text-fg-muted">
+              <p className="mt-2.5 mb-8 border-b border-border pb-6 text-text-body">
                 Share a few details and we will get back to you to confirm a time.
                 Everything you send is treated confidentially.
               </p>
@@ -97,23 +93,22 @@ export default function ContactPage() {
           <Reveal>
             <Eyebrow>Direct Contact</Eyebrow>
             <h2 className="h-lg">Prefer to Reach Out Yourself?</h2>
-            <p className="mt-3.5 mb-6.5 text-fg-muted">
+            <p className="mt-3 mb-6 text-text-body">
               Message us on any channel below. We usually respond within one business
               day.
             </p>
 
-            
-            <div className="grid gap-3.5">
-              <ContactCard
+            <ul className="divide-y divide-border rounded-lg border border-border bg-surface">
+              <ContactRow
                 href={`mailto:${site.email}`}
                 icon={<Mail className="size-5" strokeWidth={1.8} />}
                 label="Email"
                 value={site.email}
                 note="For consultation requests and general questions"
               />
-              {/* No href while unconfigured: the card stays in place but is
+              {/* No href while unconfigured: the row stays in place but is
                   inert, rather than offering a link that goes nowhere. */}
-              <ContactCard
+              <ContactRow
                 href={hasPhone ? `tel:${site.phoneHref}` : undefined}
                 icon={<Phone className="size-5" strokeWidth={1.8} />}
                 label="Phone"
@@ -124,7 +119,7 @@ export default function ContactPage() {
                     : "In the meantime, email us or use the form"
                 }
               />
-              <ContactCard
+              <ContactRow
                 href={hasWhatsApp ? whatsappLink : undefined}
                 external={hasWhatsApp}
                 icon={<WhatsAppIcon className="size-5" />}
@@ -136,16 +131,16 @@ export default function ContactPage() {
                     : "In the meantime, email us or use the form"
                 }
               />
-              <ContactCard
+              <ContactRow
                 icon={<Clock className="size-5" strokeWidth={1.8} />}
                 label="Business Hours"
                 value={site.hours}
                 note="Limited weekend consultation slots available"
               />
-            </div>
+            </ul>
 
-            <div className="mt-7 rounded-r-[10px] border-l-[3px] border-accent bg-paper-alt px-5.5 py-4.5 text-[0.93rem] text-fg-muted">
-              <strong className="text-fg">Do I need to send a resume first?</strong>
+            <div className="mt-6 rounded-r-md border-l-[3px] border-brand-blue bg-brand-blue-light px-5 py-4 text-[0.9375rem] text-text-body">
+              <strong className="text-brand-navy">Do I need to send a resume first?</strong>
               <br />
               No. Begin by booking a consultation and sharing your current profile,
               goals, target role, and expectations. We will guide you through the next
@@ -155,7 +150,7 @@ export default function ContactPage() {
         </div>
       </Section>
 
-      <Section tone="alt">
+      <Section tone="paper">
         <SectionHead
           eyebrow="After You Submit"
           heading="What Happens Next."
@@ -167,7 +162,7 @@ export default function ContactPage() {
   );
 }
 
-function ContactCard({
+function ContactRow({
   href,
   external,
   icon,
@@ -184,33 +179,34 @@ function ContactCard({
 }) {
   const content = (
     <>
-      <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-paper-alt transition-colors duration-400 group-hover:bg-accent">
+      <span className="mt-0.5 shrink-0 text-brand-blue" aria-hidden="true">
         {icon}
       </span>
-      <span>
-        <span className="block text-[0.78rem] font-bold tracking-[0.1em] text-fg-faint uppercase">
-          {label}
-        </span>
-        <span className="mt-1.25 block text-[1.02rem] font-bold tracking-[-0.02em]">
+      <span className="min-w-0">
+        <span className="block text-[0.875rem] text-text-secondary">{label}</span>
+        <span className="mt-0.5 block font-semibold break-words text-brand-navy transition-colors duration-200 group-hover:text-brand-blue">
           {value}
         </span>
-        <span className="mt-0.75 block text-[0.84rem] text-fg-muted">{note}</span>
+        <span className="mt-0.5 block text-[0.875rem] text-text-body">{note}</span>
       </span>
     </>
   );
 
-  const className =
-    "group flex items-start gap-4 rounded-2xl border border-hair bg-white px-6 py-5.5 transition-[transform,border-color] duration-400 ease-brand";
-
-  if (!href) return <div className={className}>{content}</div>;
+  const className = "group flex items-start gap-4 px-5 py-4.5 md:px-6";
 
   return (
-    <a
-      href={href}
-      {...(external ? { target: "_blank", rel: "noopener" } : {})}
-      className={`${className} hover:translate-x-1.5 hover:border-ink`}
-    >
-      {content}
-    </a>
+    <li>
+      {href ? (
+        <a
+          href={href}
+          {...(external ? { target: "_blank", rel: "noopener" } : {})}
+          className={`${className} transition-colors duration-200 hover:bg-background`}
+        >
+          {content}
+        </a>
+      ) : (
+        <div className={className}>{content}</div>
+      )}
+    </li>
   );
 }

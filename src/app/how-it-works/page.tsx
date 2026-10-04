@@ -60,12 +60,7 @@ export default function HowItWorksPage() {
 
       <PageHero
         breadcrumb="How It Works"
-        eyebrow="How It Works"
-        title={
-          <>
-            A Clear Path Toward <span className="text-accent">Your Next Role.</span>
-          </>
-        }
+        title="A Clear Path Toward Your Next Role."
         intro="Five structured stages, run in sequence but revisited whenever your situation changes. At every point you know what is happening now, what is expected of you, and what comes next."
         actions={<HeroActions />}
       />
@@ -76,36 +71,33 @@ export default function HowItWorksPage() {
           heading="Five Stages, One Direction."
           intro="Stages overlap in practice — training continues while marketing begins, and preparation sharpens as interviews approach."
         />
-        <StepList steps={processSteps} showDetails />
+        <StepList steps={processSteps} layout="rows" showDetails />
       </Section>
 
       {/* ------------------------------------------------------- expectations */}
-      <Section tone="dark">
-        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-18">
+      <Section tone="alt">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
-            <div className="overflow-hidden rounded-(--radius-card)">
-              {/* PLACEHOLDER IMAGE */}
-              <Image
-                src={photos.workspace.src}
-                alt={photos.workspace.alt}
-                width={1200}
-                height={750}
-                sizes="(max-width: 1024px) 100vw, 45vw"
-                className="aspect-16/10 w-full object-cover"
-              />
-            </div>
+            {/* PLACEHOLDER IMAGE */}
+            <Image
+              src={photos.workspace.src}
+              alt={photos.workspace.alt}
+              width={1200}
+              height={750}
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              className="aspect-16/10 w-full rounded-lg object-cover"
+            />
           </Reveal>
 
           <Reveal>
-            <Eyebrow tone="dark">Working Together</Eyebrow>
+            <Eyebrow>Working Together</Eyebrow>
             <h2 className="h-xl">What the Engagement Asks of You.</h2>
-            <p className="lead mt-6 text-on-dark-muted">
+            <p className="lead mt-5 text-text-body">
               Our side of the work is structure, preparation, and visibility. Yours is
               consistency. Candidates who make steady progress tend to share the same
               habits.
             </p>
             <CheckList
-              tone="dark"
               className="mt-7"
               items={[
                 "Time set aside each week for preparation and practice",
@@ -125,9 +117,9 @@ export default function HowItWorksPage() {
           heading="How an Engagement Usually Unfolds."
           intro="Every journey differs. The pattern below is indicative only — your consultant will set a realistic rhythm during the assessment, based on your availability and target role."
         />
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-x-8 gap-y-10 md:grid-cols-3">
           {phases.map((phase) => (
-            <FeatureCard key={phase.title} {...phase} tone="flat" />
+            <FeatureCard key={phase.title} {...phase} variant="plain" />
           ))}
         </div>
         <Disclaimer>

@@ -6,7 +6,7 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cn } from "@/lib/utils";
 
 /**
- * Full-screen navigation drawer built on Radix Dialog: focus trapping, scroll
+ * Right-hand navigation drawer built on Radix Dialog: focus trapping, scroll
  * locking, and Escape handling come for free.
  */
 export const Sheet = DialogPrimitive.Root;
@@ -22,11 +22,11 @@ export function SheetContent({
 }: React.ComponentProps<typeof DialogPrimitive.Content>) {
   return (
     <DialogPrimitive.Portal>
-      <DialogPrimitive.Overlay className="fixed inset-0 z-90 bg-ink/70 backdrop-blur-sm data-[state=closed]:animate-[fade-out_250ms_ease] data-[state=open]:animate-[fade-in_250ms_ease]" />
+      <DialogPrimitive.Overlay className="fixed inset-0 z-90 bg-brand-navy/50 data-[state=closed]:animate-[fade-out_200ms_ease] data-[state=open]:animate-[fade-in_200ms_ease]" />
       <DialogPrimitive.Content
         className={cn(
-          "fixed inset-x-0 top-0 z-100 grid max-h-dvh grid-rows-[auto_1fr] bg-ink text-on-dark shadow-float outline-none",
-          "data-[state=closed]:animate-[slide-up_400ms_var(--ease-brand)] data-[state=open]:animate-[slide-down_400ms_var(--ease-brand)]",
+          "fixed inset-y-0 right-0 z-100 grid h-dvh w-full max-w-sm grid-rows-[auto_1fr] border-l border-border bg-surface text-text-primary shadow-overlay outline-none",
+          "data-[state=closed]:animate-[drawer-out_220ms_var(--ease-brand)] data-[state=open]:animate-[drawer-in_220ms_var(--ease-brand)]",
           className,
         )}
         {...props}

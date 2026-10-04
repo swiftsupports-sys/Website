@@ -9,8 +9,8 @@ export const contentType = "image/png";
  */
 export default function AppleIcon() {
   const mark = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
-  <path d="M52 112 L90 62 L128 112" fill="none" stroke="#35E852" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M52 139 L90 89 L128 139" fill="none" stroke="#35E852" stroke-opacity="0.42" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M52 106 L90 62 L128 106" fill="none" stroke="#FFFFFF" stroke-width="17" stroke-linecap="square"/>
+  <path d="M52 140 L90 96 L128 140" fill="none" stroke="#60A5FA" stroke-width="17" stroke-linecap="square"/>
 </svg>`;
 
   return new ImageResponse(
@@ -20,7 +20,7 @@ export default function AppleIcon() {
           width: "100%",
           height: "100%",
           display: "flex",
-          background: "#101210",
+          background: "#0B1F3A",
         }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}

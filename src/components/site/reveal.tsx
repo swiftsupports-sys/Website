@@ -12,7 +12,7 @@ type RevealProps = {
   as?: "div" | "section" | "li" | "article" | "header";
 };
 
-const hidden = { opacity: 0, y: 10 };
+const hidden = { opacity: 0, y: 8 };
 const shown = { opacity: 1, y: 0 };
 
 /**
@@ -23,7 +23,7 @@ const shown = { opacity: 1, y: 0 };
  * a `<noscript>` rule in the root layout (see layout.tsx) covers visitors
  * without JavaScript, and the timer below reveals anything already on screen
  * if no intersection callback has arrived. Visitors who prefer reduced motion
- * skip the animation entirely.
+ * see the content immediately, with no transition.
  */
 export function Reveal({ children, className, delay = 0, as = "div" }: RevealProps) {
   const reduced = useReducedMotion();
@@ -43,13 +43,12 @@ export function Reveal({ children, className, delay = 0, as = "div" }: RevealPro
     return () => window.clearTimeout(timer);
   }, []);
 
-  if (reduced) {
-    const Plain = as;
-    return <Plain className={className}>{children}</Plain>;
-  }
-
+  // Reduced motion still renders the motion element, snapped to visible with
+  // no transition. Swapping in a plain element instead would leave the
+  // server-rendered `opacity: 0` in place: React does not patch mismatched
+  // style attributes during hydration, so the content stayed invisible.
   const Comp = motion[as];
-  const visible = inView || fallbackShown;
+  const visible = reduced || inView || fallbackShown;
 
   return (
     <Comp
@@ -59,11 +58,15 @@ export function Reveal({ children, className, delay = 0, as = "div" }: RevealPro
       className={className}
       initial={hidden}
       animate={visible ? shown : hidden}
-      transition={{
-        duration: 0.24,
-        delay: visible ? delay * 0.05 : 0,
-        ease: [0.16, 1, 0.3, 1],
-      }}
+      transition={
+        reduced
+          ? { duration: 0 }
+          : {
+              duration: 0.24,
+              delay: visible ? delay * 0.05 : 0,
+              ease: [0.16, 1, 0.3, 1],
+            }
+      }
     >
       {children}
     </Comp>

@@ -26,7 +26,7 @@ export function Scheduler({ calLink }: { calLink: string }) {
     frame.src = `https://cal.com/${calLink}?embed=true&theme=light`;
     frame.title = "Consultation booking calendar";
     frame.loading = "lazy";
-    frame.className = "h-[620px] w-full rounded-(--radius-lg) border-0 bg-white";
+    frame.className = "h-[620px] w-full rounded-md border border-border bg-white";
     frame.onerror = () => setFailed(true);
 
     const node = slot.current;
@@ -35,9 +35,9 @@ export function Scheduler({ calLink }: { calLink: string }) {
   }, [open, calLink]);
 
   return (
-    <div className="mt-7 rounded-(--radius-xl2) border border-hair bg-white p-6 shadow-soft md:p-8">
-      <h2 className="h-sm font-display font-extrabold">Rather Pick a Time Now?</h2>
-      <p className="mt-2.5 text-[0.93rem] text-fg-muted">
+    <div className="mt-6 rounded-lg border border-border bg-surface p-6 md:p-8">
+      <h2 className="h-md">Rather Pick a Time Now?</h2>
+      <p className="mt-2.5 text-[0.9375rem] text-text-body">
         Choose a slot that suits you and we will confirm it by email. The form is
         still the best route if you would like us to read your background first.
       </p>
@@ -46,14 +46,14 @@ export function Scheduler({ calLink }: { calLink: string }) {
         <>
           <div ref={slot} className="mt-5" aria-live="polite" />
           {failed ? (
-            <p className="mt-3 text-[0.85rem] text-fg-muted">
+            <p className="mt-3 text-[0.875rem] text-text-body">
               The calendar could not load. Please use the form or email us instead.
             </p>
           ) : null}
         </>
       ) : (
-        <Button className="mt-5" variant="outline" onClick={() => setOpen(true)}>
-          <CalendarDays className="size-4.5" strokeWidth={1.9} aria-hidden="true" />
+        <Button className="mt-5" variant="secondary" onClick={() => setOpen(true)}>
+          <CalendarDays className="size-4.5" strokeWidth={2} aria-hidden="true" />
           Open the booking calendar
         </Button>
       )}

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, IBM_Plex_Sans } from "next/font/google";
+import { IBM_Plex_Sans } from "next/font/google";
 
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -14,28 +14,14 @@ import { site } from "@/lib/site";
 import "./globals.css";
 
 /**
- * Display face. Fraunces is an optical serif: `SOFT` and `WONK` give the large
- * sizes a drawn, editorial quality that a geometric sans cannot, and the
- * optical axis keeps headings from looking spindly as they scale up.
- */
-const fraunces = Fraunces({
-  variable: "--font-display",
-  subsets: ["latin"],
-  // No `weight`: declaring axes requires the variable instance, which gives us
-  // the full weight range in one file anyway.
-  axes: ["SOFT", "WONK", "opsz"],
-  display: "swap",
-});
-
-/**
- * Body face. Plex Sans was drawn for technical documentation — it reads
- * cleanly at small sizes and its slightly mechanical forms suit an audience
- * of engineers, while contrasting with the serif above it.
+ * One family for the whole site. Plex Sans was drawn for technical
+ * documentation: it reads cleanly at small sizes, holds up as a heading face
+ * at 600, and has the measured, institutional tone the brand needs.
  */
 const plex = IBM_Plex_Sans({
-  variable: "--font-sans",
+  variable: "--font-plex",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -77,12 +63,12 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#101210",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${plex.variable} h-full antialiased`}>
+    <html lang="en" className={`${plex.variable} h-full antialiased`}>
       <head>
         {/* Entrance animations render their hidden state on the server, so
             without JavaScript the page would be blank. Reveal it instead. */}
@@ -93,7 +79,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col">
         <a
           href="#main"
-          className="sr-only rounded-b-lg bg-accent px-5 py-3 font-bold text-ink focus:not-sr-only focus:absolute focus:top-0 focus:left-4 focus:z-100"
+          className="sr-only rounded-b-md bg-brand-blue px-5 py-3 font-semibold text-white focus:not-sr-only focus:absolute focus:top-0 focus:left-4 focus:z-100"
         >
           Skip to main content
         </a>
@@ -108,7 +94,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           position="top-center"
           toastOptions={{
             classNames: {
-              toast: "font-sans rounded-2xl border border-hair shadow-card",
+              toast: "font-sans rounded-md border border-border shadow-overlay",
             },
           }}
         />

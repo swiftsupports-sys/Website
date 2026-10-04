@@ -51,13 +51,7 @@ export default function SuccessStoriesPage() {
 
       <PageHero
         breadcrumb="Success Stories"
-        eyebrow="Success Stories"
-        title={
-          <>
-            Career Progress Starts With{" "}
-            <span className="text-accent">the Right Support.</span>
-          </>
-        }
+        title="Career Progress Starts With the Right Support."
         intro="Candidate experiences, in their own words. Published anonymously by technology domain, and shared with permission."
         actions={
           <HeroActions secondaryHref="/how-it-works" secondaryLabel="See How It Works" />
@@ -70,7 +64,7 @@ export default function SuccessStoriesPage() {
           heading="Candidate Experiences."
           intro="We publish testimonials only with written consent, and we do not attribute outcomes to named employers or quote salary figures."
         />
-        <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, i) => (
             <QuoteCard key={i} testimonial={testimonial} />
           ))}
@@ -83,22 +77,20 @@ export default function SuccessStoriesPage() {
         </Disclaimer>
       </Section>
 
-      <Section tone="dark">
+      <Section tone="alt">
         <SectionHead
-          tone="dark"
           eyebrow="Our Standard"
           heading="How We Handle Testimonials."
           intro="Reviews are only useful if they are real. These are the rules we hold ourselves to on this page."
         />
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-x-8 gap-y-10 md:grid-cols-3">
           {standards.map((standard) => (
-            <FeatureCard key={standard.title} {...standard} tone="dark" />
+            <FeatureCard key={standard.title} {...standard} variant="plain" />
           ))}
         </div>
       </Section>
 
       <CtaBand
-        tone="paper"
         heading="Start Your Career Conversation."
         body="Bring your questions and your goals. We will tell you honestly whether we can help, and what that would involve."
       />

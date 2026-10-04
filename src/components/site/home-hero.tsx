@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import { BarChart, Globe, ShieldCheck, Users } from "lucide-react";
 
+import { ArrowLink } from "@/components/site/primitives";
 import { Reveal } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
 import { photos } from "@/lib/images";
-import { BarChart, Globe, ShieldCheck, Users } from "lucide-react";
 
 const trustPoints = [
   { icon: Users, label: "One-to-one guidance" },
@@ -15,77 +16,68 @@ const trustPoints = [
 
 export function HomeHero() {
   return (
-    <section className="relative isolate flex min-h-[min(94vh,880px)] items-end overflow-hidden bg-ink pt-[calc(78px+2.5rem)] pb-10 text-white md:pb-16">
-      {/* PLACEHOLDER IMAGE: replace with licensed brand photography */}
-      <div className="absolute inset-0 -z-20 bg-[#0d0d0d]">
-        <Image
-          src={photos.hero.src}
-          alt={photos.hero.alt}
-          fill
-          priority
-          quality={82}
-          sizes="100vw"
-          // Narrow viewports crop horizontally, so anchor toward the right to
-          // keep the subject in frame; wide viewports crop vertically and can
-          // sit centred.
-          className="animate-hero-pan object-cover object-[78%_30%] lg:object-[center_30%]"
-        />
-      </div>
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[linear-gradient(103deg,rgb(9_9_9/0.94)_0%,rgb(11_11_11/0.82)_40%,rgb(11_11_11/0.36)_74%,rgb(11_11_11/0.54)_100%),linear-gradient(to_top,rgb(9_9_9/0.86)_0%,transparent_46%)]"
-      />
+    <>
+      <section className="relative overflow-hidden border-b border-border bg-surface">
+        <div className="shell grid lg:min-h-[620px] lg:grid-cols-2">
+          <div className="flex flex-col justify-center py-14 md:py-20 lg:py-24 lg:pr-14">
+            <Reveal>
+              <h1 className="h-display max-w-[18ch]">
+                Build Your Career at Leading US&nbsp;Companies.
+              </h1>
 
-      {/* The right side is deliberately left to the photograph — the hero's
-          only calls to action are the two buttons below. */}
-      <div className="shell">
-        <Reveal>
-          <h1 className="h-display max-w-[17ch]">
-            Build Your Career at{" "}
-            <span className="text-accent">Leading US&nbsp;Companies.</span>
-          </h1>
-        </Reveal>
+              <p className="lead mt-6 max-w-[54ch] text-text-body">
+                Get personalized candidate marketing, recruiter networking,
+                role-specific training, interview preparation, and mentorship designed
+                to help you move confidently toward your next technology role.
+              </p>
 
-        <Reveal>
-          <p className="lead mt-6.5 max-w-[58ch] text-white/80">
-            Get personalized candidate marketing, recruiter networking,
-            role-specific training, interview preparation, and mentorship designed to
-            help you move confidently toward your next technology role.
-          </p>
-        </Reveal>
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+                <Button asChild size="lg">
+                  <Link href="/contact">Book a Free Consultation</Link>
+                </Button>
+                <ArrowLink href="/services">Explore Our Services</ArrowLink>
+              </div>
 
-        <Reveal>
-          <div className="mt-9 flex flex-wrap gap-3.5">
-            <Button asChild>
-              <Link href="/contact">Book a Free Consultation</Link>
-            </Button>
-            <Button asChild variant="outlineDark">
-              <Link href="/services">Explore Our Services</Link>
-            </Button>
+              <p className="mt-8 border-t border-border pt-5 text-[0.9375rem] text-text-secondary">
+                Personalized support for experienced and aspiring technology
+                professionals.
+              </p>
+            </Reveal>
           </div>
+        </div>
 
-          <p className="mt-6.5 inline-flex items-center gap-3 text-[0.9rem] text-white/70">
-            <span
-              aria-hidden="true"
-              className="size-1.75 shrink-0 rounded-full bg-accent ring-4 ring-accent/20"
-            />
-            Personalized support for experienced and aspiring technology
-            professionals.
-          </p>
-        </Reveal>
+        {/* PLACEHOLDER IMAGE: replace with licensed brand photography.
+            Full-bleed to the right edge on desktop; stacked below the copy on
+            smaller screens. */}
+        <div className="relative aspect-16/10 bg-muted lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto lg:w-1/2">
+          <Image
+            src={photos.hero.src}
+            alt={photos.hero.alt}
+            fill
+            priority
+            quality={82}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover object-[70%_35%]"
+          />
+        </div>
+      </section>
 
-        <Reveal className="mt-12 md:mt-20">
-          <p className="text-[0.76rem] font-bold tracking-[0.14em] text-white/55 uppercase">
-            What working with us looks like
-          </p>
-          <ul className="mt-5 grid gap-3.5 sm:grid-cols-[repeat(2,max-content)] sm:gap-y-4 sm:gap-x-14">
+      {/* Differentiators — a ruled four-column band, not a row of badges. */}
+      <section aria-labelledby="hero-points" className="tone-dark bg-brand-navy text-white">
+        <h2 id="hero-points" className="sr-only">
+          What working with us looks like
+        </h2>
+        {/* gap-px over a translucent fill draws the dividers at every
+            breakpoint without per-item border bookkeeping. */}
+        <div className="shell">
+          <ul className="grid gap-px bg-white/12 sm:grid-cols-2 lg:grid-cols-4">
             {trustPoints.map((point) => (
               <li
                 key={point.label}
-                className="flex items-center gap-2.5 text-[1rem] font-bold tracking-[-0.02em] text-white/90"
+                className="flex items-center gap-3 bg-brand-navy py-5 text-[0.9375rem] font-medium sm:px-6 sm:py-6 sm:odd:pl-0 lg:nth-3:pl-6"
               >
                 <point.icon
-                  className="size-4.75 shrink-0 text-accent"
+                  className="size-5 shrink-0 text-brand-blue-border"
                   strokeWidth={1.8}
                   aria-hidden="true"
                 />
@@ -93,8 +85,8 @@ export function HomeHero() {
               </li>
             ))}
           </ul>
-        </Reveal>
-      </div>
-    </section>
+        </div>
+      </section>
+    </>
   );
 }

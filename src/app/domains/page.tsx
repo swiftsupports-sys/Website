@@ -4,14 +4,13 @@ import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 
-import { DomainCard } from "@/components/site/cards";
+import { DomainGrid } from "@/components/site/cards";
 import { CtaBand } from "@/components/site/cta-band";
 import { HeroActions, PageHero } from "@/components/site/page-hero";
 import { PageSchema } from "@/components/site/page-schema";
 import {
   CheckList,
   Eyebrow,
-  Muted,
   Section,
   SectionHead,
 } from "@/components/site/primitives";
@@ -40,13 +39,7 @@ export default function DomainsPage() {
 
       <PageHero
         breadcrumb="Domains"
-        eyebrow="Technology Domains"
-        title={
-          <>
-            Support Across{" "}
-            <span className="text-accent">High-Demand Technology Domains.</span>
-          </>
-        }
+        title="Support Across High-Demand Technology Domains."
         intro="Your career strategy, preparation, and guidance are tailored to the expectations of your target domain. What a hiring team looks for in a data engineer is not what they look for in a security analyst — and your preparation should reflect that."
         actions={
           <HeroActions secondaryHref="/services" secondaryLabel="Explore Our Services" />
@@ -59,21 +52,15 @@ export default function DomainsPage() {
           heading="Eight Areas of Depth."
           intro="Each domain has its own vocabulary, interview format, and evidence of competence. We prepare you for the one you are actually targeting."
         />
-        <div className="grid gap-5 md:grid-cols-2">
-          {domains.map((domain) => (
-            <DomainCard key={domain.title} domain={domain} detailed />
-          ))}
-        </div>
+        <DomainGrid domains={domains} detailed />
       </Section>
 
       <Section tone="alt">
-        <div className="grid items-center gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-18">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal>
             <Eyebrow>Tailored Preparation</Eyebrow>
-            <h2 className="h-xl">
-              The Same Process, <Muted>Calibrated to Your Domain.</Muted>
-            </h2>
-            <p className="lead mt-6 text-fg-muted">
+            <h2 className="h-xl">The Same Process, Calibrated to Your Domain.</h2>
+            <p className="lead mt-5 text-text-body">
               Domain shapes almost everything: which projects are worth building, which
               keywords matter on your resume, which interview rounds you will face, and
               what &ldquo;good&rdquo; sounds like in an answer.
@@ -87,31 +74,28 @@ export default function DomainsPage() {
                 "Outreach aimed at recruiters hiring for your specialization",
               ]}
             />
-            <div className="mt-8.5">
-              <Button asChild variant="dark">
+            <div className="mt-8">
+              <Button asChild>
                 <Link href="/contact">Talk Through Your Target Role</Link>
               </Button>
             </div>
           </Reveal>
 
           <Reveal>
-            <div className="overflow-hidden rounded-(--radius-card)">
-              {/* PLACEHOLDER IMAGE */}
-              <Image
-                src={photos.team.src}
-                alt={photos.team.alt}
-                width={1000}
-                height={1250}
-                sizes="(max-width: 1024px) 100vw, 45vw"
-                className="aspect-4/5 w-full object-cover"
-              />
-            </div>
+            {/* PLACEHOLDER IMAGE */}
+            <Image
+              src={photos.team.src}
+              alt={photos.team.alt}
+              width={1200}
+              height={800}
+              sizes="(max-width: 1024px) 100vw, 45vw"
+              className="aspect-3/2 w-full rounded-lg object-cover lg:aspect-4/3"
+            />
           </Reveal>
         </div>
       </Section>
 
       <CtaBand
-        tone="paper"
         heading="Tell Us Where You Want to Go."
         body="Share your target domain and role during the consultation, and we will outline the preparation that fits it."
         secondary={{ href: "/services", label: "Explore Our Services" }}

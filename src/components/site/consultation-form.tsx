@@ -61,26 +61,26 @@ function SentPanel({ demo, onReset }: { demo: boolean; onReset: () => void }) {
 
   return (
     <div ref={ref} className="py-4 text-center">
-      <span className="mx-auto grid size-14 place-items-center rounded-full bg-accent/15 text-accent-deep">
+      <span className="mx-auto grid size-14 place-items-center rounded-full bg-brand-success/12 text-brand-success-strong">
         <CircleCheck className="size-7" strokeWidth={1.8} aria-hidden="true" />
       </span>
       <h3 className="h-md mt-5" role="status">
         Request received
       </h3>
-      <p className="mx-auto mt-3 max-w-[46ch] text-fg-muted">
+      <p className="mx-auto mt-3 max-w-[46ch] text-text-body">
         Thank you — a consultant will review your details and contact you to
         confirm a time, usually within one business day.
       </p>
       {demo ? (
-        <p className="mx-auto mt-3 max-w-[46ch] text-[0.84rem] text-fg-faint">
+        <p className="mx-auto mt-3 max-w-[46ch] text-[0.875rem] text-text-secondary">
           Demo mode: add email credentials to deliver submissions.
         </p>
       ) : null}
       <div className="mt-7 flex flex-wrap justify-center gap-3">
-        <Button type="button" variant="outline" onClick={onReset}>
+        <Button type="button" variant="secondary" onClick={onReset}>
           Send another request
         </Button>
-        <Button asChild variant="dark">
+        <Button asChild>
           <Link href="/how-it-works">See What Happens Next</Link>
         </Button>
       </div>
@@ -138,7 +138,7 @@ function FormBody({ onSent }: { onSent: (state: { demo: boolean }) => void }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-x-5 gap-y-6 sm:grid-cols-2">
         <Field>
           <Label htmlFor="fullName">
             Full Name
@@ -308,9 +308,9 @@ function FormBody({ onSent }: { onSent: (state: { demo: boolean }) => void }) {
                 />
               )}
             />
-            <Label htmlFor="consent" className="text-[0.86rem] font-normal text-fg-muted">
+            <Label htmlFor="consent" className="text-[0.875rem] font-normal text-text-body">
               I agree to be contacted about my consultation request and have read the{" "}
-              <Link href="/privacy-policy" className="underline underline-offset-3">
+              <Link href="/privacy-policy" className="text-brand-blue underline underline-offset-3 hover:text-brand-blue-hover">
                 Privacy Policy
               </Link>
               .<Req />
@@ -328,11 +328,11 @@ function FormBody({ onSent }: { onSent: (state: { demo: boolean }) => void }) {
       </div>
 
       <div className="mt-6">
-        <Button type="submit" block disabled={pending}>
+        <Button type="submit" size="lg" block disabled={pending} className="sm:w-auto">
           {pending ? "Sending…" : "Request a Free Consultation"}
         </Button>
 
-        <p className="mt-3.5 text-[0.82rem] text-fg-faint">
+        <p className="mt-4 text-[0.8125rem] text-text-secondary">
           Fields marked * are required. We do not share your details with third parties
           without your consent.
         </p>
@@ -343,8 +343,8 @@ function FormBody({ onSent }: { onSent: (state: { demo: boolean }) => void }) {
             aria-live="polite"
             className={
               status.tone === "ok"
-                ? "mt-4 rounded-[10px] border border-accent/40 bg-accent/10 px-4.5 py-3.5 text-[0.92rem]"
-                : "mt-4 rounded-[10px] border border-red-500/35 bg-red-500/8 px-4.5 py-3.5 text-[0.92rem]"
+                ? "mt-4 rounded-md border border-brand-success/40 bg-brand-success/10 px-4 py-3 text-[0.9375rem] text-brand-success-strong"
+                : "mt-4 rounded-md border border-red-600/30 bg-red-50 px-4 py-3 text-[0.9375rem] text-red-800"
             }
           >
             {status.message}

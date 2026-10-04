@@ -1,13 +1,17 @@
 import * as React from "react";
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
 import { Eyebrow } from "@/components/site/primitives";
 import { Reveal } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
 
 /**
- * Dark hero used by every page except the home page. The header sits
- * transparent over it, so the top padding accounts for the fixed bar.
+ * Navy page banner used by every page except the home page: breadcrumb,
+ * heading, introduction, and optional actions. Solid colour, no ornament.
+ *
+ * `eyebrow` is optional — pass it only when it adds something the breadcrumb
+ * does not already say (e.g. a service page's category).
  */
 export function PageHero({
   eyebrow,
@@ -17,7 +21,7 @@ export function PageHero({
   actions,
   note,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: React.ReactNode;
   intro?: React.ReactNode;
   breadcrumb: string;
@@ -25,42 +29,34 @@ export function PageHero({
   note?: React.ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden bg-ink pt-[calc(78px+clamp(3.5rem,8vw,6.5rem))] pb-[clamp(3.5rem,8vw,6.5rem)] text-white">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute top-[-42%] right-[-14%] size-[62vw] max-h-[820px] max-w-[820px] rounded-full bg-[radial-gradient(circle,rgb(53_232_82/0.13),transparent_66%)]"
-      />
-      <div className="shell relative">
+    <section className="tone-dark bg-brand-navy py-14 text-white md:py-18 lg:py-22">
+      <div className="shell">
         <Reveal>
           <nav
             aria-label="Breadcrumb"
-            className="mb-5 flex flex-wrap items-center gap-2.5 text-[0.83rem] text-white/50"
+            className="mb-6 flex flex-wrap items-center gap-1.5 text-[0.875rem] text-on-dark-subtle"
           >
-            <Link href="/" className="transition-colors hover:text-accent">
+            <Link href="/" className="transition-colors hover:text-white">
               Home
             </Link>
-            <span aria-hidden="true">/</span>
-            <span aria-current="page">{breadcrumb}</span>
+            <ChevronRight className="size-3.5" strokeWidth={2} aria-hidden="true" />
+            <span aria-current="page" className="text-on-dark-muted">
+              {breadcrumb}
+            </span>
           </nav>
 
-          <Eyebrow tone="dark">{eyebrow}</Eyebrow>
-          <h1 className="max-w-[20ch] text-[clamp(2.2rem,5.2vw,3.9rem)]">{title}</h1>
+          {eyebrow ? <Eyebrow tone="dark">{eyebrow}</Eyebrow> : null}
+          <h1 className="h-page max-w-[24ch]">{title}</h1>
 
           {intro ? (
-            <p className="lead mt-5.5 max-w-[64ch] text-white/75">{intro}</p>
+            <p className="lead mt-5 max-w-[66ch] text-on-dark-muted">{intro}</p>
           ) : null}
 
           {note ? (
-            <p className="mt-6 inline-flex items-center gap-3 text-[0.9rem] text-white/70">
-              <span
-                aria-hidden="true"
-                className="size-1.75 shrink-0 rounded-full bg-accent ring-4 ring-accent/20"
-              />
-              {note}
-            </p>
+            <p className="mt-5 text-[0.9375rem] text-on-dark-subtle">{note}</p>
           ) : null}
 
-          {actions ? <div className="mt-8.5 flex flex-wrap gap-3.5">{actions}</div> : null}
+          {actions ? <div className="mt-8 flex flex-wrap gap-3">{actions}</div> : null}
         </Reveal>
       </div>
     </section>
@@ -80,7 +76,7 @@ export function HeroActions({
       <Button asChild>
         <Link href="/contact">Book a Free Consultation</Link>
       </Button>
-      <Button asChild variant="outlineDark">
+      <Button asChild variant="secondaryDark">
         <Link href={secondaryHref}>{secondaryLabel}</Link>
       </Button>
     </>

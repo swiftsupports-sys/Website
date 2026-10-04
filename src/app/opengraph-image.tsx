@@ -6,6 +6,12 @@ export const alt = `${site.name} — career consultancy for US technology roles`
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
+const mark = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="8" fill="#2563EB"/>
+  <path d="M18 38 L32 22 L46 38" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="square"/>
+  <path d="M18 50 L32 34 L46 50" fill="none" stroke="#BFDBFE" stroke-width="6" stroke-linecap="square"/>
+</svg>`;
+
 /**
  * Social sharing card. Generated at build time so it always matches the live
  * brand colours and copy — Next also reuses this for the Twitter card.
@@ -20,70 +26,45 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#101210",
-          padding: "74px 80px",
+          background: "#0B1F3A",
+          padding: "72px 80px",
           fontFamily: "sans-serif",
-          position: "relative",
+          borderTop: "8px solid #2563EB",
         }}
       >
-        <div
-          style={{
-            position: "absolute",
-            top: -380,
-            right: -260,
-            width: 900,
-            height: 900,
-            borderRadius: 9999,
-            background:
-              "radial-gradient(circle, rgba(53,232,82,0.30), rgba(53,232,82,0) 62%)",
-          }}
-        />
-
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: 16,
-              background: "#35E852",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 34,
-              fontWeight: 800,
-              color: "#0b0b0b",
-            }}
-          >
-            ^
-          </div>
-          <div style={{ fontSize: 34, fontWeight: 800, color: "#fff", letterSpacing: -1 }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            width={56}
+            height={56}
+            alt=""
+            src={`data:image/svg+xml;base64,${Buffer.from(mark).toString("base64")}`}
+          />
+          <div style={{ fontSize: 34, fontWeight: 700, color: "#fff", letterSpacing: -0.5 }}>
             {site.name}
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          {/* Satori needs single-child text nodes, so the two-tone headline is
-              split into stacked lines rather than an inline span. */}
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
-              fontSize: 74,
-              fontWeight: 800,
-              letterSpacing: -2.6,
-              lineHeight: 1.08,
-              maxWidth: 940,
+              fontSize: 68,
+              fontWeight: 700,
+              letterSpacing: -1.5,
+              lineHeight: 1.12,
+              maxWidth: 900,
+              color: "#fff",
             }}
           >
-            <div style={{ color: "#fff" }}>Build Your Career at</div>
-            <div style={{ color: "#35E852" }}>Leading US Companies.</div>
+            Build Your Career at Leading US Companies.
           </div>
           <div
             style={{
               marginTop: 26,
-              fontSize: 25,
-              color: "rgba(244,244,241,0.68)",
-              maxWidth: 860,
+              fontSize: 26,
+              color: "#CBD5E1",
+              maxWidth: 880,
               lineHeight: 1.45,
             }}
           >
@@ -92,21 +73,21 @@ export default function OpengraphImage() {
           </div>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
           <div
             style={{
-              background: "#35E852",
-              color: "#0b0b0b",
-              fontSize: 21,
-              fontWeight: 800,
-              padding: "15px 30px",
-              borderRadius: 999,
+              background: "#2563EB",
+              color: "#fff",
+              fontSize: 22,
+              fontWeight: 600,
+              padding: "16px 30px",
+              borderRadius: 6,
               display: "flex",
             }}
           >
             Book a Free Consultation
           </div>
-          <div style={{ fontSize: 20, color: "rgba(244,244,241,0.5)", display: "flex" }}>
+          <div style={{ fontSize: 22, color: "#94A3B8", display: "flex" }}>
             {site.domain}
           </div>
         </div>
