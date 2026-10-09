@@ -32,17 +32,18 @@ export const site = {
   email: "contact@swiftconsultancy.us",
 
   /**
-   * Phone and WhatsApp. Every surface checks `hasPhone` / `hasWhatsApp` and
-   * shows an inert placeholder instead of a dead link if these are blanked.
+   * Phone and WhatsApp are intentionally blank: the site lists no number.
+   * Every surface checks `hasPhone` / `hasWhatsApp` and shows an inert
+   * placeholder instead of a dead link, and the WhatsApp button is hidden.
    *
-   * To change the number, update all three — no other file needs editing:
+   * To switch them back on, fill all three in — no other file needs editing:
    *   phoneDisplay: "+1 (555) 123-4567"   as written for humans
    *   phoneHref:    "+15551234567"         digits and a leading +, for tel:
    *   whatsappNumber: "15551234567"        digits only — wa.me 404s otherwise
    */
-  phoneDisplay: "+91 81800 91639",
-  phoneHref: "+918180091639",
-  whatsappNumber: "918180091639",
+  phoneDisplay: "",
+  phoneHref: "",
+  whatsappNumber: "",
   hours: "Mon–Fri, 9:00 AM – 7:00 PM ET",
 
   /**
