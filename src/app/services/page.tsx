@@ -14,10 +14,10 @@ import { servicePages } from "@/content/service-pages";
 import { serviceGroups, servicesByGroup } from "@/content/services";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Career Services for Technology Professionals",
+  title: "IT Staffing & Career Services in the USA",
   socialTitle: "Services",
   description:
-    "Fifteen one-to-one services across candidate marketing, recruiter networking, resume and LinkedIn optimization, domain training, interview preparation, and mentorship.",
+    "Fifteen one-to-one services: resume, LinkedIn, GitHub, and portfolio building, 40+ daily job applications, recruiter outreach, role-specific training, mock interviews, and mentorship.",
   path: "/services",
 });
 
@@ -25,8 +25,8 @@ export default function ServicesPage() {
   return (
     <>
       <PageSchema
-        name={"Career Services for Technology Professionals"}
-        description={"Fifteen one-to-one services across candidate marketing, recruiter networking, resume and LinkedIn optimization, domain training, interview preparation, and mentorship."}
+        name={"IT Staffing & Career Services in the USA"}
+        description={"Fifteen one-to-one services: resume, LinkedIn, GitHub, and portfolio building, 40+ daily job applications, recruiter outreach, role-specific training, mock interviews, and mentorship."}
         path={"/services"}
         breadcrumb={"Services"}
       />
@@ -34,7 +34,7 @@ export default function ServicesPage() {
       <PageHero
         breadcrumb="Services"
         title="Career Services Designed Around Your Goals."
-        intro="Fifteen services across positioning, preparation, and mentorship. Engage the full journey, or concentrate on the areas where you need the most support — every service is delivered one-to-one."
+        intro="Fifteen services across profile marketing, training, and mentorship. Choose the package that covers what you need — or take the complete journey. Every service is delivered one-to-one."
         actions={<HeroActions secondaryHref="/pricing" secondaryLabel="View Packages" />}
       />
 
@@ -95,10 +95,10 @@ export default function ServicesPage() {
             {groupIndex === serviceGroups.length - 1 ? (
               <>
                 <Disclaimer>
-                  Your engagement includes dedicated interview opportunities, candidate
-                  marketing, and recruiter networking. We cannot guarantee a specific
-                  offer, employer, salary, or joining date — the hiring decision belongs
-                  to the employer — and we do not provide immigration or legal advice.
+                  Your engagement includes daily applications, recruiter outreach, and
+                  dedicated interview preparation. We cannot guarantee a specific offer,
+                  employer, salary, or joining date — the hiring decision belongs to the
+                  employer — and we do not provide immigration or legal advice.
                 </Disclaimer>
                 <div className="mt-10">
                   <Button asChild variant="secondary">
@@ -113,7 +113,7 @@ export default function ServicesPage() {
 
       <CtaBand
         heading="Not Sure Which Services You Need?"
-        body="That is what the consultation is for. Tell us where you are and we will recommend the shortest sensible path — even if that means fewer services, not more."
+        body="That is what the free consultation is for. Tell us where you are and we will recommend the package that fits — even if that means the smaller one."
         secondary={{ href: "/how-it-works", label: "See How It Works" }}
       />
     </>

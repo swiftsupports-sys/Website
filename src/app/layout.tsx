@@ -7,6 +7,7 @@ import { Toaster } from "sonner";
 
 import { Footer } from "@/components/site/footer";
 import { Header } from "@/components/site/header";
+import { SwiftAgent } from "@/components/site/swift-agent";
 import { WhatsAppFab } from "@/components/site/whatsapp-fab";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
 import { site } from "@/lib/site";
@@ -28,31 +29,51 @@ const plex = IBM_Plex_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `Career Consulting for US Technology Roles | ${site.name}`,
+    default: "Swift Consultancy | IT Staffing & Tech Career Consulting in the USA",
     template: `%s — ${site.name}`,
   },
   description: site.description,
   applicationName: site.name,
   keywords: [
-    "US technology career consulting",
+    "Swift Consultancy",
+    "Swift Consultancy USA",
+    "Swift IT staffing",
+    "IT staffing USA",
+    "IT staffing and consulting",
+    "IT jobs in USA",
+    "tech jobs USA",
+    "US IT job placement assistance",
+    "job application services",
+    "profile marketing for IT jobs",
+    "resume writing for IT jobs",
+    "LinkedIn optimization",
     "tech interview preparation",
-    "candidate marketing services",
-    "IT career mentorship",
-    "US job search guidance",
-    "domain-specific technology training",
+    "mock interviews",
+    "Java developer jobs USA",
+    "Python developer jobs USA",
+    "data analyst jobs USA",
   ],
+  category: "IT staffing and career consulting",
+  verification: {
+    // Set these in Vercel once Google Search Console and Bing Webmaster
+    // Tools hand you a verification token. Absent, no tag is emitted.
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : undefined,
+  },
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: site.name,
     locale: "en_US",
     url: site.url,
-    title: `Career Consulting for US Technology Roles | ${site.name}`,
+    title: "Swift Consultancy | IT Staffing & Tech Career Consulting in the USA",
     description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `Career Consulting for US Technology Roles | ${site.name}`,
+    title: "Swift Consultancy | IT Staffing & Tech Career Consulting in the USA",
     description: site.description,
   },
   robots: {
@@ -90,6 +111,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <WhatsAppFab />
+        <SwiftAgent />
         <Toaster
           position="top-center"
           toastOptions={{

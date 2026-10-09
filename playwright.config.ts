@@ -1,4 +1,15 @@
+import { loadEnvConfig } from "@next/env";
 import { defineConfig, devices } from "@playwright/test";
+
+// Load .env files the way `next start` does, so the tests see the same
+// configuration as the server they drive.
+loadEnvConfig(process.cwd());
+
+// End-to-end runs never deliver real email: the form test would mail the team
+// inbox and bounce off example.com addresses. A blank sender makes delivery
+// fail closed — for the web server (which inherits this environment) and the
+// tests alike.
+process.env.CONSULTATION_FROM = "";
 
 const PORT = 3100;
 const baseURL = `http://127.0.0.1:${PORT}`;

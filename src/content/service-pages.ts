@@ -34,7 +34,7 @@ export const servicePages: ServicePage[] = [
     navLabel: "Interview Preparation",
     metaTitle: "Technical & Behavioral Interview Preparation",
     metaDescription:
-      "One-to-one technical, HR, and behavioral interview preparation for technology roles in the US, with full-length mock interviews and written feedback after every session.",
+      "One-to-one technical and behavioral interview training for US technology roles, with job-description-based mock interviews, detailed feedback, and support before every round.",
     eyebrow: "Interview Preparation",
     h1: {
       lead: "Technical and Behavioral",
@@ -42,7 +42,7 @@ export const servicePages: ServicePage[] = [
     },
     intro: [
       "Most candidates who struggle with interviews are not short on ability. They are short on practice under realistic conditions, and on specific feedback about what actually went wrong in the room.",
-      "We prepare you for the rounds you will genuinely face for your target role and level: technical problems and system discussion, HR and behavioral questions, and the managerial conversations that decide offers. Every mock session is followed by written notes naming what worked, what did not, and precisely what to change.",
+      "We prepare you for the rounds you will genuinely face for your target role and level: technical problems and system discussion, HR and behavioral questions, and the managerial conversations that decide offers. When a real interview is scheduled, we build a mock session from that role's job description and brief you before you go in.",
     ],
     serviceType: [
       "Technical interview preparation",
@@ -63,8 +63,12 @@ export const servicePages: ServicePage[] = [
         body: "Full-length sessions that mirror real rounds, followed by written feedback. Not 'be more confident', but which answer rambled, which claim invited a follow-up you could not defend, and what to cut.",
       },
       {
-        title: "Communication and workplace readiness coaching",
-        body: "Clarity, pace, and presence in professional settings, plus the collaboration norms and written communication expected on US technology teams.",
+        title: "Job-description-based mock practice",
+        body: "For every scheduled interview, a mock session built from that role's job description — the skills, tools, and scenarios that specific team is most likely to ask about.",
+      },
+      {
+        title: "Interview support",
+        body: "A focused briefing before each round on the company, the role, and the likely questions — and a debrief afterwards, so every interview makes the next one stronger.",
       },
     ],
     process: [
@@ -125,23 +129,23 @@ export const servicePages: ServicePage[] = [
 
   {
     slug: "resume-and-linkedin",
-    navLabel: "Resume & LinkedIn",
-    metaTitle: "Resume, ATS and LinkedIn Optimization",
+    navLabel: "Resume & Profile Building",
+    metaTitle: "Resume, LinkedIn, GitHub and Portfolio",
     metaDescription:
-      "Resume and LinkedIn optimization for technology professionals targeting US roles — structure and keywords that survive ATS screening, with every claim kept defensible in interview.",
+      "ATS-friendly resume writing, LinkedIn optimization and management, GitHub optimization with real-world projects, and a personal portfolio website for technology professionals.",
     eyebrow: "Profile & Positioning",
     h1: {
-      lead: "Resume, ATS and",
-      accent: "LinkedIn Optimization.",
+      lead: "Resume, LinkedIn, GitHub",
+      accent: "and Portfolio Building.",
     },
     intro: [
       "A strong background presented poorly reads as a weak background. Most candidates who go quiet after applying are not being rejected on merit — they are being filtered before a person ever reads the document.",
-      "We rebuild how your experience is written: structure and keyword coverage tuned for applicant tracking systems and human reviewers alike, and a LinkedIn profile that reads like the candidate you are targeting. Every claim stays something you can defend when an interviewer probes it.",
+      "We rebuild how your experience is presented everywhere a recruiter looks: an ATS-friendly resume, a LinkedIn profile we optimize and manage, a GitHub backed by real-world projects, and a personal portfolio website that ties it all together. Every claim stays something you can defend when an interviewer probes it.",
     ],
     serviceType: [
       "Resume writing and ATS optimization",
       "LinkedIn profile optimization",
-      "Professional branding",
+      "Portfolio website development",
     ],
     includes: [
       {
@@ -149,16 +153,16 @@ export const servicePages: ServicePage[] = [
         body: "Structure, language, and keyword coverage tuned for applicant tracking systems and the humans who read afterwards — drawn from real postings in your domain rather than generic templates.",
       },
       {
-        title: "LinkedIn optimization and professional branding",
-        body: "Headline, summary, experience framing, and skills rewritten around the signals recruiters actually filter and search on.",
+        title: "LinkedIn optimization and management",
+        body: "Headline, summary, experience framing, and skills rewritten around the signals recruiters actually filter and search on — then actively managed throughout your search.",
       },
       {
-        title: "Career assessment and role guidance",
-        body: "A structured review of your experience and expectations, ending in a clear view of the roles and levels worth targeting now — and the ones worth building toward.",
+        title: "GitHub optimization and real-world projects",
+        body: "A clean, professional GitHub profile and guided real-world projects in your target stack — work you understand end to end and can explain with confidence.",
       },
       {
-        title: "Software application and project guidance",
-        body: "Guidance on building work worth talking about: scope, architecture, and the ability to explain your decisions clearly when questioned.",
+        title: "Personal portfolio website",
+        body: "Your own professional website, designed and built for you, bringing your experience, projects, and skills together in one link you can share on every application.",
       },
     ],
     process: [
@@ -174,8 +178,8 @@ export const servicePages: ServicePage[] = [
       },
       {
         n: "03",
-        title: "Align the profile",
-        body: "LinkedIn is brought in line with the resume so the story is consistent wherever a recruiter encounters you.",
+        title: "Build the evidence",
+        body: "LinkedIn, GitHub, projects, and your portfolio website are brought in line with the resume, so the story is consistent wherever a recruiter encounters you.",
       },
       {
         n: "04",
@@ -193,8 +197,8 @@ export const servicePages: ServicePage[] = [
         body: "Your experience is relevant but does not look relevant on paper to the roles you are now targeting.",
       },
       {
-        title: "Invisible to recruiters",
-        body: "Your profile does not surface in the searches recruiters run for candidates like you.",
+        title: "Nothing to show",
+        body: "You have the skills but no projects, GitHub activity, or portfolio that proves them to a hiring team.",
       },
     ],
     faqs: [
@@ -214,36 +218,36 @@ export const servicePages: ServicePage[] = [
 
   {
     slug: "candidate-marketing",
-    navLabel: "Candidate Marketing",
-    metaTitle: "Candidate Marketing and Recruiter Networking",
+    navLabel: "Profile Marketing",
+    metaTitle: "Profile Marketing and Daily Applications",
     metaDescription:
-      "Candidate marketing and recruiter networking for technology professionals targeting US roles — targeted outreach, opportunity positioning, and a job search strategy based on evidence.",
+      "Profile marketing for technology professionals targeting US roles — 40+ targeted job applications every day, recruiter outreach, and weekly reports on applications and responses.",
     eyebrow: "Marketing & Visibility",
     h1: {
-      lead: "Candidate Marketing and",
-      accent: "Recruiter Networking.",
+      lead: "Profile Marketing and",
+      accent: "Daily Applications.",
     },
     intro: [
       "Applying through job boards puts you in the same queue as everyone else, evaluated on the same thirty-second scan. Visibility with the people actually filling roles is a different channel, and most candidates never work it deliberately.",
-      "We position your profile where it is relevant, run targeted and professional outreach to recruiters working in your domain, and build a search strategy you can adjust based on evidence rather than guesswork.",
+      "Our team submits 40+ targeted applications for you every working day, runs professional outreach to recruiters hiring in your domain, and reports back weekly — so your search keeps moving while you focus on training and interviews.",
     ],
     serviceType: [
       "Candidate marketing",
+      "Job application services",
       "Recruiter outreach",
-      "Job search strategy",
     ],
     includes: [
       {
-        title: "Candidate marketing and opportunity positioning",
-        body: "Your profile presented to relevant hiring channels with emphasis placed where it matters for each type of role, rather than one generic pitch sent everywhere.",
+        title: "40+ targeted applications daily",
+        body: "Applications submitted every working day to roles matched to your skills, level, and target domain — chosen for fit, not sprayed at every opening.",
       },
       {
         title: "Recruiter networking support",
         body: "Targeted outreach, professional messaging, and disciplined follow-up that builds visibility with recruiters working on roles in your domain.",
       },
       {
-        title: "Job search strategy and application guidance",
-        body: "Where to apply, what volume is realistic, how to prioritise openings, and how to track responses so the approach can be adjusted on evidence.",
+        title: "Weekly application reports",
+        body: "Where you have applied, which recruiters have responded, and what is scheduled — tracked so the strategy can be adjusted on evidence.",
       },
       {
         title: "Pre-placement support",
@@ -258,13 +262,13 @@ export const servicePages: ServicePage[] = [
       },
       {
         n: "02",
-        title: "Identify the right channels",
-        body: "Recruiters and channels working on roles that match your domain and level, rather than a mass send.",
+        title: "Apply every day",
+        body: "40+ targeted applications each working day to roles that match your domain and level.",
       },
       {
         n: "03",
-        title: "Run outreach and follow up",
-        body: "Professional, targeted messages with disciplined follow-up — persistent without becoming the candidate people stop replying to.",
+        title: "Reach out and follow up",
+        body: "Professional, targeted messages to recruiters with disciplined follow-up — persistent without becoming the candidate people stop replying to.",
       },
       {
         n: "04",
@@ -278,8 +282,8 @@ export const servicePages: ServicePage[] = [
         body: "Your experience holds up well, but the right people are not seeing it.",
       },
       {
-        title: "No time to run a search",
-        body: "You are working full time and cannot sustain the outreach and follow-up a search actually requires.",
+        title: "No time to apply",
+        body: "You are working or studying full time and cannot sustain the daily applications and follow-up a search actually requires.",
       },
       {
         title: "Unsure where to focus",
@@ -290,7 +294,7 @@ export const servicePages: ServicePage[] = [
       {
         question: "Do you apply to jobs on my behalf?",
         answer:
-          "We help position your profile and build visibility through targeted marketing and recruiter networking, and we guide your application strategy. You approve how your profile is presented before any outreach takes place.",
+          "Yes. Our team submits 40+ targeted applications every working day to roles that match your profile. You approve your resume and target roles before anything is sent, and you receive a weekly report of every application and response.",
       },
       {
         question: "Do you have partnerships with specific companies?",
@@ -306,7 +310,7 @@ export const servicePages: ServicePage[] = [
     navLabel: "Training & Mentorship",
     metaTitle: "Technology Career Training and Mentorship",
     metaDescription:
-      "Domain-specific technology training and one-to-one career mentorship for professionals targeting US roles — focused upskilling, project guidance, and continuity through the whole search.",
+      "Role-specific technical and behavioral training with one-to-one mentorship for professionals targeting US technology roles — hands-on, project-based, and built around real job descriptions.",
     eyebrow: "Training & Mentorship",
     h1: {
       lead: "Domain Training and",
@@ -323,8 +327,8 @@ export const servicePages: ServicePage[] = [
     ],
     includes: [
       {
-        title: "Domain-specific training",
-        body: "Focused upskilling in the technologies, tools, and practices that appear in the job descriptions you are actually pursuing — not a fixed curriculum.",
+        title: "Role-specific technical training",
+        body: "Hands-on training in the technologies, tools, and practices that appear in the job descriptions you are actually pursuing — not a fixed curriculum.",
       },
       {
         title: "Software application and project guidance",
@@ -335,8 +339,8 @@ export const servicePages: ServicePage[] = [
         body: "A consistent point of contact who knows your history and goals, available for the decisions that arise between the formal sessions.",
       },
       {
-        title: "Post-placement career guidance",
-        body: "Settling into a new team, navigating the first performance cycle, and planning the step after this one — because a role is a stage, not a destination.",
+        title: "Behavioral interview training",
+        body: "Structured answers for experience, situational, and motivation questions, plus the communication style expected on US technology teams.",
       },
     ],
     process: [

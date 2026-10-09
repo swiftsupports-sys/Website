@@ -90,7 +90,7 @@ export default function ServiceAgreementPage() {
 
           <h2>4. Packages and Fees</h2>
           <p>
-            Two engagement models are offered, as published on the{" "}
+            Three packages are offered, as published on the{" "}
             <Link href="/pricing" className="underline underline-offset-3">
               Pricing
             </Link>{" "}
@@ -98,14 +98,17 @@ export default function ServiceAgreementPage() {
           </p>
           <ul>
             <li>
-              <strong>Base Package — $2.5K.</strong> Complete career support covering all
-              core consultancy services. Placement-related charges apply after successful
-              placement, as defined in the engagement schedule.
+              <strong>Profile Marketing — $1K.</strong> Daily job applications, resume
+              writing, LinkedIn and GitHub optimization, project building, and a personal
+              portfolio website.
             </li>
             <li>
-              <strong>Premium Package — $10K.</strong> End-to-end career support with
-              priority mentorship and no post-placement charges after successful
-              placement.
+              <strong>Training and Support — $1K.</strong> Role-specific technical and
+              behavioral training, interview support, and mock interview practice.
+            </li>
+            <li>
+              <strong>Complete Career Package — $2K.</strong> Everything in both packages
+              above, coordinated by one dedicated consultant.
             </li>
           </ul>
           <p>

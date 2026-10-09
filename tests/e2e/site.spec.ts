@@ -3,17 +3,17 @@ import { expect, test } from "@playwright/test";
 import { hasWhatsApp } from "@/lib/site";
 
 const pages = [
-  { path: "/", heading: /Build Your Career at/i },
+  { path: "/", heading: /Land Your Next Tech Role/i },
   { path: "/about", heading: /More Than Job Search Support/i },
   { path: "/services", heading: /Career Services Designed/i },
   { path: "/how-it-works", heading: /A Clear Path Toward/i },
-  { path: "/domains", heading: /Support Across/i },
+  { path: "/domains", heading: /Roles We Train/i },
   { path: "/pricing", heading: /Choose the Support Model/i },
   { path: "/success-stories", heading: /Career Progress Starts With/i },
   { path: "/contact", heading: /Let's Build/i },
   { path: "/services/interview-preparation", heading: /Interview Preparation/i },
-  { path: "/services/resume-and-linkedin", heading: /LinkedIn Optimization/i },
-  { path: "/services/candidate-marketing", heading: /Recruiter Networking/i },
+  { path: "/services/resume-and-linkedin", heading: /LinkedIn, GitHub/i },
+  { path: "/services/candidate-marketing", heading: /Profile Marketing/i },
   { path: "/services/training-and-mentorship", heading: /Career Mentorship/i },
   { path: "/privacy-policy", heading: /Privacy Policy/i },
   { path: "/terms", heading: /Terms of Service/i },
@@ -52,8 +52,10 @@ test("primary navigation reaches the pricing page", async ({ page, isMobile }) =
   }
 
   await expect(page).toHaveURL(/\/pricing$/);
-  await expect(page.getByText("$2.5K")).toBeVisible();
-  await expect(page.getByText("$10K")).toBeVisible();
+  // Exact match: the price tags only, not mentions such as "Packages from $1K"
+  // on the home page, which can still be leaving while navigation settles.
+  await expect(page.getByText("$1K", { exact: true })).toHaveCount(2);
+  await expect(page.getByText("$2K", { exact: true })).toBeVisible();
 });
 
 test("the FAQ accordion opens an answer", async ({ page }) => {
@@ -91,18 +93,14 @@ test("a complete consultation request reaches the server action", async ({ page 
   await page.getByRole("checkbox").click();
   await page.getByRole("button", { name: /request a free consultation/i }).click();
 
-  // A production build fails closed when credentials are missing, in the same
-  // order the server action checks them: spam verification, then delivery.
-  // Nothing is ever silently swallowed.
-  if (!process.env.TURNSTILE_SECRET_KEY) {
+  // A production build fails closed, in the same order the server action
+  // checks: spam verification (only when Turnstile is half-configured — with
+  // no keys at all it is switched off), then delivery, which the Playwright
+  // config always disables. Nothing is ever silently swallowed.
+  if (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && !process.env.TURNSTILE_SECRET_KEY) {
     await expect(page.getByText(/could not verify your browser session/i)).toBeVisible();
-  } else if (!process.env.RESEND_API_KEY || !process.env.CONSULTATION_FROM) {
-    await expect(page.getByText(/temporarily unavailable/i)).toBeVisible();
   } else {
-    // Fully configured: the form is replaced by a confirmation panel, so no
-    // stale values or errors can survive a successful submission.
-    await expect(page.getByText(/request received/i)).toBeVisible();
-    await expect(page.getByLabel("Full Name")).toBeHidden();
+    await expect(page.getByText(/temporarily unavailable/i)).toBeVisible();
   }
 });
 

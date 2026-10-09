@@ -1,5 +1,5 @@
 export type Package = {
-  id: "base" | "premium";
+  id: "marketing" | "training" | "complete";
   name: string;
   price: string;
   description: string;
@@ -11,36 +11,57 @@ export type Package = {
 
 export const packages: Package[] = [
   {
-    id: "base",
-    name: "Base Package",
-    price: "$2.5K",
+    id: "marketing",
+    name: "Profile Marketing",
+    price: "$1K",
     description:
-      "A complete career-support package for candidates seeking structured preparation, marketing, and placement guidance.",
+      "Build a profile that stands out and put it in front of the right recruiters, every day.",
     features: [
-      "All core consultancy services",
-      "Candidate marketing and recruiter networking",
-      "Domain-specific training and mentorship",
-      "Technical and behavioral interview preparation",
-      "Mock interviews and personalized feedback",
-      "Support through the placement journey",
+      "40+ targeted job applications daily",
+      "Professional, ATS-friendly resume writing",
+      "LinkedIn profile optimization and ongoing management",
+      "GitHub profile optimization and real-world project building",
+      "Personal portfolio website, designed and built for you",
+      "Recruiter outreach and networking on your behalf",
+      "Weekly application and response reports",
     ],
-    cta: "Discuss the Base Package",
-    note: "Placement-related charges apply after successful placement.",
+    cta: "Start With Profile Marketing",
+    note: "Scope and terms are confirmed in writing before any payment.",
   },
   {
-    id: "premium",
-    name: "Premium Package",
-    price: "$10K",
+    id: "training",
+    name: "Training and Support",
+    price: "$1K",
     description:
-      "Complete, end-to-end career support with no additional charges after successful placement.",
+      "Role-specific preparation so you walk into every interview confident and ready.",
     features: [
-      "Everything in the Base Package",
-      "Priority mentorship and strategic guidance",
-      "Comprehensive end-to-end candidate support",
-      "No post-placement charges after successful placement",
+      "Role-specific technical training",
+      "Behavioral interview training",
+      "Interview support: a briefing before every round and a debrief after",
+      "Mock interview practice with detailed feedback",
+      "Job-description-based mock interviews",
+      "One-to-one mentorship from domain experts",
+      "Curated interview question bank for your role",
     ],
-    cta: "Choose Premium Support",
-    note: "Engagement scope is confirmed in writing before any payment.",
+    cta: "Start Training and Support",
+    note: "Scope and terms are confirmed in writing before any payment.",
+  },
+  {
+    id: "complete",
+    name: "Complete Career Package",
+    price: "$2K",
+    description:
+      "Profile marketing and training together: one end-to-end program from application to offer stage.",
+    features: [
+      "Everything in Profile Marketing",
+      "Everything in Training and Support",
+      "One dedicated consultant coordinating your journey",
+      "Priority scheduling for mock interviews and support",
+      "Weekly strategy and progress reviews",
+      "Offer evaluation and negotiation guidance",
+    ],
+    cta: "Choose the Complete Package",
+    note: "Scope and terms are confirmed in writing before any payment.",
     recommended: true,
   },
 ];

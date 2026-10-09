@@ -43,10 +43,10 @@ export function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <BrandLink tone="dark" />
             <p className="mt-5 max-w-[42ch] text-[0.9375rem] leading-relaxed">
-              A career consultancy for technology professionals targeting roles at
-              leading US companies. We provide preparation, positioning, and
-              mentorship, with dedicated interview opportunities and recruiter
-              networking.
+              Swift Consultancy is an IT staffing and career consulting firm helping
+              technology professionals land jobs in the USA — through profile
+              building, daily job applications, recruiter outreach, role-specific
+              training, and interview preparation.
             </p>
 
             <ul className="mt-6 grid gap-2 text-[0.9375rem]">

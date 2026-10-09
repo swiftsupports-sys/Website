@@ -1,22 +1,21 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+
 import { ImageResponse } from "next/og";
 
 import { site } from "@/lib/site";
 
-export const alt = `${site.name} — career consultancy for US technology roles`;
+export const alt = `${site.name} — IT staffing and career consulting in the USA`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-
-const mark = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="8" fill="#2563EB"/>
-  <path d="M18 38 L32 22 L46 38" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="square"/>
-  <path d="M18 50 L32 34 L46 50" fill="none" stroke="#BFDBFE" stroke-width="6" stroke-linecap="square"/>
-</svg>`;
 
 /**
  * Social sharing card. Generated at build time so it always matches the live
  * brand colours and copy — Next also reuses this for the Twitter card.
  */
-export default function OpengraphImage() {
+export default async function OpengraphImage() {
+  const logo = await readFile(join(process.cwd(), "public/brand/logo-white.svg"), "base64");
+
   return new ImageResponse(
     (
       <div
@@ -32,17 +31,9 @@ export default function OpengraphImage() {
           borderTop: "8px solid #2563EB",
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        <div style={{ display: "flex" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            width={56}
-            height={56}
-            alt=""
-            src={`data:image/svg+xml;base64,${Buffer.from(mark).toString("base64")}`}
-          />
-          <div style={{ fontSize: 34, fontWeight: 700, color: "#fff", letterSpacing: -0.5 }}>
-            {site.name}
-          </div>
+          <img width={274} height={88} alt="" src={`data:image/svg+xml;base64,${logo}`} />
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -57,7 +48,7 @@ export default function OpengraphImage() {
               color: "#fff",
             }}
           >
-            Build Your Career at Leading US Companies.
+            Land Your Next Tech Role in the US.
           </div>
           <div
             style={{
@@ -68,8 +59,8 @@ export default function OpengraphImage() {
               lineHeight: 1.45,
             }}
           >
-            Candidate marketing, recruiter networking, role-specific training, interview
-            preparation, and mentorship.
+            Resume and profile building, 40+ targeted applications daily,
+            role-specific training, and interview preparation.
           </div>
         </div>
 

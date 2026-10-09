@@ -94,6 +94,27 @@ Copy `.env.example` to `.env.local`. All keys are optional locally:
   skipped locally. In production a missing secret rejects submissions rather
   than accepting unverified traffic.
 
+## Swift Agent (AI chat assistant)
+
+A chat window on every page (`src/components/site/swift-agent.tsx`) backed by
+`src/app/api/agent/route.ts`, which streams answers from an open model on
+Groq's free tier (`openai/gpt-oss-120b` by default; override with `GROQ_MODEL`).
+
+- **Knowledge** comes from `src/content/*` via `src/lib/agent/knowledge.ts` —
+  edit a package or FAQ and the agent follows. Unwritten placeholder answers
+  are left out so the agent says it doesn't know instead.
+- **Booking**: a short form opens inside the chat (when the visitor asks, or
+  from the "Book a free consultation" button) and posts to
+  `src/app/api/agent/book/route.ts` — the same pipeline as the contact form
+  (`src/lib/consultation-delivery.ts`). Contact details never reach the AI.
+- **Free-tier limits**: Groq caps free usage per day. The prompt is kept
+  compact to stretch it, and when the cap is hit the chat offers WhatsApp and
+  email instead.
+- **Guardrails**: no job guarantees, no proxy interviews, no visa advice,
+  same-origin requests only, per-IP rate limits, capped message sizes.
+- **Setup**: set `GROQ_API_KEY` (free at console.groq.com). Without it the
+  window opens but offers WhatsApp and email instead of AI replies.
+
 ## Consultation form flow
 
 ```

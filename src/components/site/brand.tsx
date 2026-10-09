@@ -1,76 +1,47 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { site } from "@/lib/site";
 
 /**
- * The ascending-chevron mark on a near-square tile. Navy on light surfaces;
- * corporate blue on navy, where a navy tile would disappear.
+ * The SC monogram and two-weight wordmark, served as outlined SVG from
+ * public/brand so it renders identically everywhere and never depends on a
+ * web font. `dark` is the variant drawn for navy surfaces.
+ *
+ * The files' viewBox is 1235 × 397, so width and height keep that ratio.
  */
-export function LogoMark({
-  className,
-  tone = "light",
-}: {
-  className?: string;
-  tone?: "light" | "dark";
-}) {
-  return (
-    <svg viewBox="0 0 64 64" aria-hidden="true" className={cn("size-9", className)}>
-      <rect
-        width="64"
-        height="64"
-        rx="8"
-        fill={tone === "dark" ? "var(--color-brand-blue)" : "var(--color-brand-navy)"}
-      />
-      <path
-        d="M18 38 L32 22 L46 38"
-        fill="none"
-        stroke="#ffffff"
-        strokeWidth="6"
-        strokeLinecap="square"
-        strokeLinejoin="miter"
-      />
-      <path
-        d="M18 50 L32 34 L46 50"
-        fill="none"
-        stroke={tone === "dark" ? "#bfdbfe" : "var(--color-brand-blue-soft)"}
-        strokeWidth="6"
-        strokeLinecap="square"
-        strokeLinejoin="miter"
-      />
-    </svg>
-  );
-}
+const logoSrc = {
+  light: "/brand/logo.svg",
+  dark: "/brand/logo-white.svg",
+} as const;
 
-/** "Swift" set heavier than "Consultancy" — a conventional two-weight wordmark. */
-const wordmark = [
-  site.name.split(" ")[0],
-  site.name.split(" ").slice(1).join(" "),
-] as const;
-
-/** Logo plus wordmark, linking home. */
+/** Full logo, linking home. */
 export function BrandLink({
   className,
   tone = "light",
+  priority = false,
 }: {
   className?: string;
   tone?: "light" | "dark";
+  /** Set on the instance visible above the fold (the site header). */
+  priority?: boolean;
 }) {
   return (
     <Link
       href="/"
-      className={cn(
-        "flex shrink-0 items-center gap-2.5 text-[1.1875rem] leading-none tracking-[-0.01em]",
-        tone === "dark" ? "text-white" : "text-brand-navy",
-        className,
-      )}
+      className={cn("flex shrink-0 items-center", className)}
       aria-label={`${site.name} — home`}
     >
-      <LogoMark tone={tone} />
-      <span>
-        <span className="font-semibold">{wordmark[0]}</span>{" "}
-        <span className="font-normal">{wordmark[1]}</span>
-      </span>
+      <Image
+        src={logoSrc[tone]}
+        alt=""
+        width={143}
+        height={46}
+        priority={priority}
+        unoptimized
+        className="h-11 w-auto md:h-12"
+      />
     </Link>
   );
 }

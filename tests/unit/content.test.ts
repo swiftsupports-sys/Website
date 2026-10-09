@@ -32,7 +32,7 @@ describe("site content", () => {
   });
 
   it("offers exactly one recommended package", () => {
-    expect(packages).toHaveLength(2);
+    expect(packages).toHaveLength(3);
     expect(packages.filter((p) => p.recommended)).toHaveLength(1);
   });
 

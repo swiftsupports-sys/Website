@@ -20,10 +20,10 @@ import { photos } from "@/lib/images";
 import { processSteps } from "@/content/process";
 
 export const metadata: Metadata = pageMetadata({
-  title: "How Our Career Consulting Process Works",
+  title: "How We Help You Land an IT Job in the USA",
   socialTitle: "How It Works",
   description:
-    "A five-stage process: career assessment, a personalized roadmap, role-specific training, candidate marketing and recruiter networking, then interview and placement guidance.",
+    "A five-stage process: a free career consultation, resume and profile building, daily profile marketing, role-specific training, then interview support through to the offer.",
   path: "/how-it-works",
 });
 
@@ -32,19 +32,19 @@ const phases = [
     icon: Timer,
     title: "Opening Phase",
     description:
-      "Assessment, roadmap, and the first pass at your resume, profile, and positioning. This is where the direction is set.",
+      "Consultation, then your resume, LinkedIn, GitHub, and portfolio are built and approved. This is where the direction is set.",
   },
   {
     icon: BarChart,
     title: "Build Phase",
     description:
-      "Training, project work, and preparation run alongside candidate marketing and recruiter networking.",
+      "40+ daily applications and recruiter outreach begin, while role-specific training and project work run alongside.",
   },
   {
     icon: CircleCheckBig,
     title: "Interview Phase",
     description:
-      "Mock interviews, round-specific preparation, debriefs, and support through offer conversations and onboarding.",
+      "Job-description-based mock interviews, a briefing before each round, debriefs, and support through the offer and onboarding.",
   },
 ];
 
@@ -52,8 +52,8 @@ export default function HowItWorksPage() {
   return (
     <>
       <PageSchema
-        name={"How Our Career Consulting Process Works"}
-        description={"A five-stage process: career assessment, a personalized roadmap, role-specific training, candidate marketing and recruiter networking, then interview and placement guidance."}
+        name={"How We Help You Land an IT Job in the USA"}
+        description={"A five-stage process: a free career consultation, resume and profile building, daily profile marketing, role-specific training, then interview support through to the offer."}
         path={"/how-it-works"}
         breadcrumb={"How It Works"}
       />
@@ -61,7 +61,7 @@ export default function HowItWorksPage() {
       <PageHero
         breadcrumb="How It Works"
         title="A Clear Path Toward Your Next Role."
-        intro="Five structured stages, run in sequence but revisited whenever your situation changes. At every point you know what is happening now, what is expected of you, and what comes next."
+        intro="From your first conversation to your offer, in five structured stages. At every point you know what is happening now, what is expected of you, and what comes next."
         actions={<HeroActions />}
       />
 
@@ -69,7 +69,7 @@ export default function HowItWorksPage() {
         <SectionHead
           eyebrow="The Process"
           heading="Five Stages, One Direction."
-          intro="Stages overlap in practice — training continues while marketing begins, and preparation sharpens as interviews approach."
+          intro="Stages overlap in practice — training runs alongside daily marketing, and preparation sharpens as interviews are scheduled."
         />
         <StepList steps={processSteps} layout="rows" showDetails />
       </Section>
@@ -100,9 +100,9 @@ export default function HowItWorksPage() {
             <CheckList
               className="mt-7"
               items={[
-                "Time set aside each week for preparation and practice",
+                "Time set aside each week for training and practice",
                 "Openness about gaps — they are far easier to work on once named",
-                "Prompt updates when interviews are scheduled or feedback arrives",
+                "Prompt updates when recruiters reach out or interviews are scheduled",
                 "Patience with a market that moves at its own pace",
               ]}
             />
@@ -131,7 +131,7 @@ export default function HowItWorksPage() {
 
       <CtaBand
         eyebrow="Step One"
-        heading="Begin With the Career Assessment."
+        heading="Begin With a Free Consultation."
         body="The first conversation is free and carries no obligation. Bring your questions — including the uncomfortable ones about whether this is worth it."
       />
     </>

@@ -1,8 +1,8 @@
 import {
   CircleCheckBig,
   ClipboardList,
+  FileText,
   GraduationCap,
-  Map,
   Megaphone,
   type LucideIcon,
 } from "lucide-react";
@@ -19,56 +19,56 @@ export type ProcessStep = {
 export const processSteps: ProcessStep[] = [
   {
     n: "01",
-    title: "Career Assessment",
+    title: "Free Career Consultation",
     description:
-      "We understand your experience, career stage, target role, strengths, and professional expectations.",
+      "We learn about your experience, skills, target role, and goals, and recommend the package that fits.",
     details: [
-      "A detailed review of your background and current profile",
-      "An honest read on which roles and levels are realistic today",
+      "An honest review of your background and current profile",
+      "A clear recommendation on which roles and levels to target",
     ],
     icon: ClipboardList,
   },
   {
     n: "02",
-    title: "Personalized Roadmap",
+    title: "Resume & Profile Building",
     description:
-      "We create a focused plan covering profile positioning, skills, preparation, and next actions.",
+      "We build your ATS-friendly resume, optimize LinkedIn and GitHub, and create your personal portfolio website.",
     details: [
-      "Priorities sequenced so the highest-impact work happens first",
-      "Checkpoints so progress is visible, not assumed",
+      "Resume and LinkedIn written for the roles you are targeting",
+      "Real-world projects and a portfolio that back up your experience",
     ],
-    icon: Map,
+    icon: FileText,
   },
   {
     n: "03",
-    title: "Role-Specific Training",
+    title: "Profile Marketing",
     description:
-      "Receive guidance around relevant technologies, real-world expectations, projects, and professional skills.",
+      "We submit 40+ targeted applications daily and reach out to recruiters hiring in your domain.",
     details: [
-      "Depth in the areas your target roles actually assess",
-      "Practical work you can discuss with confidence",
-    ],
-    icon: GraduationCap,
-  },
-  {
-    n: "04",
-    title: "Candidate Marketing & Networking",
-    description:
-      "We help position your profile and build visibility through targeted marketing and recruiter networking.",
-    details: [
-      "Positioning matched to each type of opportunity",
-      "Consistent, professional follow-up with hiring channels",
+      "Applications matched to your skills, level, and domain",
+      "Weekly reports on applications, responses, and next steps",
     ],
     icon: Megaphone,
   },
   {
-    n: "05",
-    title: "Interview & Placement Guidance",
+    n: "04",
+    title: "Role-Specific Training",
     description:
-      "Receive dedicated interview preparation, mock sessions, feedback, and support as you navigate opportunities.",
+      "Hands-on technical and behavioral training focused on what your target role actually assesses.",
     details: [
-      "Round-by-round preparation as processes progress",
-      "Debriefs after each interview so the next one goes better",
+      "Depth in the technologies your target roles ask for",
+      "Practical, real-world work you can discuss with confidence",
+    ],
+    icon: GraduationCap,
+  },
+  {
+    n: "05",
+    title: "Interviews & Offer",
+    description:
+      "Mock interviews, job-description-based practice, and support before and after every round — through to the offer.",
+    details: [
+      "A briefing before each scheduled interview and a debrief after it",
+      "Guidance on evaluating, negotiating, and accepting offers",
     ],
     icon: CircleCheckBig,
   },
