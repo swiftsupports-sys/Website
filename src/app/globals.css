@@ -115,10 +115,11 @@
 
 /* ------------------------------------------------------- primitives ---- */
 @layer components {
-  /* One container for every section: 1280px including gutters. */
+  /* One container for every section: 1440px including gutters, widening to
+     1600px on very large monitors so wide screens are not mostly margin. */
   .shell {
     width: 100%;
-    max-width: 80rem;
+    max-width: 90rem;
     margin-inline: auto;
     padding-inline: 1rem;
   }
@@ -132,6 +133,13 @@
   @media (width >= 64rem) {
     .shell {
       padding-inline: 2rem;
+    }
+  }
+
+  @media (width >= 112rem) {
+    .shell {
+      max-width: 100rem;
+      padding-inline: 3rem;
     }
   }
 

@@ -27,11 +27,11 @@ import { Reveal } from "@/components/site/reveal";
 import { photos } from "@/lib/images";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Swift Consultancy | US Tech Career Consulting",
+  title: "About Swift Consultancy | IT Staffing & Career Consulting USA",
   absoluteTitle: true,
   socialTitle: "About Us",
   description:
-    "Swift Consultancy is a career consultancy for technology professionals targeting roles at companies in the United States, providing preparation, positioning, dedicated interview opportunities, and recruiter networking.",
+    "Swift Consultancy helps technology professionals land roles in the United States through resume and profile building, daily profile marketing, role-specific training, and interview preparation.",
   path: "/about",
 });
 
@@ -67,7 +67,7 @@ const audiences = [
     icon: Briefcase,
     title: "Experienced Professionals",
     description:
-      "You have delivered real work, but your profile, interview preparation, or market visibility has not kept pace with your experience.",
+      "You have delivered real work, but your resume, interview preparation, or market visibility has not kept pace with your experience.",
   },
   {
     icon: Repeat,
@@ -77,9 +77,9 @@ const audiences = [
   },
   {
     icon: GraduationCap,
-    title: "Aspiring Professionals",
+    title: "Recent Graduates",
     description:
-      "You are early in your journey and want structured guidance on what to learn, how to present it, and how hiring actually works.",
+      "You have the degree and the drive, and now need real-world projects, a strong profile, and interview practice to land your first role.",
   },
 ];
 
@@ -96,7 +96,7 @@ export default function AboutPage() {
     <>
       <PageSchema
         name={"About Swift Consultancy"}
-        description={"Swift Consultancy is a career consultancy for technology professionals targeting roles at companies in the United States, providing preparation, positioning, dedicated interview opportunities, and recruiter networking."}
+        description={"Swift Consultancy helps technology professionals land roles in the United States through resume and profile building, daily profile marketing, role-specific training, and interview preparation."}
         path={"/about"}
         breadcrumb={"About Us"}
       />
@@ -104,7 +104,7 @@ export default function AboutPage() {
       <PageHero
         breadcrumb="About Us"
         title="More Than Job Search Support — A Career Strategy Built Around You."
-        intro="We work closely with candidates to understand their experience, strengths, career goals, and target roles. From professional branding and role-specific preparation to recruiter networking and interview support, our process is designed to help candidates present themselves with confidence in the US technology job market."
+        intro="We work closely with every candidate to understand their experience, strengths, and target role — then build their profile, market it every day, and train them to perform in the interview. One team, one plan, from first conversation to offer."
         actions={<HeroActions />}
       />
 
@@ -128,9 +128,9 @@ export default function AboutPage() {
             <CheckList
               className="mt-7"
               items={[
-                "A named consultant who stays with you throughout",
-                "Preparation matched to your target domain and level",
-                "Written feedback you can act on, not vague encouragement",
+                "A dedicated consultant who stays with you throughout",
+                "A profile, marketing plan, and training matched to your target role",
+                "Weekly reports and feedback you can act on, not vague encouragement",
               ]}
             />
           </Reveal>

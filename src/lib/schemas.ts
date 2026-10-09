@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { packages } from "@/content/packages";
+
 export const experienceLevels = [
   "Student or recent graduate",
   "0–2 years",
@@ -20,6 +22,9 @@ export const targetDomains = [
   "UI/UX and Product Roles",
   "Other / Not sure yet",
 ] as const;
+
+/** Booking-form package choices: every package, plus an undecided option. */
+export const packageInterests: string[] = [...packages.map((p) => p.name), "Not sure yet"];
 
 export const consultationTimes = [
   "No preference — suggest a time",
@@ -58,6 +63,10 @@ export const consultationSchema = z.object({
     errorMap: () => ({ message: "Please select a target domain." }),
   }),
   role: z.string().trim().max(120, "Please keep the role title shorter.").optional(),
+  packageInterest: z
+    .string()
+    .refine((v) => packageInterests.includes(v), "Please choose a package.")
+    .optional(),
   preferredTime: z.enum(consultationTimes).optional(),
   message: z
     .string()
@@ -75,6 +84,12 @@ export const consultationSchema = z.object({
 });
 
 export type ConsultationInput = z.infer<typeof consultationSchema>;
+
+/** True when a bot filled the hidden `companyWebsite` field. */
+export function isHoneypotFilled(raw: unknown): boolean {
+  const value = (raw as { companyWebsite?: unknown } | null)?.companyWebsite;
+  return typeof value === "string" && value.length > 0;
+}
 
 export type ConsultationResult =
   | { ok: true; demo?: boolean }

@@ -16,11 +16,18 @@ export const organizationJsonLd = {
   "@type": "Organization",
   "@id": `${site.url}/#organization`,
   name: site.name,
-  alternateName: "Swift Consultancy US",
+  alternateName: [
+    "Swift Consultancy US",
+    "Swift Consultancy USA",
+    "Swift IT Staffing",
+    "Swift IT Consulting",
+  ],
   url: site.url,
   logo: {
     "@type": "ImageObject",
-    url: `${site.url}/icon.svg`,
+    url: `${site.url}/brand/logo-mark.png`,
+    width: 1024,
+    height: 1024,
     caption: `${site.name} logo`,
   },
   image: `${site.url}/opengraph-image`,
@@ -32,7 +39,7 @@ export const organizationJsonLd = {
    * separate them by.
    */
   disambiguatingDescription:
-    "A career consultancy for technology professionals pursuing roles at companies in the United States, providing candidate marketing, recruiter networking, interview preparation, domain training, and one-to-one mentorship. Not affiliated with other businesses operating under similar names in HR outsourcing, recruitment, or financial services.",
+    "An IT staffing and career consulting firm for technology professionals pursuing jobs in the United States, providing resume and profile building, daily job applications, recruiter outreach, role-specific training, and interview preparation. Not affiliated with the Swift programming language, the SWIFT banking network, or other businesses operating under similar names.",
   email: site.email,
   // Omitted rather than emitted empty while no number is configured.
   ...(hasPhone ? { telephone: site.phoneDisplay } : {}),
@@ -40,17 +47,23 @@ export const organizationJsonLd = {
   slogan: site.tagline,
   knowsLanguage: "en",
   serviceType: [
+    "IT staffing",
     "Career consulting",
-    "Technical interview preparation",
+    "Job application services",
+    "Resume writing",
+    "LinkedIn profile optimization",
     "Candidate marketing",
     "Recruiter networking",
-    "Technology training",
+    "Technical training",
+    "Interview preparation",
     "Career mentorship",
   ],
   knowsAbout: [
-    "Software development careers",
+    "IT jobs in the United States",
+    "Java and Python developer careers",
+    "Full-stack development careers",
     "Quality assurance and automation",
-    "Data analytics and data engineering",
+    "Data analytics, data science, and data engineering",
     "Cloud engineering and DevOps",
     "Cybersecurity",
     "Business analysis",

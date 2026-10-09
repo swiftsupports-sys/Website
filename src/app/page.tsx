@@ -32,36 +32,36 @@ import { services } from "@/content/services";
 import { testimonials } from "@/content/testimonials";
 import { JsonLd, faqJsonLd } from "@/lib/structured-data";
 import {
+  FileText,
   GraduationCap,
   Mic,
-  Network,
   Send,
 } from "lucide-react";
 
 const pillars = [
   {
+    icon: FileText,
+    title: "Profile Building",
+    description:
+      "An ATS-friendly resume, an optimized LinkedIn and GitHub, real-world projects, and a personal portfolio website.",
+  },
+  {
     icon: Send,
-    title: "Candidate Marketing",
+    title: "Profile Marketing",
     description:
-      "Professionally position your experience, skills, resume, and LinkedIn presence for relevant technology opportunities.",
-  },
-  {
-    icon: Network,
-    title: "Recruiter Networking",
-    description:
-      "Leverage targeted outreach and recruiter networking to increase visibility with relevant hiring channels.",
-  },
-  {
-    icon: Mic,
-    title: "Interview Preparation",
-    description:
-      "Prepare for technical, behavioral, HR, and managerial interviews through guided practice and detailed feedback.",
+      "40+ targeted applications every working day, plus direct outreach to recruiters hiring in your domain.",
   },
   {
     icon: GraduationCap,
-    title: "Training & Mentorship",
+    title: "Role-Specific Training",
     description:
-      "Strengthen domain knowledge, practical skills, communication, and career decision-making with personalized support.",
+      "Hands-on technical and behavioral training focused on exactly what your target role assesses.",
+  },
+  {
+    icon: Mic,
+    title: "Interview Support",
+    description:
+      "Mock interviews, job-description-based practice, and a briefing before every round — through to the offer.",
   },
 ];
 
@@ -90,9 +90,9 @@ export default function HomePage() {
             <CheckList
               className="mt-7"
               items={[
-                "A strategy shaped by your experience level and target role",
-                "Preparation aligned to how US technology teams actually hire",
-                "Committed interview opportunities and recruiter networking, worked continuously",
+                "A resume, LinkedIn, GitHub, and portfolio built for your target role",
+                "40+ targeted applications every day, with weekly progress reports",
+                "Training and mock interviews aligned to how US technology teams hire",
               ]}
             />
             <div className="mt-8">
@@ -132,7 +132,7 @@ export default function HomePage() {
         <SectionHead
           eyebrow="Why Choose Us"
           heading="Everything You Need to Prepare, Position, and Progress."
-          intro="Four pillars that work together — so your profile, your preparation, and your visibility all point in the same direction."
+          intro="Four pillars that work together — a profile that gets noticed, marketing that gets it seen, and preparation that turns interviews into offers."
         />
         <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {pillars.map((pillar) => (
@@ -146,7 +146,7 @@ export default function HomePage() {
         <SectionHead
           eyebrow="How It Works"
           heading="A Clear Path Toward Your Next Role."
-          intro="Five structured stages. You always know what is happening now, and what comes next."
+          intro="Five structured stages, from your first conversation to your offer. You always know what is happening now, and what comes next."
         />
         <StepList steps={processSteps} />
         <Reveal className="mt-12">
@@ -160,8 +160,8 @@ export default function HomePage() {
       <Section tone="alt" id="domains">
         <SectionHead
           eyebrow="Technology Domains"
-          heading="Support Across High-Demand Technology Domains."
-          intro="Your career strategy, preparation, and guidance are tailored to the expectations of your target domain."
+          heading="Roles We Train and Market For."
+          intro="From Java and Python developers to data, cloud, and QA roles — your resume, marketing, and training are tailored to the domain you are targeting."
         />
         <DomainGrid domains={domains} />
         <Reveal className="mt-8">
@@ -174,7 +174,7 @@ export default function HomePage() {
         <SectionHead
           eyebrow="Our Services"
           heading="Career Services Designed Around Your Goals."
-          intro="Engage the full journey, or focus on the areas where you need the most support. Every service is delivered one-to-one."
+          intro="Fifteen services across profile marketing, training, and mentorship — delivered one-to-one and grouped into three simple packages."
         />
         <ServiceRows services={services} />
         <Reveal className="mt-10">
@@ -189,9 +189,9 @@ export default function HomePage() {
         <SectionHead
           eyebrow="Pricing"
           heading="Choose the Support Model That Works for You."
-          intro="Two straightforward engagement models. Scope, timelines, and terms are discussed openly before you commit."
+          intro="Get noticed, get prepared, or get both. Three straightforward packages, with every term confirmed in writing before you commit."
         />
-        <div className="grid items-stretch gap-6 lg:grid-cols-2 lg:gap-8">
+        <div className="grid items-stretch gap-6 lg:grid-cols-3">
           {packages.map((plan) => (
             <PriceCard key={plan.id} plan={plan} />
           ))}

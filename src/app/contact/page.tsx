@@ -20,7 +20,8 @@ import {
 } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Book a Free Career Consultation",
+  title: "Contact Swift Consultancy — Free IT Career Consultation",
+  absoluteTitle: true,
   socialTitle: "Contact",
   description:
     "Tell us about your experience, target role, and technology domain. No resume needed to begin — book a free consultation and we will explain the right next step.",
@@ -62,7 +63,7 @@ export default function ContactPage() {
   return (
     <>
       <PageSchema
-        name={"Book a Free Career Consultation"}
+        name={"Contact Swift Consultancy — Free IT Career Consultation"}
         description={"Tell us about your experience, target role, and technology domain. No resume needed to begin — book a free consultation and we will explain the right next step."}
         path={"/contact"}
         breadcrumb={"Contact"}
@@ -77,7 +78,7 @@ export default function ContactPage() {
       />
 
       <Section tone="alt" className="border-t-0">
-        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:gap-12">
+        <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-10 lg:grid-cols-[minmax(0,1.55fr)_minmax(0,1fr)] lg:gap-12">
           <Reveal>
             <div className="rounded-lg border border-border bg-surface p-6 md:p-10">
               <h2 className="h-lg">Request a Consultation</h2>

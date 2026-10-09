@@ -20,10 +20,10 @@ import { Button } from "@/components/ui/button";
 import { domains } from "@/content/domains";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Technology Domains We Support",
+  title: "IT Roles We Train and Market For",
   socialTitle: "Domains",
   description:
-    "Career support across software development, QA and automation, data analytics and engineering, cloud and DevOps, cybersecurity, business analysis, and UI/UX and product roles.",
+    "Training and profile marketing for Java, Python, full-stack, data, QA, cloud and DevOps, cybersecurity, business analyst, and UI/UX roles in the US.",
   path: "/domains",
 });
 
@@ -31,16 +31,16 @@ export default function DomainsPage() {
   return (
     <>
       <PageSchema
-        name={"Technology Domains We Support"}
-        description={"Career support across software development, QA and automation, data analytics and engineering, cloud and DevOps, cybersecurity, business analysis, and UI/UX and product roles."}
+        name={"IT Roles We Train and Market For"}
+        description={"Training and profile marketing for Java, Python, full-stack, data, QA, cloud and DevOps, cybersecurity, business analyst, and UI/UX roles in the US."}
         path={"/domains"}
         breadcrumb={"Domains"}
       />
 
       <PageHero
         breadcrumb="Domains"
-        title="Support Across High-Demand Technology Domains."
-        intro="Your career strategy, preparation, and guidance are tailored to the expectations of your target domain. What a hiring team looks for in a data engineer is not what they look for in a security analyst — and your preparation should reflect that."
+        title="Roles We Train and Market For."
+        intro="Your resume, marketing, and training are tailored to your target role. What a hiring team looks for in a data engineer is not what they look for in a Java developer — and your preparation should reflect that."
         actions={
           <HeroActions secondaryHref="/services" secondaryLabel="Explore Our Services" />
         }
@@ -50,7 +50,7 @@ export default function DomainsPage() {
         <SectionHead
           eyebrow="Where We Focus"
           heading="Eight Areas of Depth."
-          intro="Each domain has its own vocabulary, interview format, and evidence of competence. We prepare you for the one you are actually targeting."
+          intro="Each domain has its own tools, interview format, and evidence of competence. We train and market you for the one you are actually targeting."
         />
         <DomainGrid domains={domains} detailed />
       </Section>
@@ -69,9 +69,9 @@ export default function DomainsPage() {
               className="mt-7"
               items={[
                 "Resume language drawn from real postings in your domain",
+                "Real-world projects in the stack your target roles use",
                 "Mock interviews that mirror the rounds you will actually face",
-                "Project guidance that produces evidence, not filler",
-                "Outreach aimed at recruiters hiring for your specialization",
+                "Daily applications and outreach aimed at your specialization",
               ]}
             />
             <div className="mt-8">

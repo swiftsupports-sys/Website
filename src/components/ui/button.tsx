@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-md border font-medium whitespace-nowrap transition-colors duration-200 ease-brand disabled:pointer-events-none disabled:opacity-60 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 rounded-md border text-center font-medium transition-colors duration-200 ease-brand disabled:pointer-events-none disabled:opacity-60 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -21,9 +21,9 @@ const buttonVariants = cva(
           "border-white/40 bg-transparent text-white hover:border-white hover:bg-white/10",
       },
       size: {
-        default: "h-11 px-5 text-[0.9375rem]",
-        sm: "h-10 px-4 text-[0.875rem]",
-        lg: "h-12 px-6 text-base",
+        default: "min-h-11 px-5 py-2 text-[0.9375rem]",
+        sm: "min-h-10 px-4 py-2 text-[0.875rem]",
+        lg: "min-h-12 px-6 py-2.5 text-base",
       },
       block: {
         true: "w-full",

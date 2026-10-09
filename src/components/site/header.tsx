@@ -79,7 +79,7 @@ export function Header() {
 
       <header className="sticky top-0 z-80 border-b border-border bg-surface">
         <div className="shell flex h-[76px] items-center gap-6 lg:gap-8">
-          <BrandLink />
+          <BrandLink priority />
 
           <nav aria-label="Primary" className="ml-auto hidden h-full items-stretch xl:flex">
             {desktopNav.map((item) => (

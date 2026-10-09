@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { BarChart, Globe, ShieldCheck, Users } from "lucide-react";
+import { GraduationCap, Mic, Send, Users } from "lucide-react";
 
 import { ArrowLink } from "@/components/site/primitives";
 import { Reveal } from "@/components/site/reveal";
@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/button";
 import { photos } from "@/lib/images";
 
 const trustPoints = [
-  { icon: Users, label: "One-to-one guidance" },
-  { icon: Globe, label: "US technology market focus" },
-  { icon: BarChart, label: "Domain-specific preparation" },
-  { icon: ShieldCheck, label: "Transparent packages" },
+  { icon: Send, label: "40+ applications daily" },
+  { icon: GraduationCap, label: "Role-specific training" },
+  { icon: Mic, label: "Mock interviews & support" },
+  { icon: Users, label: "One-to-one mentorship" },
 ];
 
 export function HomeHero() {
@@ -45,14 +45,17 @@ export function HomeHero() {
 
         <div className="shell flex min-h-[560px] flex-col justify-center py-16 md:py-24 lg:min-h-[640px]">
           <Reveal>
+            <p className="mb-5 text-[0.9375rem] font-semibold tracking-wide text-brand-blue-border uppercase">
+              Swift Consultancy · IT Staffing &amp; Career Consulting, USA
+            </p>
             <h1 className="h-display max-w-[17ch]">
-              Build Your Career at Leading US&nbsp;Companies.
+              Land Your Next Tech Role in the&nbsp;US.
             </h1>
 
             <p className="lead mt-6 max-w-[56ch] text-white/80">
-              Get personalized candidate marketing, recruiter networking,
-              role-specific training, interview preparation, and mentorship designed
-              to help you move confidently toward your next technology role.
+              We build your resume, LinkedIn, GitHub, and portfolio, apply to 40+
+              matched roles for you every day, and train you to win the interview
+              — with a dedicated consultant beside you from first call to offer.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
@@ -65,8 +68,8 @@ export function HomeHero() {
             </div>
 
             <p className="mt-8 max-w-[56ch] border-t border-white/20 pt-5 text-[0.9375rem] text-white/70">
-              Personalized support for experienced and aspiring technology
-              professionals.
+              For recent graduates, experienced professionals, and career switchers.
+              Packages from $1K.
             </p>
           </Reveal>
         </div>

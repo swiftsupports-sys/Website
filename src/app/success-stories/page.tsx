@@ -11,7 +11,7 @@ import { Disclaimer, Section, SectionHead } from "@/components/site/primitives";
 import { testimonials } from "@/content/testimonials";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Candidate Experiences",
+  title: "Success Stories — Candidate Experiences",
   socialTitle: "Success Stories",
   description:
     "Feedback from candidates who worked with our consultants, published anonymously by technology domain. Individual experiences vary and outcomes are never guaranteed.",
@@ -43,7 +43,7 @@ export default function SuccessStoriesPage() {
   return (
     <>
       <PageSchema
-        name={"Candidate Experiences"}
+        name={"Success Stories — Candidate Experiences"}
         description={"Feedback from candidates who worked with our consultants, published anonymously by technology domain. Individual experiences vary and outcomes are never guaranteed."}
         path={"/success-stories"}
         breadcrumb={"Success Stories"}

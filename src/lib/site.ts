@@ -19,9 +19,9 @@ export const site = {
    * every canonical URL on the site will point at a redirect.
    */
   url: "https://swiftconsultancy.us",
-  tagline: "Career consultancy for US technology roles",
+  tagline: "IT staffing and career consulting for technology roles in the USA",
   description:
-    "Personalized candidate marketing, recruiter networking, role-specific training, interview preparation, and mentorship for professionals targeting technology roles at leading US companies.",
+    "Swift Consultancy is an IT staffing and career consulting firm helping professionals land tech jobs in the USA — resume, LinkedIn, and portfolio building, 40+ targeted job applications daily, role-specific training, and interview preparation.",
 
   /**
    * Public-facing address, shown in the header, footer, contact page, and
@@ -32,18 +32,17 @@ export const site = {
   email: "contact@swiftconsultancy.us",
 
   /**
-   * Phone and WhatsApp are intentionally blank while a business number is
-   * being arranged. Every surface checks `hasPhone` / `hasWhatsApp` and shows
-   * an inert placeholder instead of a dead link, so nothing looks broken.
+   * Phone and WhatsApp. Every surface checks `hasPhone` / `hasWhatsApp` and
+   * shows an inert placeholder instead of a dead link if these are blanked.
    *
-   * To switch them back on, fill all three in — no other file needs editing:
+   * To change the number, update all three — no other file needs editing:
    *   phoneDisplay: "+1 (555) 123-4567"   as written for humans
    *   phoneHref:    "+15551234567"         digits and a leading +, for tel:
    *   whatsappNumber: "15551234567"        digits only — wa.me 404s otherwise
    */
-  phoneDisplay: "",
-  phoneHref: "",
-  whatsappNumber: "",
+  phoneDisplay: "+91 81800 91639",
+  phoneHref: "+918180091639",
+  whatsappNumber: "918180091639",
   hours: "Mon–Fri, 9:00 AM – 7:00 PM ET",
 
   /**
