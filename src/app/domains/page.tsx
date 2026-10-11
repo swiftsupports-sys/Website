@@ -81,7 +81,7 @@ export default function DomainsPage() {
             </div>
           </Reveal>
 
-          <Reveal>
+          <Reveal variant="image">
             {/* PLACEHOLDER IMAGE */}
             <Image
               src={photos.team.src}

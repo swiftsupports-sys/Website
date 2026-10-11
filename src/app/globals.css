@@ -42,14 +42,22 @@
 
   /* Type — one family, used at disciplined weights. */
   --font-sans: var(--font-plex), ui-sans-serif, system-ui, "Segoe UI", Arial, sans-serif;
+  /* The company name in the logo — nowhere else. */
+  --font-brand: var(--font-sora), var(--font-plex), ui-sans-serif, system-ui, sans-serif;
 
   /* Shadows — borders separate surfaces; shadows are near-invisible. */
   --shadow-card: 0 1px 2px rgb(15 23 42 / 0.05);
   --shadow-hover: 0 4px 14px rgb(15 23 42 / 0.07);
+  --shadow-lift: 0 14px 30px -14px rgb(15 23 42 / 0.22);
+  --shadow-cta: 0 8px 20px -8px rgb(37 99 235 / 0.55);
   --shadow-overlay: 0 12px 32px rgb(15 23 42 / 0.14);
+  --shadow-header: 0 6px 24px -10px rgb(15 23 42 / 0.16);
 
-  /* Motion */
+  /* Motion — colour and small state changes use ease-brand at 200ms;
+     anything that travels (entrances, lifts, page changes) uses the longer,
+     softer ease-out-soft so it settles rather than stops. */
   --ease-brand: cubic-bezier(0.2, 0.6, 0.35, 1);
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* ------------------------------------------------------------- base ---- */
@@ -313,7 +321,157 @@
     animation: none;
     /* Held still and wrapped, rather than frozen mid-slide off-screen. */
     width: 100%;
+    justify-content: center;
+  }
+
+  /* Nothing travels, so nothing needs to fade at the edges. */
+  .employer-track {
+    mask-image: none;
+  }
+
+  /* The loop's second copy exists only for the seamless scroll. */
+  .animate-employer-scroll > [aria-hidden="true"] {
+    display: none;
+  }
+
+  .animate-employer-scroll > ul {
+    flex-shrink: 1;
     flex-wrap: wrap;
     justify-content: center;
+    row-gap: 0.75rem;
+    padding-inline: 1rem;
+  }
+}
+
+/* ==========================================================================
+   Motion
+   ========================================================================== */
+
+/**
+ * Staggered groups (see <Stagger> in components/site/reveal.tsx).
+ *
+ * An animation rather than a transition, with `backwards` fill: once it ends,
+ * each child is back on its own styles, so card hover lifts and colour
+ * transitions keep working instead of being pinned by the entrance.
+ */
+[data-stagger]:not([data-shown]) > * {
+  opacity: 0;
+}
+
+[data-stagger][data-shown] > * {
+  animation: stagger-in 0.6s var(--ease-out-soft) backwards;
+  animation-delay: calc(var(--stagger-i, 0) * 80ms);
+}
+
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+/* The home hero photograph settles in once, on load. */
+@keyframes hero-settle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.animate-hero-settle {
+  animation: hero-settle 2.4s var(--ease-out-soft) both;
+}
+
+/* Floating chat: the launcher arrives after the page, the panel opens from
+   the corner it was launched from. */
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+}
+
+.animate-pop-in {
+  animation: pop-in 0.45s var(--ease-out-soft) both;
+}
+
+.animate-panel-in {
+  transform-origin: bottom right;
+  animation: pop-in 0.32s var(--ease-out-soft) both;
+}
+
+/* Mobile drawer links trail the drawer in from the right. */
+@keyframes drawer-item-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+}
+
+.animate-drawer-item {
+  animation: drawer-item-in 0.4s var(--ease-out-soft) both;
+}
+
+/**
+ * Page transitions (see app/template.tsx). The outgoing page fades quickly so
+ * it never competes with the incoming one, which rises gently into place.
+ * The header and chat launcher are anchored: they are the fixed reference
+ * that tells the visitor the content changed, not the whole window.
+ */
+::view-transition {
+  pointer-events: none;
+}
+
+::view-transition-old(.page-exit) {
+  animation: 0.18s cubic-bezier(0.4, 0, 1, 1) both vt-fade-out;
+}
+
+::view-transition-new(.page-enter) {
+  animation: 0.45s var(--ease-out-soft) 0.08s both vt-rise-in;
+}
+
+@keyframes vt-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes vt-rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+::view-transition-group(site-header),
+::view-transition-group(agent-launcher) {
+  animation: none;
+  z-index: 100;
+}
+
+::view-transition-old(site-header),
+::view-transition-old(agent-launcher) {
+  display: none;
+}
+
+::view-transition-new(site-header),
+::view-transition-new(agent-launcher) {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-stagger] > *,
+  [data-stagger]:not([data-shown]) > * {
+    opacity: 1;
+    animation: none !important;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*),
+  ::view-transition-group(*) {
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }

@@ -38,7 +38,7 @@ function AccordionTrigger({
         <span className="flex-1">{children}</span>
         <ChevronDown
           aria-hidden="true"
-          className="size-5 shrink-0 text-text-secondary transition-transform duration-200 group-hover:text-brand-blue group-data-[state=open]:rotate-180"
+          className="size-5 shrink-0 text-text-secondary transition-transform duration-300 ease-out-soft group-hover:text-brand-blue group-data-[state=open]:rotate-180"
           strokeWidth={2}
         />
       </AccordionPrimitive.Trigger>
@@ -53,7 +53,7 @@ function AccordionContent({
 }: React.ComponentProps<typeof AccordionPrimitive.Content>) {
   return (
     <AccordionPrimitive.Content
-      className="overflow-hidden data-[state=closed]:animate-[accordion-up_200ms_var(--ease-brand)] data-[state=open]:animate-[accordion-down_200ms_var(--ease-brand)]"
+      className="overflow-hidden data-[state=closed]:animate-[accordion-up_260ms_var(--ease-out-soft)] data-[state=open]:animate-[accordion-down_300ms_var(--ease-out-soft)]"
       {...props}
     >
       <div className={cn("max-w-[72ch] pb-6 text-text-body", className)}>{children}</div>

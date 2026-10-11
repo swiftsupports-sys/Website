@@ -15,7 +15,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { hasPhone, phonePlaceholder, primaryNav, site } from "@/lib/site";
+import { hasPhone, primaryNav, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 /** The logo already links home, so the desktop bar leaves "Home" out. */
@@ -45,6 +45,15 @@ export function Header() {
 
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  // The bar lifts off the page once content scrolls beneath it.
+  const [scrolled, setScrolled] = React.useState(false);
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
@@ -77,7 +86,16 @@ export function Header() {
         </div>
       </div>
 
-      <header className="sticky top-0 z-80 border-b border-border bg-surface">
+      <header
+        // Held still during page transitions (see globals.css).
+        style={{ viewTransitionName: "site-header" }}
+        className={cn(
+          "sticky top-0 z-80 border-b transition-[background-color,box-shadow,border-color] duration-300 ease-brand",
+          scrolled
+            ? "border-transparent bg-surface/95 shadow-header backdrop-blur-md"
+            : "border-border bg-surface",
+        )}
+      >
         <div className="shell flex h-[76px] items-center gap-6 lg:gap-8">
           <BrandLink priority />
 
@@ -89,7 +107,10 @@ export function Header() {
                 aria-current={isActive(item.href) ? "page" : undefined}
                 className={cn(
                   "relative flex items-center px-3 text-[0.9375rem] font-medium whitespace-nowrap text-text-primary transition-colors duration-200 hover:text-brand-blue",
-                  "aria-[current=page]:text-brand-blue aria-[current=page]:after:absolute aria-[current=page]:after:inset-x-3 aria-[current=page]:after:bottom-0 aria-[current=page]:after:h-0.5 aria-[current=page]:after:bg-brand-blue",
+                  // Underline draws in from the left on hover; stays drawn on
+                  // the current page.
+                  "after:absolute after:inset-x-3 after:bottom-0 after:h-0.5 after:origin-left after:scale-x-0 after:bg-brand-blue after:transition-transform after:duration-300 after:ease-out-soft hover:after:scale-x-100",
+                  "aria-[current=page]:text-brand-blue aria-[current=page]:after:scale-x-100",
                 )}
               >
                 {item.label}
@@ -130,8 +151,13 @@ export function Header() {
 
                 <nav aria-label="Mobile">
                   <ul>
-                    {primaryNav.map((item) => (
-                      <li key={item.href} className="border-b border-border">
+                    {/* Links follow the drawer in, one after another. */}
+                    {primaryNav.map((item, i) => (
+                      <li
+                        key={item.href}
+                        className="animate-drawer-item border-b border-border"
+                        style={{ animationDelay: `${120 + i * 35}ms` }}
+                      >
                         <Link
                           href={item.href}
                           onClick={() => setOpen(false)}
@@ -177,9 +203,7 @@ export function Header() {
                     >
                       {site.phoneDisplay}
                     </a>
-                  ) : (
-                    <span>Phone: {phonePlaceholder}</span>
-                  )}
+                  ) : null}
                   <span>{site.hours}</span>
                 </div>
               </div>

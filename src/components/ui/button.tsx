@@ -6,13 +6,13 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 rounded-md border text-center font-medium transition-colors duration-200 ease-brand disabled:pointer-events-none disabled:opacity-60 [&_svg]:shrink-0",
+  "group/button inline-flex items-center justify-center gap-2 rounded-md border text-center font-medium transition-[color,background-color,border-color,box-shadow,transform] duration-200 ease-brand active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         /** Main call to action. */
         primary:
-          "border-brand-blue bg-brand-blue text-white hover:border-brand-blue-hover hover:bg-brand-blue-hover",
+          "border-brand-blue bg-brand-blue text-white hover:border-brand-blue-hover hover:bg-brand-blue-hover hover:shadow-cta",
         /** Outlined button for light backgrounds. */
         secondary:
           "border-border-strong bg-surface text-brand-navy hover:border-brand-blue-border hover:bg-brand-blue-light",
@@ -41,10 +41,11 @@ export type ButtonProps = React.ComponentProps<"button"> &
   };
 
 /**
- * The site's single button component: rectangular, 6px radius, colour-only
- * hover. With `asChild` the styles (and optional arrow) are applied to the
- * child element — usually a `next/link` — which is why the label is wrapped
- * in Radix's `Slottable`.
+ * The site's single button component: rectangular, 6px radius. Hover shifts
+ * colour (and lifts the primary button with a soft blue shadow); a press
+ * dips it slightly so a click feels registered. With `asChild` the styles
+ * (and optional arrow) are applied to the child element — usually a
+ * `next/link` — which is why the label is wrapped in Radix's `Slottable`.
  */
 export function Button({
   className,
@@ -62,7 +63,11 @@ export function Button({
     <Comp className={cn(buttonVariants({ variant, size, block }), className)} {...props}>
       <Slottable>{children}</Slottable>
       {withArrow ? (
-        <ArrowRight className="size-4" strokeWidth={2} aria-hidden="true" />
+        <ArrowRight
+          className="size-4 transition-transform duration-300 ease-out-soft group-hover/button:translate-x-0.5"
+          strokeWidth={2}
+          aria-hidden="true"
+        />
       ) : null}
     </Comp>
   );

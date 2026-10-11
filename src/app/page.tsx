@@ -15,28 +15,73 @@ import { FaqList } from "@/components/site/faq-list";
 import { HomeHero } from "@/components/site/home-hero";
 import {
   ArrowLink,
-  CheckList,
   Disclaimer,
-  Eyebrow,
   Section,
   SectionHead,
 } from "@/components/site/primitives";
-import { Reveal } from "@/components/site/reveal";
-import { photos } from "@/lib/images";
+import { Reveal, Stagger } from "@/components/site/reveal";
+import { photos, type Photo } from "@/lib/images";
 import { Button } from "@/components/ui/button";
 import { domains } from "@/content/domains";
 import { faqsFor } from "@/content/faq";
-import { packages, pricingDisclaimer } from "@/content/packages";
+import { packages, pricingDisclaimer, type Package } from "@/content/packages";
 import { processSteps } from "@/content/process";
 import { services } from "@/content/services";
 import { testimonials } from "@/content/testimonials";
 import { JsonLd, faqJsonLd } from "@/lib/structured-data";
 import {
+  ArrowRight,
   FileText,
   GraduationCap,
   Mic,
   Send,
 } from "lucide-react";
+
+/**
+ * Where a job search stalls, and what we do about each. This is how the free
+ * consultation actually triages a candidate, so the home page leads with it
+ * rather than with a general description of the company. Package names and
+ * prices come from content/packages, so they cannot drift from the pricing.
+ */
+const situations: {
+  stage: string;
+  title: string;
+  body: string;
+  photo: Photo;
+  href: string;
+  plan: Package["id"];
+}[] = [
+  {
+    stage: "No interview calls",
+    title: "Your profile isn't reaching the right recruiters.",
+    body: "We rebuild your resume, LinkedIn, and GitHub around your target role, then send 40+ targeted applications every working day and reach out to recruiters hiring in your domain.",
+    photo: photos.resumeReview,
+    href: "/services/candidate-marketing",
+    plan: "marketing",
+  },
+  {
+    stage: "Interviews, but no offers",
+    title: "Your interviews aren't showing what you can do.",
+    body: "Role-specific technical and behavioral training, mock interviews built from the real job description, and a briefing before every round with a debrief after it.",
+    photo: photos.interviewPreparation,
+    href: "/services/interview-preparation",
+    plan: "training",
+  },
+  {
+    stage: "Both — or starting fresh",
+    title: "You want the whole search handled, end to end.",
+    body: "Profile marketing and training together, coordinated by one dedicated consultant, with weekly strategy reviews from first application to offer stage.",
+    photo: photos.trainingMentorship,
+    href: "/pricing",
+    plan: "complete",
+  },
+];
+
+const packageById = (id: Package["id"]) => {
+  const plan = packages.find((p) => p.id === id);
+  if (!plan) throw new Error(`Unknown package: ${id}`);
+  return plan;
+};
 
 const pillars = [
   {
@@ -72,59 +117,77 @@ export default function HomePage() {
 
       <EmployerStrip />
 
-      {/* ------------------------------------------------------------ about */}
+      {/* ------------------------------------------------- where we come in */}
       <Section tone="paper" id="about">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <Reveal>
-            <Eyebrow>About Us</Eyebrow>
-            <h2 className="h-xl">
-              More Than Job Search Support — A Career Strategy Built Around You.
-            </h2>
-            <p className="lead mt-5 text-text-body">
-              We work closely with candidates to understand their experience,
-              strengths, career goals, and target roles. From professional branding
-              and role-specific preparation to recruiter networking and interview
-              support, our process is designed to help candidates present themselves
-              with confidence in the US technology job market.
-            </p>
-            <CheckList
-              className="mt-7"
-              items={[
-                "A resume, LinkedIn, GitHub, and portfolio built for your target role",
-                "40+ targeted applications every day, with weekly progress reports",
-                "Training and mock interviews aligned to how US technology teams hire",
-              ]}
-            />
-            <div className="mt-8">
-              <Button asChild variant="secondary">
-                <Link href="/about">Learn More About Us</Link>
-              </Button>
-            </div>
-          </Reveal>
+        <SectionHead
+          eyebrow="Where We Come In"
+          heading="Most US job searches stall in one of two places."
+          intro="Either the applications go out and nothing comes back, or the interviews come and the offers don't. Your free consultation works out which one is holding you back — then a consultant works on exactly that, every working day."
+        />
 
-          <Reveal>
-            <figure>
-              {/* PLACEHOLDER IMAGE */}
-              <Image
-                src={photos.mentorship.src}
-                alt={photos.mentorship.alt}
-                width={1000}
-                height={1250}
-                sizes="(max-width: 1024px) 100vw, 45vw"
-                className="aspect-4/5 w-full rounded-lg object-cover sm:aspect-4/3 lg:aspect-1/1"
-              />
-              <figcaption className="mt-5 border-l-2 border-brand-blue pl-4">
-                <strong className="block font-semibold text-brand-navy">
-                  1:1 Mentorship
-                </strong>
-                <span className="mt-1 block text-[0.9375rem] text-text-body">
-                  Every engagement is led by a consultant who knows your goals and your
-                  target domain.
-                </span>
-              </figcaption>
-            </figure>
-          </Reveal>
-        </div>
+        <Stagger className="grid gap-6 md:grid-cols-3">
+          {situations.map((situation) => {
+            const plan = packageById(situation.plan);
+            return (
+              <Link
+                key={situation.plan}
+                href={situation.href}
+                className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-surface transition-[border-color,box-shadow,transform] duration-300 ease-out-soft hover:-translate-y-1 hover:border-brand-blue-border hover:shadow-lift"
+              >
+                <div className="relative aspect-16/10 overflow-hidden bg-muted">
+                  <Image
+                    src={situation.photo.src}
+                    alt=""
+                    fill
+                    sizes="(min-width: 768px) 30vw, 100vw"
+                    className="object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.04]"
+                    style={
+                      situation.photo.position
+                        ? { objectPosition: situation.photo.position }
+                        : undefined
+                    }
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-6 md:p-7">
+                  <p className="inline-flex items-center gap-2 text-[0.8125rem] font-semibold tracking-wide text-brand-blue uppercase">
+                    <span aria-hidden="true" className="size-1.5 rounded-full bg-brand-blue" />
+                    {situation.stage}
+                  </p>
+                  <h3 className="h-md mt-3 transition-colors duration-200 group-hover:text-brand-blue">
+                    {situation.title}
+                  </h3>
+                  <p className="mt-3 flex-1 text-text-body">{situation.body}</p>
+                  <span className="mt-6 flex items-center justify-between gap-4 border-t border-border pt-4 font-semibold text-brand-navy">
+                    <span>
+                      {plan.name}
+                      <span className="font-medium text-text-secondary"> · {plan.price}</span>
+                    </span>
+                    <ArrowRight
+                      className="size-4 shrink-0 text-brand-blue transition-transform duration-300 ease-out-soft group-hover:translate-x-1"
+                      strokeWidth={2}
+                      aria-hidden="true"
+                    />
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
+        </Stagger>
+
+        <Reveal className="mt-8 flex flex-col gap-5 rounded-lg border border-border bg-background p-6 md:mt-10 md:flex-row md:items-center md:justify-between md:px-8">
+          <p className="text-text-body">
+            <strong className="font-semibold text-brand-navy">
+              Not sure which one describes you?
+            </strong>{" "}
+            That is exactly what the free consultation is for.
+          </p>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Button asChild>
+              <Link href="/contact">Book a Free Consultation</Link>
+            </Button>
+            <ArrowLink href="/about">More about us</ArrowLink>
+          </div>
+        </Reveal>
       </Section>
 
       {/* ------------------------------------------------------ why choose us */}
@@ -134,11 +197,11 @@ export default function HomePage() {
           heading="Everything You Need to Prepare, Position, and Progress."
           intro="Four pillars that work together — a profile that gets noticed, marketing that gets it seen, and preparation that turns interviews into offers."
         />
-        <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        <Stagger className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {pillars.map((pillar) => (
             <FeatureCard key={pillar.title} {...pillar} variant="plain" />
           ))}
-        </div>
+        </Stagger>
       </Section>
 
       {/* -------------------------------------------------------- how it works */}
@@ -191,11 +254,11 @@ export default function HomePage() {
           heading="Choose the Support Model That Works for You."
           intro="Get noticed, get prepared, or get both. Three straightforward packages, with every term confirmed in writing before you commit."
         />
-        <div className="grid items-stretch gap-6 lg:grid-cols-3">
+        <Stagger className="grid items-stretch gap-6 lg:grid-cols-3">
           {packages.map((plan) => (
             <PriceCard key={plan.id} plan={plan} />
           ))}
-        </div>
+        </Stagger>
         <Disclaimer>{pricingDisclaimer}</Disclaimer>
       </Section>
 
@@ -206,11 +269,11 @@ export default function HomePage() {
           heading="Career Progress Starts With the Right Support."
           intro="Candidate experiences, in their own words — published anonymously by technology domain."
         />
-        <div className="grid gap-6 lg:grid-cols-3">
+        <Stagger className="grid gap-6 lg:grid-cols-3">
           {testimonials.slice(0, 3).map((testimonial, i) => (
             <QuoteCard key={i} testimonial={testimonial} />
           ))}
-        </div>
+        </Stagger>
         <Reveal className="mt-10">
           <Button asChild>
             <Link href="/contact">Start Your Career Conversation</Link>

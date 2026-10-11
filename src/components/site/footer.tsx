@@ -7,7 +7,6 @@ import {
   hasPhone,
   hasWhatsApp,
   legalNav,
-  phonePlaceholder,
   site,
   whatsappLink,
   type NavItem,
@@ -58,21 +57,19 @@ export function Footer() {
                   {site.email}
                 </a>
               </li>
-              {/* Rendered as plain text, not a link, until a number exists. */}
-              <li>
-                {hasPhone ? (
+              {/* Listed only once a number is set. */}
+              {hasPhone ? (
+                <li>
                   <a
                     href={`tel:${site.phoneHref}`}
                     className="transition-colors hover:text-brand-blue-soft"
                   >
                     {site.phoneDisplay}
                   </a>
-                ) : (
-                  <span>Phone: {phonePlaceholder}</span>
-                )}
-              </li>
-              <li>
-                {hasWhatsApp ? (
+                </li>
+              ) : null}
+              {hasWhatsApp ? (
+                <li>
                   <a
                     href={whatsappLink}
                     target="_blank"
@@ -81,10 +78,8 @@ export function Footer() {
                   >
                     WhatsApp: {site.phoneDisplay}
                   </a>
-                ) : (
-                  <span>WhatsApp: {phonePlaceholder}</span>
-                )}
-              </li>
+                </li>
+              ) : null}
               <li>{site.hours}</li>
             </ul>
 

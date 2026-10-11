@@ -21,7 +21,8 @@ export function WhatsAppFab() {
       target="_blank"
       rel="noopener"
       aria-label="Chat with us on WhatsApp"
-      className="fixed right-4 bottom-20 z-70 flex items-center gap-2.5 rounded-md border border-border bg-surface p-3 text-[0.9375rem] font-medium text-brand-navy shadow-overlay transition-colors duration-200 hover:border-brand-blue-border hover:bg-brand-blue-light sm:right-6 sm:bottom-24 sm:px-4"
+      style={{ animationDelay: "0.7s" }}
+      className="animate-pop-in fixed right-4 bottom-20 z-70 flex items-center gap-2.5 rounded-md border border-border bg-surface p-3 text-[0.9375rem] font-medium text-brand-navy shadow-overlay transition-colors duration-200 hover:border-brand-blue-border hover:bg-brand-blue-light sm:right-6 sm:bottom-24 sm:px-4"
     >
       {/* WhatsApp's own green stays on the mark only, so it reads as the
           service it opens rather than as a brand colour. */}

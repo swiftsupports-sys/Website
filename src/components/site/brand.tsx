@@ -5,18 +5,21 @@ import { cn } from "@/lib/utils";
 import { site } from "@/lib/site";
 
 /**
- * The SC monogram and two-weight wordmark, served as outlined SVG from
- * public/brand so it renders identically everywhere and never depends on a
- * web font. `dark` is the variant drawn for navy surfaces.
+ * The SC monogram (square SVG from public/brand) beside the name set on one
+ * line, "Swift" bold and "Consultancy" regular — the same two-weight split as
+ * the original stacked logo. `dark` is the variant drawn for navy surfaces.
+ * The name is live text in the brand face (Sora, loaded in the root layout),
+ * so it stays sharp at every size.
  *
- * The files' viewBox is 1235 × 397, so width and height keep that ratio.
+ * The full stacked lockup (logo.svg / logo-white.svg) is still in
+ * public/brand for print and social use.
  */
-const logoSrc = {
-  light: "/brand/logo.svg",
-  dark: "/brand/logo-white.svg",
+const markSrc = {
+  light: "/brand/logo-mark.svg",
+  dark: "/brand/logo-mark-white.svg",
 } as const;
 
-/** Full logo, linking home. */
+/** Logo mark and one-line name, linking home. */
 export function BrandLink({
   className,
   tone = "light",
@@ -30,18 +33,26 @@ export function BrandLink({
   return (
     <Link
       href="/"
-      className={cn("flex shrink-0 items-center", className)}
+      className={cn("flex shrink-0 items-center gap-2.5", className)}
       aria-label={`${site.name} — home`}
     >
       <Image
-        src={logoSrc[tone]}
+        src={markSrc[tone]}
         alt=""
-        width={143}
-        height={46}
+        width={44}
+        height={44}
         priority={priority}
         unoptimized
-        className="h-11 w-auto md:h-12"
+        className="size-9 sm:size-10 md:size-11"
       />
+      <span
+        className={cn(
+          "font-brand text-[1.0625rem] leading-none font-normal tracking-[-0.02em] whitespace-nowrap sm:text-lg md:text-xl",
+          tone === "dark" ? "text-white" : "text-brand-navy",
+        )}
+      >
+        <span className="font-bold">Swift</span> Consultancy
+      </span>
     </Link>
   );
 }

@@ -85,11 +85,11 @@ export const faqs: FaqItem[] = [
     tags: ["general"],
   },
   {
-    /* PLACEHOLDER: confirm payment methods, schedule, currency, and refund
-       terms with your finance and legal advisors before publishing. */
+    /* Deliberately general, and in step with Service Agreement sections 4 and
+       8. Name specific methods or instalments here only once they are fixed. */
     question: "How is payment handled?",
     answer:
-      "[Placeholder — describe accepted payment methods, instalment options if offered, invoicing, currency, and refund or cancellation terms here. This wording should be reviewed alongside your service agreement before publication.]",
+      "Accepted payment methods, the payment schedule, currency, any instalment arrangement, and the cancellation and refund terms that apply to you are set out in your written service agreement. We go through them openly during your free consultation and confirm them in writing before you pay anything.",
     tags: ["pricing"],
   },
   {

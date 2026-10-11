@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import { pageMetadata } from "@/lib/seo";
 import { CalendarDays, Clock, Mail, MessageSquare, Phone, Search } from "lucide-react";
@@ -11,13 +12,8 @@ import { PageSchema } from "@/components/site/page-schema";
 import { Scheduler } from "@/components/site/scheduler";
 import { Eyebrow, Section, SectionHead } from "@/components/site/primitives";
 import { Reveal } from "@/components/site/reveal";
-import {
-  hasPhone,
-  hasWhatsApp,
-  phonePlaceholder,
-  site,
-  whatsappLink,
-} from "@/lib/site";
+import { photos } from "@/lib/images";
+import { hasPhone, hasWhatsApp, site, whatsappLink } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact Swift Consultancy — Free IT Career Consultation",
@@ -95,8 +91,8 @@ export default function ContactPage() {
             <Eyebrow>Direct Contact</Eyebrow>
             <h2 className="h-lg">Prefer to Reach Out Yourself?</h2>
             <p className="mt-3 mb-6 text-text-body">
-              Message us on any channel below. We usually respond within one business
-              day.
+              Reach us directly using the details below. We usually respond within one
+              business day.
             </p>
 
             <ul className="divide-y divide-border rounded-lg border border-border bg-surface">
@@ -107,31 +103,26 @@ export default function ContactPage() {
                 value={site.email}
                 note="For consultation requests and general questions"
               />
-              {/* No href while unconfigured: the row stays in place but is
-                  inert, rather than offering a link that goes nowhere. */}
-              <ContactRow
-                href={hasPhone ? `tel:${site.phoneHref}` : undefined}
-                icon={<Phone className="size-5" strokeWidth={1.8} />}
-                label="Phone"
-                value={hasPhone ? site.phoneDisplay : phonePlaceholder}
-                note={
-                  hasPhone
-                    ? "Mon–Fri during business hours"
-                    : "In the meantime, email us or use the form"
-                }
-              />
-              <ContactRow
-                href={hasWhatsApp ? whatsappLink : undefined}
-                external={hasWhatsApp}
-                icon={<WhatsAppIcon className="size-5" />}
-                label="WhatsApp"
-                value={hasWhatsApp ? site.phoneDisplay : phonePlaceholder}
-                note={
-                  hasWhatsApp
-                    ? "Quickest way to reach a consultant"
-                    : "In the meantime, email us or use the form"
-                }
-              />
+              {/* Phone and WhatsApp rows appear only once a number is set. */}
+              {hasPhone ? (
+                <ContactRow
+                  href={`tel:${site.phoneHref}`}
+                  icon={<Phone className="size-5" strokeWidth={1.8} />}
+                  label="Phone"
+                  value={site.phoneDisplay}
+                  note="Mon–Fri during business hours"
+                />
+              ) : null}
+              {hasWhatsApp ? (
+                <ContactRow
+                  href={whatsappLink}
+                  external
+                  icon={<WhatsAppIcon className="size-5" />}
+                  label="WhatsApp"
+                  value={site.phoneDisplay}
+                  note="Quickest way to reach a consultant"
+                />
+              ) : null}
               <ContactRow
                 icon={<Clock className="size-5" strokeWidth={1.8} />}
                 label="Business Hours"
@@ -146,6 +137,18 @@ export default function ContactPage() {
               No. Begin by booking a consultation and sharing your current profile,
               goals, target role, and expectations. We will guide you through the next
               steps.
+            </div>
+
+            {/* Desktop only: balances the long form beside it. On phones this
+                column already follows the form, so it would only add length. */}
+            <div className="relative mt-6 hidden aspect-4/3 overflow-hidden rounded-lg lg:block">
+              <Image
+                src={photos.contactConsultation.src}
+                alt={photos.contactConsultation.alt}
+                fill
+                sizes="(min-width: 1024px) 36vw, 100vw"
+                className="object-cover"
+              />
             </div>
           </Reveal>
         </div>

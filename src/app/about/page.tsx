@@ -23,7 +23,7 @@ import {
   Section,
   SectionHead,
 } from "@/components/site/primitives";
-import { Reveal } from "@/components/site/reveal";
+import { Reveal, Stagger } from "@/components/site/reveal";
 import { photos } from "@/lib/images";
 
 export const metadata: Metadata = pageMetadata({
@@ -135,7 +135,7 @@ export default function AboutPage() {
             />
           </Reveal>
 
-          <Reveal>
+          <Reveal variant="image">
             {/* PLACEHOLDER IMAGE */}
             <Image
               src={photos.roadmap.src}
@@ -156,11 +156,11 @@ export default function AboutPage() {
           heading="Principles We Hold To."
           intro="A career decision deserves straight answers. These are the commitments we make to every candidate we work with."
         />
-        <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        <Stagger className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           {principles.map((principle) => (
             <FeatureCard key={principle.title} {...principle} variant="plain" />
           ))}
-        </div>
+        </Stagger>
       </Section>
 
       {/* ----------------------------------------------------------- audiences */}
@@ -169,11 +169,11 @@ export default function AboutPage() {
           eyebrow="Who We Work With"
           heading="Professionals at Different Points on the Same Path."
         />
-        <div className="grid gap-6 md:grid-cols-3">
+        <Stagger className="grid gap-6 md:grid-cols-3">
           {audiences.map((audience) => (
             <FeatureCard key={audience.title} {...audience} />
           ))}
-        </div>
+        </Stagger>
       </Section>
 
       {/* ------------------------------------------------------- what we don't */}

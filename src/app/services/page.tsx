@@ -8,10 +8,11 @@ import { CtaBand } from "@/components/site/cta-band";
 import { HeroActions, PageHero } from "@/components/site/page-hero";
 import { PageSchema } from "@/components/site/page-schema";
 import { Disclaimer, Section, SectionHead } from "@/components/site/primitives";
-import { Reveal } from "@/components/site/reveal";
+import { Stagger } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
 import { servicePages } from "@/content/service-pages";
 import { serviceGroups, servicesByGroup } from "@/content/services";
+import { photos } from "@/lib/images";
 
 export const metadata: Metadata = pageMetadata({
   title: "IT Staffing & Career Services in the USA",
@@ -36,6 +37,7 @@ export default function ServicesPage() {
         title="Career Services Designed Around Your Goals."
         intro="Fifteen services across profile marketing, training, and mentorship. Choose the package that covers what you need — or take the complete journey. Every service is delivered one-to-one."
         actions={<HeroActions secondaryHref="/pricing" secondaryLabel="View Packages" />}
+        image={photos.servicesHero}
       />
 
       {/*
@@ -50,18 +52,17 @@ export default function ServicesPage() {
           heading="Four areas, explained in full."
           intro="Every service below belongs to one of these. Each page covers what it includes, how it runs, who it suits, and the questions candidates ask most."
         />
-        <div className="grid gap-6 md:grid-cols-2">
+        <Stagger className="grid gap-6 md:grid-cols-2">
           {servicePages.map((page) => (
-            <Reveal key={page.slug} className="h-full">
-              <LinkCard
-                href={`/services/${page.slug}`}
-                title={page.metaTitle}
-                description={page.metaDescription}
-                linkLabel={`${page.navLabel} in detail`}
-              />
-            </Reveal>
+            <LinkCard
+              key={page.slug}
+              href={`/services/${page.slug}`}
+              title={page.metaTitle}
+              description={page.metaDescription}
+              linkLabel={`${page.navLabel} in detail`}
+            />
           ))}
-        </div>
+        </Stagger>
       </Section>
 
       {serviceGroups.map((group, groupIndex) => {
@@ -75,7 +76,7 @@ export default function ServicesPage() {
               heading={group.heading}
               intro={group.intro}
             />
-            <div
+            <Stagger
               className={
                 items.length === 3
                   ? "grid gap-6 md:grid-cols-3"
@@ -90,7 +91,7 @@ export default function ServicesPage() {
                   description={service.long}
                 />
               ))}
-            </div>
+            </Stagger>
 
             {groupIndex === serviceGroups.length - 1 ? (
               <>

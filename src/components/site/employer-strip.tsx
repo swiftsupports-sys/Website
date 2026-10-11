@@ -6,8 +6,9 @@ import { marqueeHeading, targetEmployers } from "@/content/companies";
  *
  * No JavaScript: the row is rendered twice and translated by exactly -50%, so
  * the second copy lands where the first began and the loop is seamless. The
- * duplicate is `aria-hidden` so the list is announced once, and the whole
- * thing holds still under prefers-reduced-motion.
+ * duplicate is `aria-hidden` so the list is announced once. Under
+ * prefers-reduced-motion the strip holds still: the duplicate is hidden and
+ * the names wrap, centred, with no edge fade (see globals.css).
  */
 function Row({ duplicate = false }: { duplicate?: boolean }) {
   return (
@@ -44,7 +45,7 @@ export function EmployerStrip() {
 
       {/* Full-bleed, so names travel the width of the viewport and fade out at
           each edge rather than being clipped against it. */}
-      <div className="relative overflow-hidden mask-[linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+      <div className="employer-track relative overflow-hidden mask-[linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
         <div className="animate-employer-scroll flex w-max">
           <Row />
           <Row duplicate />

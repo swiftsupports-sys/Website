@@ -109,6 +109,9 @@ export function SwiftAgent() {
   const titleId = useId();
   const pathname = usePathname();
   const [teaser, setTeaser] = useState<string | null>(null);
+  // The launcher's entrance waits for the page only the first time; after the
+  // chat closes it comes straight back.
+  const [launcherDelay, setLauncherDelay] = useState("0.6s");
 
   // A one-time greeting per visit, sooner on the pages where visitors compare
   // packages. Skipped entirely when storage is unavailable, so it can never
@@ -152,6 +155,7 @@ export function SwiftAgent() {
       }
     }
     setTeaser(null);
+    setLauncherDelay("0s");
     setOpen(true);
   }
 
@@ -356,7 +360,10 @@ export function SwiftAgent() {
           aria-haspopup="dialog"
           aria-expanded={open}
           aria-label="Open Swift Agent chat"
-          className="fixed right-4 bottom-4 z-75 flex items-center gap-2.5 rounded-md border border-brand-blue bg-brand-blue p-2.5 font-medium text-white shadow-overlay transition-colors duration-200 hover:border-brand-blue-hover hover:bg-brand-blue-hover sm:right-6 sm:bottom-6 sm:py-2.5 sm:pr-4 sm:pl-3"
+          // Held still during page transitions (see globals.css), and eased
+          // in a moment after the page so it never competes with the hero.
+          style={{ viewTransitionName: "agent-launcher", animationDelay: launcherDelay }}
+          className="animate-pop-in fixed right-4 bottom-4 z-75 flex items-center gap-2.5 rounded-md border border-brand-blue bg-brand-blue p-2.5 font-medium text-white shadow-overlay transition-colors duration-200 hover:border-brand-blue-hover hover:bg-brand-blue-hover sm:right-6 sm:bottom-6 sm:py-2.5 sm:pr-4 sm:pl-3"
         >
           <Image src="/brand/logo-mark-white.svg" alt="" width={30} height={30} unoptimized className="size-7.5" />
           <span className="hidden text-[0.9375rem] sm:inline">Ask Swift Agent</span>
@@ -366,7 +373,7 @@ export function SwiftAgent() {
       {teaser && !open ? (
         <div
           role="status"
-          className="fixed right-4 bottom-36 z-75 w-[min(19rem,calc(100vw-2rem))] rounded-lg border border-border bg-surface shadow-overlay sm:right-6 sm:bottom-40"
+          className="animate-pop-in fixed right-4 bottom-36 z-75 w-[min(19rem,calc(100vw-2rem))] rounded-lg border border-border bg-surface shadow-overlay sm:right-6 sm:bottom-40"
         >
           <button
             type="button"
@@ -394,7 +401,7 @@ export function SwiftAgent() {
         <section
           role="dialog"
           aria-labelledby={titleId}
-          className="fixed inset-0 z-95 flex flex-col bg-surface sm:inset-auto sm:right-6 sm:bottom-6 sm:h-[min(680px,calc(100dvh-3rem))] sm:w-[400px] sm:overflow-hidden sm:rounded-lg sm:border sm:border-border sm:shadow-overlay"
+          className="animate-panel-in fixed inset-0 z-95 flex flex-col bg-surface sm:inset-auto sm:right-6 sm:bottom-6 sm:h-[min(680px,calc(100dvh-3rem))] sm:w-[400px] sm:overflow-hidden sm:rounded-lg sm:border sm:border-border sm:shadow-overlay"
         >
           {/* Header */}
           <header className="flex items-center gap-3 bg-brand-navy px-4 pt-[max(0.875rem,env(safe-area-inset-top))] pb-3.5 text-white">

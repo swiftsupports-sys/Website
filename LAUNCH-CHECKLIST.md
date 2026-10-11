@@ -52,12 +52,13 @@ Before launch, confirm each candidate has given permission for their words to be
 published, even anonymously. To name someone who consents, add it to `context`.
 Keep the house rules: no employer names, no salary figures, no promised outcomes.
 
-## 4. Pricing FAQ — blocks launch
+## 4. Pricing FAQ — DONE
 
-The payment-terms answer in
-[`src/content/faq.ts:58`](src/content/faq.ts) is a placeholder. It needs your
-accepted methods, instalment options, currency, and refund terms — and should
-match the service agreement exactly.
+The payment-terms answer in [`src/content/faq.ts`](src/content/faq.ts) is
+written in general terms: methods, schedule, currency, instalments, and refunds
+are set out in each candidate's written service agreement before payment. That
+matches Service Agreement sections 4 and 8. Name specific methods or instalment
+options there only once they are fixed, and keep both in step.
 
 ## 5. Photography — recommended before launch
 

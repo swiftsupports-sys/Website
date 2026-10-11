@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Sans } from "next/font/google";
+import { IBM_Plex_Sans, Sora } from "next/font/google";
 
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -23,6 +23,17 @@ const plex = IBM_Plex_Sans({
   variable: "--font-plex",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+/**
+ * The company name in the logo only. A geometric face with more character
+ * than the text family, so the name reads as a mark rather than a heading.
+ * Variable, so one file covers both weights the lockup uses.
+ */
+const sora = Sora({
+  variable: "--font-sora",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -89,12 +100,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${plex.variable} h-full antialiased`}>
+    <html lang="en" className={`${plex.variable} ${sora.variable} h-full antialiased`}>
       <head>
         {/* Entrance animations render their hidden state on the server, so
             without JavaScript the page would be blank. Reveal it instead. */}
         <noscript>
-          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+          <style>{`[data-reveal],[data-stagger]>*{opacity:1!important;transform:none!important}`}</style>
         </noscript>
       </head>
       <body className="flex min-h-full flex-col">

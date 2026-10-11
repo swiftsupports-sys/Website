@@ -78,8 +78,9 @@ export function SectionHead({
   tone?: "light" | "dark";
   className?: string;
 }) {
+  // Every section opens the same way: its heading block rises into view.
   return (
-    <div className={cn("mb-10 max-w-3xl md:mb-12", className)}>
+    <Reveal className={cn("mb-10 max-w-3xl md:mb-12", className)}>
       {eyebrow ? <Eyebrow tone={tone}>{eyebrow}</Eyebrow> : null}
       <h2 className="h-xl">{heading}</h2>
       {intro ? (
@@ -92,7 +93,7 @@ export function SectionHead({
           {intro}
         </p>
       ) : null}
-    </div>
+    </Reveal>
   );
 }
 
@@ -179,12 +180,16 @@ export function ArrowLink({
     <Link
       href={href}
       className={cn(
-        "inline-flex items-center gap-1.5 font-medium text-brand-blue underline-offset-4 transition-colors duration-200 hover:text-brand-blue-hover hover:underline",
+        "group/arrow inline-flex items-center gap-1.5 font-medium text-brand-blue underline-offset-4 transition-colors duration-200 hover:text-brand-blue-hover hover:underline",
         className,
       )}
     >
       {children}
-      <ArrowRight className="size-4" strokeWidth={2} aria-hidden="true" />
+      <ArrowRight
+        className="size-4 transition-transform duration-300 ease-out-soft group-hover/arrow:translate-x-1"
+        strokeWidth={2}
+        aria-hidden="true"
+      />
     </Link>
   );
 }

@@ -8,7 +8,9 @@ import { CtaBand } from "@/components/site/cta-band";
 import { HeroActions, PageHero } from "@/components/site/page-hero";
 import { PageSchema } from "@/components/site/page-schema";
 import { Disclaimer, Section, SectionHead } from "@/components/site/primitives";
+import { Stagger } from "@/components/site/reveal";
 import { testimonials } from "@/content/testimonials";
+import { photos } from "@/lib/images";
 
 export const metadata: Metadata = pageMetadata({
   title: "Success Stories — Candidate Experiences",
@@ -56,6 +58,7 @@ export default function SuccessStoriesPage() {
         actions={
           <HeroActions secondaryHref="/how-it-works" secondaryLabel="See How It Works" />
         }
+        image={photos.successCandidates}
       />
 
       <Section tone="paper">
@@ -64,11 +67,11 @@ export default function SuccessStoriesPage() {
           heading="Candidate Experiences."
           intro="We publish testimonials only with written consent, and we do not attribute outcomes to named employers or quote salary figures."
         />
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <Stagger className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {testimonials.map((testimonial, i) => (
             <QuoteCard key={i} testimonial={testimonial} />
           ))}
-        </div>
+        </Stagger>
         <Disclaimer>
           Feedback is shared with permission and published anonymously by technology
           domain. Individual experiences vary, and one candidate&apos;s experience does
@@ -83,11 +86,11 @@ export default function SuccessStoriesPage() {
           heading="How We Handle Testimonials."
           intro="Reviews are only useful if they are real. These are the rules we hold ourselves to on this page."
         />
-        <div className="grid gap-x-8 gap-y-10 md:grid-cols-3">
+        <Stagger className="grid gap-x-8 gap-y-10 md:grid-cols-3">
           {standards.map((standard) => (
             <FeatureCard key={standard.title} {...standard} variant="plain" />
           ))}
-        </div>
+        </Stagger>
       </Section>
 
       <CtaBand

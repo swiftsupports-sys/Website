@@ -75,7 +75,6 @@ Search the repo for `PLACEHOLDER` to find every marked spot.
 | Email, phone, WhatsApp number, business hours | `src/lib/site.ts` |
 | LinkedIn / social URLs | `src/lib/site.ts` (`social`) |
 | Testimonials (all six are labelled placeholders) | `src/content/testimonials.ts` |
-| Payment-terms FAQ answer | `src/content/faq.ts` |
 | Legal wording — company name, dates, jurisdiction | the three pages under `src/app/` |
 | Photography | `public/images/*.jpg` + alt text in `src/lib/images.ts` |
 

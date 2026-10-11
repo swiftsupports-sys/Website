@@ -33,8 +33,8 @@ export const site = {
 
   /**
    * Phone and WhatsApp are intentionally blank: the site lists no number.
-   * Every surface checks `hasPhone` / `hasWhatsApp` and shows an inert
-   * placeholder instead of a dead link, and the WhatsApp button is hidden.
+   * Every surface checks `hasPhone` / `hasWhatsApp` and leaves those entries
+   * out entirely, so contact details show email and hours only.
    *
    * To switch them back on, fill all three in — no other file needs editing:
    *   phoneDisplay: "+1 (555) 123-4567"   as written for humans
@@ -58,8 +58,8 @@ export const site = {
 } as const;
 
 /**
- * Whether a contact number is configured. Surfaces render an inert
- * placeholder when these are false rather than a link that goes nowhere.
+ * Whether a contact number is configured. Surfaces omit the phone and
+ * WhatsApp entries when these are false rather than showing a placeholder.
  */
 export const hasPhone: boolean = String(site.phoneHref).length > 0;
 export const hasWhatsApp: boolean = String(site.whatsappNumber).length > 0;
@@ -70,9 +70,6 @@ export const whatsappLink = hasWhatsApp
       "Hi, I'd like to book a free career consultation.",
     )}`
   : "";
-
-/** Shown in place of a number while none is configured. */
-export const phonePlaceholder = "Available soon";
 
 export type NavItem = { href: string; label: string };
 

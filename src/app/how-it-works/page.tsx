@@ -15,7 +15,7 @@ import {
   Section,
   SectionHead,
 } from "@/components/site/primitives";
-import { Reveal } from "@/components/site/reveal";
+import { Reveal, Stagger } from "@/components/site/reveal";
 import { photos } from "@/lib/images";
 import { processSteps } from "@/content/process";
 
@@ -77,7 +77,7 @@ export default function HowItWorksPage() {
       {/* ------------------------------------------------------- expectations */}
       <Section tone="alt">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <Reveal>
+          <Reveal variant="image">
             {/* PLACEHOLDER IMAGE */}
             <Image
               src={photos.workspace.src}
@@ -117,11 +117,11 @@ export default function HowItWorksPage() {
           heading="How an Engagement Usually Unfolds."
           intro="Every journey differs. The pattern below is indicative only — your consultant will set a realistic rhythm during the assessment, based on your availability and target role."
         />
-        <div className="grid gap-x-8 gap-y-10 md:grid-cols-3">
+        <Stagger className="grid gap-x-8 gap-y-10 md:grid-cols-3">
           {phases.map((phase) => (
             <FeatureCard key={phase.title} {...phase} variant="plain" />
           ))}
-        </div>
+        </Stagger>
         <Disclaimer>
           Timelines depend on your background, target role, preparation time, and hiring
           conditions. We do not promise a placement date, an interview volume, or an

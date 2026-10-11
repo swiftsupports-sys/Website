@@ -2,6 +2,7 @@ import * as React from "react";
 import Link from "next/link";
 import { ArrowRight, Check, type LucideIcon } from "lucide-react";
 
+import { Reveal, Stagger } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
 import type { Domain } from "@/content/domains";
 import type { Package } from "@/content/packages";
@@ -48,7 +49,8 @@ export function FeatureCard({
 
 /* ------------------------------------------------------------ link card */
 
-/** A card that is a link: hover tints the border and title, nothing moves. */
+/** A card that is a link: hover lifts it slightly, tints the border and
+ * title, and nudges the arrow toward where it goes. */
 export function LinkCard({
   href,
   title,
@@ -63,7 +65,7 @@ export function LinkCard({
   return (
     <Link
       href={href}
-      className="group flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-[border-color,box-shadow] duration-200 hover:border-brand-blue-border hover:shadow-hover md:p-8"
+      className="group flex h-full flex-col rounded-lg border border-border bg-surface p-6 transition-[border-color,box-shadow,transform] duration-300 ease-out-soft hover:-translate-y-1 hover:border-brand-blue-border hover:shadow-lift md:p-8"
     >
       <h3 className="h-md transition-colors duration-200 group-hover:text-brand-blue">
         {title}
@@ -71,7 +73,11 @@ export function LinkCard({
       <p className="mt-3 flex-1 text-text-body">{description}</p>
       <span className="mt-5 inline-flex items-center gap-1.5 font-medium text-brand-blue">
         {linkLabel}
-        <ArrowRight className="size-4" strokeWidth={2} aria-hidden="true" />
+        <ArrowRight
+          className="size-4 transition-transform duration-300 ease-out-soft group-hover:translate-x-1"
+          strokeWidth={2}
+          aria-hidden="true"
+        />
       </span>
     </Link>
   );
@@ -90,37 +96,41 @@ export function DomainGrid({
   domains: Domain[];
   detailed?: boolean;
 }) {
+  // Revealed as one block: the dividers are the list's background showing
+  // through 1px gaps, so fading cells individually would flash that colour.
   return (
-    <ul
-      className={cn(
-        "grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2",
-        !detailed && "lg:grid-cols-4",
-      )}
-    >
-      {domains.map((domain) => (
-        <li
-          key={domain.title}
-          className={cn("bg-surface p-6", detailed ? "md:p-8" : "md:p-7")}
-        >
-          <domain.icon
-            className="mb-4 size-6 text-brand-blue"
-            strokeWidth={1.7}
-            aria-hidden="true"
-          />
-          <h3 className={detailed ? "h-md" : "text-[1.0625rem] font-semibold"}>
-            {domain.title}
-          </h3>
-          <p
-            className={cn(
-              "mt-2 text-text-body",
-              detailed ? "text-[1rem]" : "text-[0.9375rem]",
-            )}
+    <Reveal>
+      <ul
+        className={cn(
+          "grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2",
+          !detailed && "lg:grid-cols-4",
+        )}
+      >
+        {domains.map((domain) => (
+          <li
+            key={domain.title}
+            className={cn("bg-surface p-6", detailed ? "md:p-8" : "md:p-7")}
           >
-            {detailed ? domain.long : domain.short}
-          </p>
-        </li>
-      ))}
-    </ul>
+            <domain.icon
+              className="mb-4 size-6 text-brand-blue"
+              strokeWidth={1.7}
+              aria-hidden="true"
+            />
+            <h3 className={detailed ? "h-md" : "text-[1.0625rem] font-semibold"}>
+              {domain.title}
+            </h3>
+            <p
+              className={cn(
+                "mt-2 text-text-body",
+                detailed ? "text-[1rem]" : "text-[0.9375rem]",
+              )}
+            >
+              {detailed ? domain.long : domain.short}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </Reveal>
   );
 }
 
@@ -150,7 +160,7 @@ export function StepList({
 }) {
   if (layout === "rows") {
     return (
-      <ol className="border-t border-border">
+      <Stagger as="ol" className="border-t border-border">
         {steps.map((step) => (
           <li
             key={step.n}
@@ -182,12 +192,15 @@ export function StepList({
             ) : null}
           </li>
         ))}
-      </ol>
+      </Stagger>
     );
   }
 
   return (
-    <ol className={cn("grid gap-8 lg:gap-0", timelineCols[steps.length] ?? "lg:grid-cols-4")}>
+    <Stagger
+      as="ol"
+      className={cn("grid gap-8 lg:gap-0", timelineCols[steps.length] ?? "lg:grid-cols-4")}
+    >
       {steps.map((step, i) => (
         <li key={step.n} className="grid grid-cols-[auto_1fr] gap-x-4 lg:block lg:pr-8">
           <div className="flex items-start lg:mb-5 lg:items-center" aria-hidden="true">
@@ -207,7 +220,7 @@ export function StepList({
           </div>
         </li>
       ))}
-    </ol>
+    </Stagger>
   );
 }
 
@@ -215,7 +228,7 @@ export function StepList({
 
 export function ServiceRows({ services }: { services: Service[] }) {
   return (
-    <ul className="grid md:grid-cols-2 md:gap-x-12">
+    <Stagger as="ul" className="grid md:grid-cols-2 md:gap-x-12">
       {services.map((service) => (
         <li
           key={service.n}
@@ -234,14 +247,14 @@ export function ServiceRows({ services }: { services: Service[] }) {
               </span>
             </span>
             <ArrowRight
-              className="mt-1 size-4 shrink-0 text-text-secondary transition-colors duration-200 group-hover:text-brand-blue"
+              className="mt-1 size-4 shrink-0 text-text-secondary transition-[color,transform] duration-300 ease-out-soft group-hover:translate-x-1 group-hover:text-brand-blue"
               strokeWidth={2}
               aria-hidden="true"
             />
           </Link>
         </li>
       ))}
-    </ul>
+    </Stagger>
   );
 }
 
@@ -253,8 +266,10 @@ export function PriceCard({ plan }: { plan: Package }) {
   return (
     <article
       className={cn(
-        "flex h-full flex-col rounded-lg bg-surface p-7 md:p-10",
-        featured ? "border-2 border-brand-blue" : "border border-border",
+        "flex h-full flex-col rounded-lg bg-surface p-7 transition-[border-color,box-shadow,transform] duration-300 ease-out-soft hover:-translate-y-1 hover:shadow-lift md:p-10",
+        featured
+          ? "border-2 border-brand-blue shadow-hover"
+          : "border border-border hover:border-brand-blue-border",
       )}
     >
       <div className="flex min-h-8 flex-wrap items-center justify-between gap-3">

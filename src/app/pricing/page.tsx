@@ -9,7 +9,7 @@ import { FaqList } from "@/components/site/faq-list";
 import { HeroActions, PageHero } from "@/components/site/page-hero";
 import { PageSchema } from "@/components/site/page-schema";
 import { Disclaimer, Section, SectionHead } from "@/components/site/primitives";
-import { Reveal } from "@/components/site/reveal";
+import { Reveal, Stagger } from "@/components/site/reveal";
 import { faqsFor } from "@/content/faq";
 import { packages, pricingDisclaimer } from "@/content/packages";
 
@@ -62,11 +62,11 @@ export default function PricingPage() {
       />
 
       <Section tone="paper">
-        <div className="grid items-stretch gap-6 lg:grid-cols-3">
+        <Stagger className="grid items-stretch gap-6 lg:grid-cols-3">
           {packages.map((plan) => (
             <PriceCard key={plan.id} plan={plan} />
           ))}
-        </div>
+        </Stagger>
         <div>
           <Disclaimer>{pricingDisclaimer}</Disclaimer>
         </div>
@@ -78,11 +78,11 @@ export default function PricingPage() {
           heading="What Every Package Includes."
           intro="Whichever model you choose, the standard of support and the honesty of the guidance do not change."
         />
-        <div className="grid gap-x-8 gap-y-10 md:grid-cols-3">
+        <Stagger className="grid gap-x-8 gap-y-10 md:grid-cols-3">
           {shared.map((item) => (
             <FeatureCard key={item.title} {...item} variant="plain" />
           ))}
-        </div>
+        </Stagger>
       </Section>
 
       <Section tone="paper">

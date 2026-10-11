@@ -8,9 +8,10 @@ import { FaqList } from "@/components/site/faq-list";
 import { FeatureCard, LinkCard } from "@/components/site/cards";
 import { PageHero } from "@/components/site/page-hero";
 import { ArrowLink, Section, SectionHead } from "@/components/site/primitives";
-import { Reveal } from "@/components/site/reveal";
+import { Reveal, Stagger } from "@/components/site/reveal";
 import { Button } from "@/components/ui/button";
 import { servicePageBySlug, servicePages } from "@/content/service-pages";
+import { photos, type Photo } from "@/lib/images";
 import { breadcrumbJsonLd, pageMetadata, serviceJsonLd } from "@/lib/seo";
 import { JsonLd, webPageJsonLd } from "@/lib/structured-data";
 
@@ -21,6 +22,15 @@ export function generateStaticParams() {
 
 /** Anything outside the four known slugs 404s rather than rendering empty. */
 export const dynamicParams = false;
+
+/** Banner photograph for each service page; a new slug without one simply
+ * renders the banner without an image. */
+const heroPhoto: Record<string, Photo> = {
+  "interview-preparation": photos.interviewPreparation,
+  "resume-and-linkedin": photos.resumeReview,
+  "candidate-marketing": photos.candidateMarketing,
+  "training-and-mentorship": photos.trainingMentorship,
+};
 
 export async function generateMetadata({
   params,
@@ -98,6 +108,7 @@ export default async function ServicePage({
             </Button>
           </>
         }
+        image={heroPhoto[page.slug]}
       />
 
       {/* What it is ---------------------------------------------------- */}
@@ -165,7 +176,7 @@ export default async function ServicePage({
           heading="Situations this fits."
           intro="If none of these describe you, say so during the consultation — a different part of the process may be the better place to start."
         />
-        <div className="grid gap-x-8 gap-y-10 md:grid-cols-3">
+        <Stagger className="grid gap-x-8 gap-y-10 md:grid-cols-3">
           {page.audience.map((item) => (
             <FeatureCard
               key={item.title}
@@ -174,7 +185,7 @@ export default async function ServicePage({
               variant="plain"
             />
           ))}
-        </div>
+        </Stagger>
       </Section>
 
       {/* FAQs ----------------------------------------------------------- */}
@@ -199,18 +210,17 @@ export default async function ServicePage({
           heading="Often combined with."
           intro="Most candidates need more than one of these. The consultation decides the balance."
         />
-        <div className="grid gap-6 md:grid-cols-2">
+        <Stagger className="grid gap-6 md:grid-cols-2">
           {related.map((item) => (
-            <Reveal key={item.slug} className="h-full">
-              <LinkCard
-                href={`/services/${item.slug}`}
-                title={item.metaTitle}
-                description={item.metaDescription}
-                linkLabel={`Read about ${item.navLabel.toLowerCase()}`}
-              />
-            </Reveal>
+            <LinkCard
+              key={item.slug}
+              href={`/services/${item.slug}`}
+              title={item.metaTitle}
+              description={item.metaDescription}
+              linkLabel={`Read about ${item.navLabel.toLowerCase()}`}
+            />
           ))}
-        </div>
+        </Stagger>
 
         <Reveal className="mt-10">
           <ArrowLink href="/how-it-works">
